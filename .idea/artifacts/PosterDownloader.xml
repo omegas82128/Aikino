@@ -1,0 +1,43 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="PosterDownloader">
+    <output-path>$PROJECT_DIR$/out/artifacts/PosterDownloader</output-path>
+    <properties id="javafx-properties">
+      <options>
+        <option name="appClass" value="com.omegas.main.SecondMain" />
+        <option name="description" value="" />
+        <option name="height" value="388" />
+        <option name="htmlPlaceholderId" value="" />
+        <option name="icons">
+          <JavaFxApplicationIcons>
+            <option name="windowsIcon" value="$PROJECT_DIR$/src/main/resources/Movies Dvd Folder Icon.ico" />
+          </JavaFxApplicationIcons>
+        </option>
+        <option name="nativeBundle" value="all" />
+        <option name="title" value="Poster Downloader" />
+        <option name="vendor" value="" />
+        <option name="version" value="1.0.1" />
+        <option name="width" value="488" />
+      </options>
+    </properties>
+    <root id="root">
+      <element id="archive" name="PosterDownloader.jar">
+        <element id="module-output" name="PosterDownloader" />
+      </element>
+      <element id="library" level="project" name="KotlinJavaRuntime" />
+      <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.8.11" />
+      <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.8.11" />
+      <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.8.11" />
+      <element id="library" level="project" name="Maven: com.google.guava:guava:18.0" />
+      <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.10" />
+      <element id="library" level="project" name="Maven: org.apache.commons:commons-lang3:3.3.2" />
+      <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-stdlib-common:1.3.61" />
+      <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.61" />
+      <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.61" />
+      <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-stdlib:1.3.61" />
+      <element id="library" level="project" name="Maven: org.jetbrains:annotations:13.0" />
+      <element id="library" level="project" name="Maven: org.slf4j:jcl-over-slf4j:1.7.7" />
+      <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.7" />
+      <element id="library" level="project" name="themoviedbapi-1.9-sources" />
+    </root>
+  </artifact>
+</component>
