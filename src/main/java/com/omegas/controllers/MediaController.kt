@@ -2,13 +2,14 @@ package com.omegas.controllers
 
 import com.omegas.api.DisplayImageTask
 import com.omegas.api.ImageDownloader
+import com.omegas.api.ImageDownloader.downloadPng
 import com.omegas.api.Posters
 import com.omegas.main.SecondMain.Companion.stage
+import com.omegas.util.*
+import com.omegas.util.Constants.APP_TYPE
 import com.omegas.util.Constants.LOCATION
 import com.omegas.util.Constants.MAX_POSTERS
 import com.omegas.util.Constants.PLACEHOLDER_IMAGE_PATH
-import com.omegas.util.Type
-import com.omegas.util.showMessage
 import javafx.fxml.FXML
 import javafx.fxml.Initializable
 import javafx.scene.control.Button
@@ -78,9 +79,15 @@ abstract class MediaController:Initializable {
     }
     fun downloadPoster(name:String){
         if(imageView.image!=null){
+
+            val folder:String = when(APP_TYPE){
+                AppType.PERSONAL->LOCATION.absolutePath + "\\" + name
+                AppType.PUBLIC -> file.absolutePath
+            }
+
             val filePath:String? = ImageDownloader.download(
                 posterUrls[currentPosition],
-                LOCATION.absolutePath + "\\" + name,
+                folder,
                 imageView.image
             )
             if(filePath !=null){
@@ -131,6 +138,26 @@ abstract class MediaController:Initializable {
             )
             btnNext.isDisable = true
         }
+    }
+    fun createIcon(){
+        createIcon(true)
+    }
+    private fun createIcon(delete:Boolean):File?{
+        val pngFile = downloadPng(imageView.image,file)
+        pngFile?.let{
+            convertToIcon(it)
+            if(delete){
+                it.delete()
+            }
+        }
+        return pngFile
+    }
+    fun createAndApply(){
+        //TODO return icon
+        //TODO add ability to apply icon even if one already exists
+        val pngFile = createIcon(false)
+        applyIcon(file)
+        pngFile?.delete()
     }
     private val normalForPosters : (movieName:String) -> MutableList<String> = { name->
         Posters.getPosters(name)

@@ -34,6 +34,9 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="KotlinJavaRuntime" level="project" />
     <orderEntry type="library" name="themoviedbapi-1.9-sources" level="project" />
+    <orderEntry type="library" name="image4j-0.7.2" level="application" />
+    <orderEntry type="library" name="ini4j-0.5.4-jdk14" level="application" />
+    <orderEntry type="library" name="hibernate" level="application" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.8.11" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.8.11" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.8.11" level="project" />

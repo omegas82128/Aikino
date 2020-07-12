@@ -7,6 +7,7 @@ import info.movito.themoviedbapi.TmdbTvSeasons
 import info.movito.themoviedbapi.model.ArtworkType
 import info.movito.themoviedbapi.model.MovieDb
 import info.movito.themoviedbapi.model.core.MovieResultsPage
+import info.movito.themoviedbapi.model.tv.TvSeries
 import javafx.scene.control.Alert
 import java.io.File
 
@@ -133,14 +134,31 @@ object TheMovieDb {
         val results = page.results
         val posterList = mutableListOf<String>()
         if(results.isNotEmpty()){
-            val season = tvSeasons.getSeason(results[0].id,seasonNumber,null,TmdbTvSeasons.SeasonMethod.images)
+            val series: TvSeries = findSeries(showName,results)
+            val season = tvSeasons.getSeason(series.id,seasonNumber,null,TmdbTvSeasons.SeasonMethod.images)
             val posters = season.images
-            posterList.add(results[0].posterPath)
+            series.posterPath?.let{
+                posterList.add(it)
+            }
             for(poster in posters.posters){
                 posterList.add(poster.filePath)
             }
         }
         return posterList
+    }
+
+    private fun findSeries(showName: String, results: List<TvSeries>): TvSeries {
+        var series:TvSeries? = null
+        for(result in results){
+            val name = result.name
+            if(name == showName){
+                series = result
+            }
+        }
+        if(series == null || results[0].name == showName){
+            series = results[0]
+        }
+        return series
     }
 }
 
@@ -160,7 +178,7 @@ fun main(){
             println(poster.filePath)
         }
     }else{
-        println("fucked")
+        println("failed")
     }
     //for(season in results){
         //ImageDownloader.download(posterPath,Constants.LOCATION.absolutePath+"\\$showName\\")

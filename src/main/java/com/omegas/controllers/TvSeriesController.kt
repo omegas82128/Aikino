@@ -12,8 +12,6 @@ class TvSeriesController:MediaController() {
     private lateinit var showName: String
 
     override fun initialize(location: URL?, resources: ResourceBundle?) {
-        btnCreate.isDisable = true
-        btnCreateApply.isDisable = true
         btnPrevious.isDisable = true
         file = File(args[0])
         

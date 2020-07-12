@@ -12,8 +12,6 @@ import java.util.*
 class MovieController:MediaController() {
     private lateinit var movieName: String
     override fun initialize(location: URL?, resources: ResourceBundle?) {
-        btnCreate.isDisable = true
-        btnCreateApply.isDisable = true
         btnPrevious.isDisable = true
         file = File(args[0])
         movieName = file.name

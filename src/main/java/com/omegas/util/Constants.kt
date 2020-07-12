@@ -12,4 +12,5 @@ object Constants{
     val LOCATION =  File("F:\\(Icons)\\(New Projects)\\")
     val PLACEHOLDER_IMAGE_PATH = javaClass.getResource("/placeholder.jpg").toString()
     const val MAX_POSTERS = 80
+    val APP_TYPE:AppType = AppType.PUBLIC
 }

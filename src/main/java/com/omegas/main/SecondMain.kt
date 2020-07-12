@@ -1,6 +1,7 @@
 package com.omegas.main
 
 import com.omegas.util.Constants
+import com.omegas.util.Type
 import com.omegas.util.showMessage
 import javafx.application.Application
 import javafx.fxml.FXMLLoader
@@ -40,7 +41,7 @@ class SecondMain : Application() {
                 isMovie -> {return "Movie"}
                 !isMovie && !isAnime -> {
                     showMessage(
-                        "Cannot distinguish type from Movie and Anime.",
+                        "Cannot distinguish type from Movie and TvSeries.",
                         title = "Invalid Folder Name"
                     )
                     Thread.sleep(10000)
@@ -61,8 +62,13 @@ class SecondMain : Application() {
         @JvmStatic
         fun main(args:Array<String>){
             Companion.args = args
-            //Companion.args = arrayOf("E:\\Carnival Row Season 1")
-            launch(SecondMain::class.java)
+            Companion.args = arrayOf("E:\\"+"Sucker Punch (2011)")
+            try{
+                launch(SecondMain::class.java)
+            }catch (exception:Exception){
+                showMessage("TheMovieDB.org cannot be reached.",Type.ERROR,"Connection Error:")
+                exitProcess(1)
+            }
         }
     }
 }

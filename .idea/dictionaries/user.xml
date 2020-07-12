@@ -2,6 +2,7 @@
   <dictionary name="user">
     <words>
       <w>themoviedb</w>
+      <w>tmdb</w>
     </words>
   </dictionary>
 </component>

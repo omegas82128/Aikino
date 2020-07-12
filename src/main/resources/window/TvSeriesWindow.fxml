@@ -9,31 +9,27 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<!--suppress JavaFxEventHandler -->
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="388.0" prefWidth="488.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.omegas.controllers.TvSeriesController">
    <center>
       <ImageView fx:id="imageView" fitHeight="205.0" fitWidth="135.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
    </center>
    <bottom>
-      <VBox alignment="BASELINE_CENTER" prefHeight="187.0" prefWidth="487.0" spacing="5.0"
-            BorderPane.alignment="CENTER">
+      <VBox alignment="BASELINE_CENTER" prefHeight="187.0" prefWidth="487.0" spacing="5.0" BorderPane.alignment="CENTER">
          <Label text="If this is not the desired tv show">
             <font>
-               <Font name="System Bold" size="14.0"/>
+               <Font name="System Bold" size="14.0" />
             </font>
          </Label>
-         <TextField fx:id="txtName" maxWidth="214.0" onAction="#nameChanged" prefHeight="25.0" prefWidth="214.0"
-                    promptText="Enter name with season:"/>
-         <TextField fx:id="txtLink" maxWidth="214.0" onAction="#linkChanged" prefHeight="25.0" prefWidth="214.0"
-                    promptText="Enter themoviedb link or id:">
+         <TextField fx:id="txtName" maxWidth="214.0" onAction="#nameChanged" prefHeight="25.0" prefWidth="214.0" promptText="Enter name with season:" />
+         <TextField fx:id="txtLink" maxWidth="214.0" onAction="#linkChanged" prefHeight="25.0" prefWidth="214.0" promptText="Enter themoviedb link or id:">
             <VBox.margin>
-               <Insets/>
+               <Insets />
             </VBox.margin>
          </TextField>
-         <Button mnemonicParsing="false" onAction="#downloadPoster" prefHeight="25.0"
-                 prefWidth="214.0" text="Download Poster"/>
-         <Button fx:id="btnCreate" mnemonicParsing="false" prefHeight="25.0" prefWidth="214.0" text="Create Icon"/>
-         <Button fx:id="btnCreateApply" mnemonicParsing="false" prefHeight="25.0" prefWidth="214.0"
-                 text="Create and Apply Icon"/>
+         <Button mnemonicParsing="false" onAction="#downloadPoster" prefHeight="25.0" prefWidth="214.0" text="Download Poster" />
+         <Button fx:id="btnCreate" mnemonicParsing="false" onAction="#createIcon" prefHeight="25.0" prefWidth="214.0" text="Create Icon" />
+         <Button fx:id="btnCreateApply" mnemonicParsing="false" onAction="#createAndApply" prefHeight="25.0" prefWidth="214.0" text="Create and Apply Icon" />
       </VBox>
    </bottom>
    <right>
