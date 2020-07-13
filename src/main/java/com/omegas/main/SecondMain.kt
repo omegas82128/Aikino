@@ -1,50 +1,45 @@
 package com.omegas.main
 
-import com.omegas.util.Constants
+import com.omegas.api.PTN
+import com.omegas.enums.MediaType
+import com.omegas.model.MediaInfo
+import com.omegas.util.Constants.ICON
 import com.omegas.util.Type
 import com.omegas.util.showMessage
 import javafx.application.Application
 import javafx.fxml.FXMLLoader
 import javafx.scene.Parent
 import javafx.scene.Scene
-import javafx.scene.image.Image
 import javafx.stage.Stage
 import java.io.File
 import kotlin.system.exitProcess
 
 class SecondMain : Application() {
     override fun start(primaryStage: Stage?) {
-        stage = primaryStage!!
-        println(javaClass.getResource(""))
-        val windowType = getTypeFromArgs()
-
-
-        val root = FXMLLoader.load<Parent>(javaClass.getResource("/window/${windowType}Window.fxml"))
-        stage.title = File(args[0]).name
-        primaryStage.icons.add(Image(javaClass.getResource("/icon.png").toString()))
-        stage.scene = Scene(root)
-        stage.show()
-        stage.isResizable = false
-        stage.setOnCloseRequest {
-            exitProcess(0)
-        }
-    }
-
-    private fun getTypeFromArgs():String{
         if (args.isNotEmpty()){
-            val file = File(args[0])
-            val isMovie = file.name.matches(Constants.MOVIE_RE)
-            val isAnime = file.name.matches(Constants.ANIME_RE)
-            val isTvSeries = file.name.matches(Constants.TV_SERIES_RE)
-            when {
-                isAnime || isTvSeries -> {return "TvSeries"}
-                isMovie -> {return "Movie"}
-                !isMovie && !isAnime -> {
-                    showMessage(
-                        "Cannot distinguish type from Movie and TvSeries.",
-                        title = "Invalid Folder Name"
-                    )
-                    Thread.sleep(10000)
+            stage = primaryStage!!
+            mediaInfo = PTN.getMediaInfo(File(args[0]))
+            if(mediaInfo==null){
+                showMessage(
+                    "Incomplete information in folder name.",
+                    title = "Invalid Folder Name"
+                )
+                Thread.sleep(10000)
+                exitProcess(0)
+            }else{
+                val windowType:String? = when(mediaInfo!!.mediaType) {
+                    MediaType.TV-> "TvSeries"
+                    MediaType.MOVIE-> "Movie"
+                }
+
+                val root = FXMLLoader.load<Parent>(javaClass.getResource("/fxml/${windowType}Window.fxml"))
+                stage.title = TITLE+" - "+mediaInfo!!.title
+                primaryStage.icons.add(ICON)
+
+                stage.scene = Scene(root)
+                stage.show()
+                stage.isResizable = false
+                stage.setOnCloseRequest {
                     exitProcess(0)
                 }
             }
@@ -53,19 +48,31 @@ class SecondMain : Application() {
             Thread.sleep(10000)
             exitProcess(0)
         }
-        return  ""
+
     }
 
     companion object{
         lateinit var args:Array<String>
         lateinit var stage: Stage
+        const val TITLE = "PosterDownloader"
+        var mediaInfo:MediaInfo? = null
+        fun changeScene(fxmlPath:String,title:String){
+            try {
+                val root = FXMLLoader.load<Parent>(SecondMain::class.java.getResource("/fxml/${fxmlPath}Window.fxml"))
+                stage.title = "$TITLE - $title"
+                stage.scene = Scene(root)
+            } catch (e: java.lang.Exception) {
+                e.printStackTrace()
+            }
+        }
         @JvmStatic
         fun main(args:Array<String>){
             Companion.args = args
-            Companion.args = arrayOf("E:\\"+"Sucker Punch (2011)")
+            //Companion.args = arrayOf("E:\\"+"Sucker Punch (2011)")
             try{
                 launch(SecondMain::class.java)
             }catch (exception:Exception){
+                exception.printStackTrace()
                 showMessage("TheMovieDB.org cannot be reached.",Type.ERROR,"Connection Error:")
                 exitProcess(1)
             }

@@ -1,12 +1,15 @@
 package com.omegas.util
 
+import com.omegas.model.Icon
+import com.omegas.main.SecondMain
+import com.omegas.util.Constants.ICON
+import javafx.scene.Node
 import javafx.scene.control.Alert
 import javafx.scene.control.ButtonType
 import javafx.scene.control.Label
 import javafx.scene.control.TextArea
-import javafx.scene.layout.GridPane
-import javafx.scene.layout.Priority
-import javafx.scene.layout.Region
+import javafx.scene.layout.*
+import javafx.stage.Stage
 import javafx.stage.StageStyle
 import net.sf.image4j.codec.ico.ICOEncoder
 import org.ini4j.Wini
@@ -84,15 +87,13 @@ private fun displayTray(title: String, text: String, type: Type, action:()->Unit
     val tray = SystemTray.getSystemTray()
 
     //If the icon is a file
-    val image = Toolkit.getDefaultToolkit().createImage("icon.png")
+    val image = Toolkit.getDefaultToolkit().createImage(SecondMain::class.java.getResource("/icon.gif"))
     //Alternative (if the icon is on the classpath):
     //Image image = Toolkit.getDefaultToolkit().createImage(getClass().getResource("icon.png"));
 
     val trayIcon = TrayIcon(image, "Poster downloader")
     //Let the system resize the image if needed
     trayIcon.isImageAutoSize = true
-    //Set tooltip text for the tray icon
-    trayIcon.toolTip = "Poster Downloader"
     tray.add(trayIcon)
     val messageType: TrayIcon.MessageType = if (type == Type.ERROR) {
         TrayIcon.MessageType.ERROR
@@ -105,29 +106,23 @@ private fun displayTray(title: String, text: String, type: Type, action:()->Unit
     }
 }
 @Throws(Exception::class)
-fun convertToIcon(file: File) {
+fun convertToIcon(file: File):String{
     val pngFileName = file.toString()
-    val outputFile = File(pngFileName.substring(0, pngFileName.indexOf(".png")) + " Icon.ico")
-    if(!outputFile.exists()){
-        val bi = ImageIO.read(file)
-        ICOEncoder.write(bi, outputFile)
+    var outputFile = File(pngFileName.replace(".png", " Icon.ico"))
+    var version = 1
+    while(outputFile.exists()){
+        outputFile =  File(pngFileName.replace(".png","Icon v$version.ico"))
+        version++
     }
+    val bi = ImageIO.read(file)
+    ICOEncoder.write(bi, outputFile)
+    return outputFile.name
 }
 
-fun findIconName(folderPath: String): String? {
-    val files = File(folderPath).listFiles { _: File?, filename: String -> filename.endsWith(".ico") }
-    return if (files != null && files.isNotEmpty()) {
-        files[0].name
-    } else {
-        null
-    }
-}
-
-private fun setIcon(folderPath: String, hideFile: Boolean= true) {
+private fun setIcon(folderPath: String, iconName:String, hideFile: Boolean= true) {
     try {
-        val iconName = findIconName(folderPath)
         val diPath = File("$folderPath\\desktop.ini")
-        if (!diPath.exists() && iconName != null) {
+        if (!diPath.exists()) {
             val writer = FileWriter(diPath)
             writer.write("")
             writer.close()
@@ -147,10 +142,14 @@ private fun setIcon(folderPath: String, hideFile: Boolean= true) {
                 Runtime.getRuntime().exec("attrib -a -r -h -s \"$folderPath\\$iconName\"")
             }
             showMessage("Icon applied successfully", Type.INFO, "Icon applied to folder $folderPath")
-        } else if (iconName == null) {
-            showMessage("Icon not found", Type.ERROR, "$folderPath has no icon that can be applied.")
         } else if (diPath.exists()) {
-            showMessage("Icon applied already", Type.ERROR, "$folderPath already has an icon.")
+            val alert = showAlert("Folder already has an icon. Do you want to overwrite icon?","Overwrite Icon Confirmation",false,ButtonType.YES,ButtonType.NO)
+            alert.showAndWait()
+            if(alert.result == ButtonType.YES){
+                diPath.delete()
+                setIcon(folderPath, iconName, hideFile)
+            }
+            alert.close()
         }
     } catch (e: Exception) {
         exceptionDialog(e)
@@ -158,8 +157,8 @@ private fun setIcon(folderPath: String, hideFile: Boolean= true) {
 }
 
 
-fun applyIcon(file:File){
-    setIcon(file.absolutePath)
+fun applyIcon(icon: Icon){
+    setIcon(icon.file.absolutePath, icon.iconName)
 }
 
 fun increaseSize(input: BufferedImage, dimension: Dimension): BufferedImage {
@@ -179,4 +178,35 @@ fun increaseSize(input: BufferedImage, dimension: Dimension): BufferedImage {
     g.dispose()
     //Return the 600*600 image
     return output
+}
+fun showAlert(contentText: String= "Internet disconnected. Reconnect and try again.", title: String="Connection Error",show:Boolean = true, vararg buttonTypes: ButtonType):Alert {
+    val alert = Alert(Alert.AlertType.NONE, contentText)
+
+    alert.title = title
+    //alert.initStyle(StageStyle.UTILITY)
+
+    if (buttonTypes.isEmpty()){
+        alert.dialogPane.buttonTypes.add(ButtonType.OK)
+    }else{
+        alert.dialogPane.buttonTypes.addAll(buttonTypes)
+    }
+
+    (alert.dialogPane.scene.window as Stage).
+    icons.add(ICON)
+
+    alert.dialogPane.minHeight = Region.USE_PREF_SIZE
+    if(show){
+        alert.showAndWait()
+    }
+    return alert
+}
+
+fun addComponent(pane: Pane, component: Node){
+    pane.children.clear()
+    for(i in 1..7){
+        pane.children.add(Label(""))
+    }
+    val border = BorderPane()
+    border.center= component
+    pane.children.add(border)
 }

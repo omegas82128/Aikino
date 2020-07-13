@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="410.0" style="-fx-border-color: black;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.omegas.controllers.MediaItemController">
+   <left>
+      <ImageView fx:id="imageView" fitHeight="200.0" fitWidth="133.33" focusTraversable="true" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </ImageView>
+   </left>
+   <center>
+      <VBox maxHeight="283.333" spacing="1.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets left="5.0" right="5.0"/>
+         </BorderPane.margin>
+         <padding>
+            <Insets left="7.0" right="10.0"/>
+         </padding>
+         <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="26.33" minWidth="263.33">
+            <VBox.margin>
+               <Insets/>
+            </VBox.margin>
+            <Label fx:id="lblTitle" maxHeight="-Infinity" maxWidth="260.0" minHeight="-Infinity" minWidth="-Infinity"
+                   prefHeight="35.333333333333336" prefWidth="200.0" text="123456789012.." wrapText="true">
+               <font>
+                  <Font name="System Bold" size="24.0"/>
+               </font>
+            </Label>
+            <Label fx:id="lblYear" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                   minWidth="-Infinity" text="(Year)" textAlignment="CENTER">
+               <font>
+                  <Font size="18.0"/>
+               </font>
+            </Label>
+         </HBox>
+         <HBox prefWidth="200.0" spacing="10.0">
+            <Label fx:id="lblDirectorOrSeasons" text="Director">
+               <HBox.margin>
+                  <Insets/>
+               </HBox.margin>
+               <font>
+                  <Font name="System Italic" size="12.0"/>
+               </font>
+            </Label>
+            <Label fx:id="lblRuntimeOrEpisodes" text="Runtime"/>
+         </HBox>
+         <TextArea fx:id="txtOverview" editable="false" prefHeight="110.0" prefWidth="200.0" wrapText="true">
+            <VBox.margin>
+               <Insets/>
+            </VBox.margin>
+         </TextArea>
+         <Button mnemonicParsing="false" onAction="#select" prefHeight="30.0" prefWidth="281.0" text="Select"
+                 textFill="WHITE">
+            <VBox.margin>
+               <Insets/>
+            </VBox.margin>
+         </Button>
+      </VBox>
+   </center>
+</BorderPane>

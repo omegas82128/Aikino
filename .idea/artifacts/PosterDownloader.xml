@@ -9,13 +9,13 @@
         <option name="htmlPlaceholderId" value="" />
         <option name="icons">
           <JavaFxApplicationIcons>
-            <option name="windowsIcon" value="$PROJECT_DIR$/src/main/resources/Movies Dvd Folder Icon.ico" />
+            <option name="windowsIcon" value="$PROJECT_DIR$/src/main/resources/icon.ico" />
           </JavaFxApplicationIcons>
         </option>
         <option name="nativeBundle" value="all" />
         <option name="title" value="Poster Downloader" />
         <option name="vendor" value="" />
-        <option name="version" value="1.0.1" />
+        <option name="version" value="1.3.7" />
         <option name="width" value="488" />
       </options>
     </properties>
@@ -30,14 +30,17 @@
       <element id="library" level="project" name="Maven: com.google.guava:guava:18.0" />
       <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.10" />
       <element id="library" level="project" name="Maven: org.apache.commons:commons-lang3:3.3.2" />
-      <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-stdlib-common:1.3.61" />
-      <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.61" />
-      <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.61" />
-      <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-stdlib:1.3.61" />
       <element id="library" level="project" name="Maven: org.jetbrains:annotations:13.0" />
       <element id="library" level="project" name="Maven: org.slf4j:jcl-over-slf4j:1.7.7" />
       <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.7" />
       <element id="library" level="project" name="themoviedbapi-1.9-sources" />
+      <element id="library" level="application" name="image4j-0.7.2" />
+      <element id="library" level="application" name="ini4j-0.5.4-jdk14" />
+      <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-stdlib-common:1.3.72" />
+      <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72" />
+      <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.72" />
+      <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-stdlib:1.3.72" />
+      <element id="library" level="project" name="Maven: org.python:jython-standalone:2.7.0" />
     </root>
   </artifact>
 </component>

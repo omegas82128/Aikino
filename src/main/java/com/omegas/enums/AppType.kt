@@ -1,4 +1,4 @@
-package com.omegas.util
+package com.omegas.enums
 
 enum class AppType {
     PERSONAL,PUBLIC

@@ -1,4 +1,4 @@
-package com.omegas.util
+package com.omegas.model
 
 class SeasonName(seasonName:String) {
 

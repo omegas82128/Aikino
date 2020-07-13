@@ -1,4 +1,4 @@
-package com.omegas.api
+package com.omegas.tasks
 
 import javafx.concurrent.Task
 import javafx.scene.image.Image

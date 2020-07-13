@@ -1,0 +1,19 @@
+.text-area {
+    -fx-text-fill: #000000;
+    -fx-display-caret:false;
+}
+.text-area:focused, .scroll-pane:focused, .scroll-pane > .viewport:focused {
+  -fx-background-color: transparent
+}
+.text-area .content {
+    -fx-background-color: #ffffff;
+}
+.button{
+    -fx-background-color: #405060;
+}
+.button:hover{
+    -fx-background-color: #303C48;
+}
+.button:pressed{
+    -fx-background-color: #667788;
+}

@@ -1,19 +1,21 @@
 package com.omegas.controllers
 
-import com.omegas.api.DisplayImageTask
-import com.omegas.api.ImageDownloader
-import com.omegas.api.ImageDownloader.downloadPng
-import com.omegas.api.Posters
+import com.omegas.api.moviedb.MovieDAL
+import com.omegas.enums.AppType
+import com.omegas.model.Icon
+import com.omegas.main.SecondMain
 import com.omegas.main.SecondMain.Companion.stage
+import com.omegas.model.MediaInfo
+import com.omegas.tasks.DisplayImageTask
 import com.omegas.util.*
 import com.omegas.util.Constants.APP_TYPE
 import com.omegas.util.Constants.LOCATION
 import com.omegas.util.Constants.MAX_POSTERS
 import com.omegas.util.Constants.PLACEHOLDER_IMAGE_PATH
+import com.omegas.util.ImageDownloader.downloadPng
 import javafx.fxml.FXML
 import javafx.fxml.Initializable
 import javafx.scene.control.Button
-import javafx.scene.control.TextField
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import java.io.File
@@ -21,6 +23,7 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import java.util.concurrent.Future
 import kotlin.concurrent.thread
+import kotlin.system.exitProcess
 
 
 abstract class MediaController:Initializable {
@@ -34,18 +37,20 @@ abstract class MediaController:Initializable {
     protected lateinit var btnPrevious: Button
     @FXML
     protected lateinit var imageView:ImageView
-    @FXML
-    protected lateinit var txtName:TextField
-    @FXML
-    protected lateinit var txtLink:TextField
+
     protected lateinit var file:File
+    protected lateinit var mediaInfo: MediaInfo
     private var currentPosition = -1
     private lateinit var posterUrls:MutableList<String>
     private var posters: MutableList<Future<Image>> = mutableListOf()
     private var executorService: ExecutorService? = null
     private var imageThread: Thread? = null
-    abstract fun nameChanged()
-    abstract fun linkChanged()
+
+    fun search(){
+        SecondMain.mediaInfo = mediaInfo
+        SecondMain.changeScene("Search","Search Window")
+    }
+
     fun nextPoster() {
         currentPosition++
         applyPoster()
@@ -113,11 +118,11 @@ abstract class MediaController:Initializable {
             )
         }
     }
-    protected fun getPosters(name:String, function:(name: String)-> MutableList<String> = normalForPosters){
-        stage.title = name
+    protected fun getPosters(mediaInfo: MediaInfo, function:(mediaInfo: MediaInfo)-> MutableList<String> = normalForPosters){
+        stage.title = mediaInfo.title
         imageView.image = null
         currentPosition = -1
-        posterUrls = function(name)
+        posterUrls = function(mediaInfo)
         val thread = thread(true) { posters.clear() }
         executorService?.shutdownNow()
         executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors()*2)
@@ -134,32 +139,42 @@ abstract class MediaController:Initializable {
         }else{
             showMessage(
                 title = "No Posters Found",
-                text = "$name has no posters available"
+                text = "${mediaInfo.toMovieName()} has no posters available"
             )
-            btnNext.isDisable = true
+            exitProcess(1)
         }
     }
     fun createIcon(){
         createIcon(true)
     }
-    private fun createIcon(delete:Boolean):File?{
+    private fun createIcon(delete:Boolean): Icon?{
         val pngFile = downloadPng(imageView.image,file)
+        val name =
         pngFile?.let{
-            convertToIcon(it)
+            val iconName = convertToIcon(it)
             if(delete){
                 it.delete()
             }
+            iconName
         }
-        return pngFile
+        return if(pngFile == null){
+            null
+        }else{
+            Icon(pngFile, name!!)
+        }
     }
     fun createAndApply(){
-        //TODO return icon
-        //TODO add ability to apply icon even if one already exists
-        val pngFile = createIcon(false)
-        applyIcon(file)
-        pngFile?.delete()
+        val icon = createIcon(false)
+        val file = icon?.file
+        icon?.file = this.file
+        if(icon!=null){
+            applyIcon(icon)
+        }else{
+            showMessage("Icon could not be created.",Type.ERROR,"Icon Creation Failed")
+        }
+        file?.delete()
     }
-    private val normalForPosters : (movieName:String) -> MutableList<String> = { name->
-        Posters.getPosters(name)
+    private val normalForPosters : (mediaInfo: MediaInfo) -> MutableList<String> = { mediaInfo->
+        MovieDAL.getMoviePosters(mediaInfo)
     }
 }
