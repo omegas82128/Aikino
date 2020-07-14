@@ -10,6 +10,7 @@ import javafx.application.Application
 import javafx.fxml.FXMLLoader
 import javafx.scene.Parent
 import javafx.scene.Scene
+import javafx.stage.DirectoryChooser
 import javafx.stage.Stage
 import java.io.File
 import kotlin.system.exitProcess
@@ -44,6 +45,14 @@ class SecondMain : Application() {
                 }
             }
         }else{
+            val directoryChooser = DirectoryChooser()
+            directoryChooser.title = "Choose Movie or TV Series Folder"
+            val file = directoryChooser.showDialog(primaryStage)
+            if(file!=null){
+                args = arrayOf(file.absolutePath)
+                start(primaryStage)
+                return
+            }
             showMessage()
             Thread.sleep(10000)
             exitProcess(0)

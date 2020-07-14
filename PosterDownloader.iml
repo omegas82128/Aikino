@@ -20,9 +20,6 @@
         </compilerArguments>
       </configuration>
     </facet>
-    <facet type="Python" name="Python">
-      <configuration sdkName="Python 3.6 (venv)" />
-    </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_10">
     <output url="file://$MODULE_DIR$/target/classes" />
@@ -40,7 +37,6 @@
     <orderEntry type="library" name="image4j-0.7.2" level="application" />
     <orderEntry type="library" name="ini4j-0.5.4-jdk14" level="application" />
     <orderEntry type="library" name="hibernate" level="application" />
-    <orderEntry type="library" name="Python 3.6 (venv) interpreter library" level="application" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.8.11" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.8.11" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.8.11" level="project" />
