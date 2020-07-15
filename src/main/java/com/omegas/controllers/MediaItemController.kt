@@ -6,6 +6,7 @@ import com.omegas.main.SecondMain
 import com.omegas.main.SecondMain.Companion.changeScene
 import com.omegas.model.Media
 import com.omegas.util.Constants
+import com.omegas.util.toHoursAndMinutes
 import javafx.fxml.FXML
 import javafx.fxml.Initializable
 import javafx.scene.control.Label
@@ -51,7 +52,7 @@ class MediaItemController:Initializable {
                 MediaType.MOVIE -> {
                     lblYear.text= "(${it.yearOfRelease})"
                     lblDirectorOrSeasons.text = it.director
-                    lblRuntimeOrEpisodes.text = it.runtime.toString()
+                    lblRuntimeOrEpisodes.text = it.runtime.toHoursAndMinutes()
                 }
                 MediaType.TV -> {
                     lblTitle.prefWidth = 260.0

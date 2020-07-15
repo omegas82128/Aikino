@@ -2,18 +2,64 @@
     -fx-text-fill: #000000;
     -fx-display-caret:false;
 }
-.text-area:focused, .scroll-pane:focused, .scroll-pane > .viewport:focused {
+.image-view-wrapper{
+    -fx-border-color: white;
+    -fx-border-style: solid;
+    -fx-border-width: 2.5;
+}
+
+.image-view-wrapper-two{
+    -fx-border-color: black;
+    -fx-border-width: 0 3.2 0 0;
+}
+.image-view-wrapper-three{
+    -fx-border-color: black;
+    -fx-border-style: solid;
+    -fx-border-width: 3.2;
+}
+
+.text-area:focused, .scroll-pane:focused, .scroll-pane > .viewport:focused, .my-border-pane {
   -fx-background-color: transparent
 }
 .text-area .content {
     -fx-background-color: #ffffff;
 }
+.my-border-pane{
+    -fx-background-color: #2C3440;
+}
 .button{
     -fx-background-color: #405060;
+    -fx-text-fill: #ffffff;
 }
 .button:hover{
     -fx-background-color: #303C48;
 }
 .button:pressed{
     -fx-background-color: #667788;
+}
+
+
+.scroll-bar:horizontal, .scroll-bar:vertical{
+    -fx-background-color:transparent;
+}
+
+.increment-button, .decrement-button {
+    -fx-background-color: white;
+    -fx-border-color: transparent;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track{
+    -fx-background-color: black;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0em;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: white;
+    -fx-background-radius: 5em;
+}
+.scroll-pane > .corner {
+    -fx-background-color: black;
 }

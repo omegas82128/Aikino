@@ -22,7 +22,7 @@ class TvSeriesController:MediaController() {
     fun downloadPoster(){
         super.downloadPoster(file.name)
     }
-    fun loadPostersById(){
+    private fun loadPostersById(){
         getPosters(mediaInfo){
             getShowPosters(mediaInfo.id,mediaInfo.seasonNumber)
         }

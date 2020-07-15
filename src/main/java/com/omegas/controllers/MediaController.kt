@@ -2,9 +2,9 @@ package com.omegas.controllers
 
 import com.omegas.api.moviedb.MovieDAL
 import com.omegas.enums.AppType
-import com.omegas.model.Icon
 import com.omegas.main.SecondMain
 import com.omegas.main.SecondMain.Companion.stage
+import com.omegas.model.Icon
 import com.omegas.model.MediaInfo
 import com.omegas.tasks.DisplayImageTask
 import com.omegas.util.*
@@ -28,10 +28,6 @@ import kotlin.system.exitProcess
 
 abstract class MediaController:Initializable {
     @FXML
-    protected lateinit var btnCreate: Button
-    @FXML
-    protected lateinit var btnCreateApply: Button
-    @FXML
     protected lateinit var btnNext: Button
     @FXML
     protected lateinit var btnPrevious: Button
@@ -45,7 +41,6 @@ abstract class MediaController:Initializable {
     private var posters: MutableList<Future<Image>> = mutableListOf()
     private var executorService: ExecutorService? = null
     private var imageThread: Thread? = null
-
     fun search(){
         SecondMain.mediaInfo = mediaInfo
         SecondMain.changeScene("Search","Search Window")

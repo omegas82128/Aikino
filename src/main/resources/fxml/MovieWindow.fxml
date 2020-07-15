@@ -10,13 +10,20 @@
 
 <!--suppress JavaFxEventHandler -->
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="388.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.omegas.controllers.MovieController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="400.0" styleClass="my-border-pane" stylesheets="@../myCss.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.omegas.controllers.MovieController">
    <center>
-      <ImageView fx:id="imageView" fitHeight="205.0" fitWidth="135.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+      <BorderPane maxWidth="214.0" styleClass="image-view-wrapper" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets top="13.0" />
+         </BorderPane.margin>
+         <center>
+            <ImageView fx:id="imageView" fitHeight="313.5" fitWidth="209.0" pickOnBounds="true" preserveRatio="true" styleClass="image-view-wrapper" />
+         </center>
+      </BorderPane>
    </center>
    <bottom>
-      <VBox alignment="BASELINE_CENTER" prefHeight="187.0" prefWidth="487.0" spacing="5.0" BorderPane.alignment="CENTER">
-         <Label text="Not the desired movie? Search.">
+      <VBox alignment="BASELINE_CENTER" prefHeight="170.0" prefWidth="400.0" spacing="5.0" BorderPane.alignment="CENTER">
+         <Label text="Not the desired movie? Search." textFill="WHITE">
             <font>
                <Font name="System Bold" size="14.0" />
             </font>

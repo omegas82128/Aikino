@@ -3,7 +3,7 @@ package com.omegas.main
 import com.omegas.api.PTN
 import com.omegas.enums.MediaType
 import com.omegas.model.MediaInfo
-import com.omegas.util.Constants.ICON
+import com.omegas.util.Constants
 import com.omegas.util.Type
 import com.omegas.util.showMessage
 import javafx.application.Application
@@ -17,6 +17,7 @@ import kotlin.system.exitProcess
 
 class SecondMain : Application() {
     override fun start(primaryStage: Stage?) {
+        primaryStage?.icons?.add(Constants.ICON)
         if (args.isNotEmpty()){
             stage = primaryStage!!
             mediaInfo = PTN.getMediaInfo(File(args[0]))
@@ -35,9 +36,8 @@ class SecondMain : Application() {
 
                 val root = FXMLLoader.load<Parent>(javaClass.getResource("/fxml/${windowType}Window.fxml"))
                 stage.title = TITLE+" - "+mediaInfo!!.title
-                primaryStage.icons.add(ICON)
-
                 stage.scene = Scene(root)
+                stage.sizeToScene()
                 stage.show()
                 stage.isResizable = false
                 stage.setOnCloseRequest {
@@ -45,11 +45,20 @@ class SecondMain : Application() {
                 }
             }
         }else{
+
+            primaryStage?.let {
+                it.height = 0.0
+                it.width = 0.0
+                it.show()
+            }
+
             val directoryChooser = DirectoryChooser()
             directoryChooser.title = "Choose Movie or TV Series Folder"
             val file = directoryChooser.showDialog(primaryStage)
+
             if(file!=null){
                 args = arrayOf(file.absolutePath)
+                primaryStage?.hide()
                 start(primaryStage)
                 return
             }

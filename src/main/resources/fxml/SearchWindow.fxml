@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="500.0" minWidth="420.0" prefHeight="500.0" prefWidth="435.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.omegas.controllers.SearchController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="500.0" minWidth="420.0" prefHeight="500.0" prefWidth="430.0" styleClass="my-border-pane" stylesheets="@../myCss.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.omegas.controllers.SearchController">
    <top>
       <BorderPane BorderPane.alignment="CENTER">
          <BorderPane.margin>
@@ -16,26 +16,26 @@
          <center>
             <BorderPane prefHeight="25.0" prefWidth="390.0">
                <left>
-                  <TextField fx:id="txtName" alignment="CENTER" onAction="#search" prefHeight="25.0" prefWidth="265.0" promptText="Enter movie name" BorderPane.alignment="CENTER" />
+                  <TextField fx:id="txtName" alignment="CENTER" onAction="#search" prefHeight="26.0" prefWidth="237.0" promptText="Enter movie name" BorderPane.alignment="CENTER" />
                </left>
                <right>
-                  <TextField fx:id="txtYearOrSeason" alignment="CENTER" onAction="#search" prefHeight="25.0" prefWidth="145.0" promptText="Enter year of release" BorderPane.alignment="CENTER" />
+                  <TextField fx:id="txtYearOrSeason" alignment="CENTER" onAction="#search" prefHeight="26.0" prefWidth="165.0" promptText="Enter year of release" BorderPane.alignment="CENTER" />
                </right>
             </BorderPane>
          </center>
          <right>
-            <AnchorPane prefHeight="25.0" prefWidth="15.0" BorderPane.alignment="CENTER" />
+            <AnchorPane prefHeight="26.0" prefWidth="14.0" BorderPane.alignment="CENTER" />
          </right>
       </BorderPane>
    </top>
    <center>
-      <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" stylesheets="@../myCss.css" BorderPane.alignment="CENTER">
+      <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets top="10.0" />
          </BorderPane.margin>
          <VBox fx:id="vbox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="453.0" prefWidth="435.0" spacing="5.0">
             <padding>
-               <Insets left="5.0" right="5.0" />
+               <Insets left="5.0" right="10.0" top="5.0" />
             </padding></VBox>
          <padding>
             <Insets bottom="5.0" />
