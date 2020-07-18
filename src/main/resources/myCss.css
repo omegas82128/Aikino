@@ -48,9 +48,13 @@
     -fx-border-color: transparent;
 }
 
-.scroll-bar:horizontal .track,
 .scroll-bar:vertical .track{
     -fx-background-color: black;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0em;
+}
+.scroll-bar:horizontal .track{
+    -fx-background-color: transparent;
     -fx-border-color: transparent;
     -fx-background-radius: 0em;
 }
@@ -59,7 +63,4 @@
 .scroll-bar:vertical .thumb {
     -fx-background-color: white;
     -fx-background-radius: 5em;
-}
-.scroll-pane > .corner {
-    -fx-background-color: black;
 }
