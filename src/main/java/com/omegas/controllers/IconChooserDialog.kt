@@ -97,7 +97,7 @@ class IconChooserDialog(var iconImages:List<BufferedImage>, private val createTy
             chkBoxThree.isSelected->{2}
             else -> {-1}
         }
-        if(index>0){
+        if(index>=0){
             val image = iconImages[index]
             when(createType){
                 CreateType.CREATE -> createIcon(image,true)
