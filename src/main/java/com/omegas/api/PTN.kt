@@ -1,6 +1,6 @@
 package com.omegas.api
 
-import com.omegas.enums.MediaType
+import com.omegas.util.MediaType
 import com.omegas.model.MediaInfo
 import com.omegas.model.SeasonName
 import com.omegas.util.Constants.ANIME_RE
@@ -38,11 +38,12 @@ object PTN { // Parse Torrent Name
         pi.exec("title = result['title']")
         return try{
             pi.exec("year = result['year']")
-            MediaInfo(pi["title"].asString(),MediaType.MOVIE,folder,pi["year"].asInt())
+            MediaInfo(pi["title"].asString(), MediaType.MOVIE,folder,pi["year"].asInt())
         } catch (e: Exception) {
             try{
                 pi.exec("season = result['season']")
-                MediaInfo(pi["title"].asString(),MediaType.TV,pi["season"].asInt(),folder)
+                MediaInfo(pi["title"].asString(),
+                    MediaType.TV,pi["season"].asInt(),folder)
             }catch (e:Exception){
                 null
             }
@@ -55,7 +56,7 @@ object PTN { // Parse Torrent Name
         val seasonName = SeasonName(matcher.group(1))
         val animeName = seasonName.name
         val seasonNumber = seasonName.number
-        return MediaInfo(animeName,MediaType.TV,seasonNumber,file)
+        return MediaInfo(animeName, MediaType.TV,seasonNumber,file)
     }
 
     private fun parseTVFormat(file: File):MediaInfo{
@@ -65,7 +66,7 @@ object PTN { // Parse Torrent Name
         val animeName = seasonName.name
         val seasonNumber = seasonName.number
 
-        return MediaInfo(animeName,MediaType.TV,seasonNumber,file)
+        return MediaInfo(animeName, MediaType.TV,seasonNumber,file)
     }
 
     private fun parseMovieFormat(file: File): MediaInfo {
@@ -73,6 +74,6 @@ object PTN { // Parse Torrent Name
         matcher.find()
         val movieName = matcher.group(1)
         val year = matcher.group(2).toInt()
-        return MediaInfo(movieName,MediaType.MOVIE,file,year)
+        return MediaInfo(movieName, MediaType.MOVIE,file,year)
     }
 }

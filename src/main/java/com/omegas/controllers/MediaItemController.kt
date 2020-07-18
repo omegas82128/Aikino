@@ -1,7 +1,7 @@
 package com.omegas.controllers
 
 import com.omegas.api.moviedb.TheMovieDb.TIMEOUT
-import com.omegas.enums.MediaType
+import com.omegas.util.MediaType
 import com.omegas.main.SecondMain
 import com.omegas.main.SecondMain.Companion.changeScene
 import com.omegas.model.Media

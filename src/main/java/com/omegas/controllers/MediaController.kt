@@ -1,7 +1,9 @@
 package com.omegas.controllers
 
 import com.omegas.api.moviedb.MovieDAL
-import com.omegas.enums.AppType
+import com.omegas.image.Downloader
+import com.omegas.image.ImageSaver.saveTransparentPng
+import com.omegas.image.TemplateImage
 import com.omegas.main.SecondMain
 import com.omegas.main.SecondMain.Companion.stage
 import com.omegas.model.Icon
@@ -9,10 +11,10 @@ import com.omegas.model.MediaInfo
 import com.omegas.tasks.DisplayImageTask
 import com.omegas.util.*
 import com.omegas.util.Constants.APP_TYPE
+import com.omegas.util.Constants.ICON_TYPE
 import com.omegas.util.Constants.LOCATION
 import com.omegas.util.Constants.MAX_POSTERS
 import com.omegas.util.Constants.PLACEHOLDER_IMAGE_PATH
-import com.omegas.util.ImageDownloader.downloadPng
 import javafx.fxml.FXML
 import javafx.fxml.Initializable
 import javafx.scene.control.Button
@@ -85,7 +87,7 @@ abstract class MediaController:Initializable {
                 AppType.PUBLIC -> file.absolutePath
             }
 
-            val filePath:String? = ImageDownloader.download(
+            val filePath:String? = Downloader.download(
                 posterUrls[currentPosition],
                 folder,
                 imageView.image
@@ -93,7 +95,7 @@ abstract class MediaController:Initializable {
             if(filePath !=null){
                 showMessage(
                     "$name poster downloaded",
-                    Type.INFO,
+                    AlertType.INFO,
                     "Download Complete"
                 ) {
                     Runtime.getRuntime().exec("explorer.exe /select,$filePath")
@@ -101,14 +103,14 @@ abstract class MediaController:Initializable {
             }else{
                 showMessage(
                     "No image found",
-                    Type.ERROR,
+                    AlertType.ERROR,
                     "Error:"
                 )
             }
         }else{
             showMessage(
                 "No image found",
-                Type.ERROR,
+                AlertType.ERROR,
                 "Error:"
             )
         }
@@ -125,7 +127,7 @@ abstract class MediaController:Initializable {
         for (posterUrl in posterUrls){
             posters.add(
                 executorService!!.submit<Image> {
-                    ImageDownloader.getImage(posterUrl)
+                    Downloader.getImage(posterUrl)
                 }
             )
         }
@@ -140,34 +142,35 @@ abstract class MediaController:Initializable {
         }
     }
     fun createIcon(){
-        createIcon(true)
+        when(ICON_TYPE){
+            IconType.SIMPLE -> createIcon(true)
+            IconType.WITH_TEMPLATE -> {
+                createIconChooserDialog(CreateType.CREATE)
+            }
+        }
+
     }
     private fun createIcon(delete:Boolean): Icon?{
-        val pngFile = downloadPng(imageView.image,file)
-        val name =
-        pngFile?.let{
-            val iconName = convertToIcon(it)
-            if(delete){
-                it.delete()
-            }
-            iconName
-        }
-        return if(pngFile == null){
-            null
-        }else{
-            Icon(pngFile, name!!)
-        }
+        val pngFile = saveTransparentPng(imageView.image,file)
+        return createIcon(pngFile, delete)
     }
     fun createAndApply(){
-        val icon = createIcon(false)
-        val file = icon?.file
-        icon?.file = this.file
-        if(icon!=null){
-            applyIcon(icon)
-        }else{
-            showMessage("Icon could not be created.",Type.ERROR,"Icon Creation Failed")
+        when(ICON_TYPE){
+            IconType.SIMPLE -> {
+                val icon = createIcon(false)
+                applyIcon(icon,this.file)
+            }
+            IconType.WITH_TEMPLATE -> {
+                createIconChooserDialog(CreateType.CREATE_AND_APPLY)
+            }
         }
-        file?.delete()
+
+    }
+
+    private fun createIconChooserDialog(createType: CreateType){
+        val list = TemplateImage.getShortenedImages(imageView.image,file)
+        val iconChooserDialog = IconChooserDialog(list,createType, file)
+        iconChooserDialog.show()
     }
     private val normalForPosters : (mediaInfo: MediaInfo) -> MutableList<String> = { mediaInfo->
         MovieDAL.getMoviePosters(mediaInfo)

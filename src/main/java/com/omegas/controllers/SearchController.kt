@@ -1,9 +1,9 @@
 package com.omegas.controllers
 
-import com.omegas.enums.MediaType
 import com.omegas.main.SecondMain
 import com.omegas.model.MediaInfo
 import com.omegas.tasks.SearchTask
+import com.omegas.util.MediaType
 import com.omegas.util.addComponent
 import javafx.concurrent.Task
 import javafx.fxml.FXML

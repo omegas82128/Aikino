@@ -1,6 +1,6 @@
 package com.omegas.api.moviedb
 
-import com.omegas.enums.MediaType
+import com.omegas.util.MediaType
 import com.omegas.model.Media
 import info.movito.themoviedbapi.TmdbMovies
 import info.movito.themoviedbapi.TmdbTV
@@ -14,7 +14,8 @@ object TmdbManager {
                 // tvSeries is used to get refreshedTvSeries which has values of totalSeasons and episodes
                 val refreshedTvSeries=TvDAL.tmdbTV.getSeries(tvSeries.id,null, TmdbTV.TvMethod.credits)
                 if(refreshedTvSeries.numberOfSeasons>=seasonNumber){
-                    val media = Media(refreshedTvSeries.id,refreshedTvSeries.name,MediaType.TV,refreshedTvSeries.posterPath, refreshedTvSeries.overview)
+                    val media = Media(refreshedTvSeries.id,refreshedTvSeries.name,
+                        MediaType.TV,refreshedTvSeries.posterPath, refreshedTvSeries.overview)
                     media.totalSeasons = refreshedTvSeries.numberOfSeasons
                     media.currentSeason = seasonNumber
                     media.episodes = refreshedTvSeries.numberOfEpisodes
@@ -31,7 +32,8 @@ object TmdbManager {
         if(movieList.isNotEmpty()){
             for(movieDB in movieList){
                 val movie = MovieDAL.movies.getMovie(movieDB.id, null, TmdbMovies.MovieMethod.credits)
-                val media = Media(movie.id,movie.title,MediaType.MOVIE,movie.posterPath,movie.overview)
+                val media = Media(movie.id,movie.title,
+                    MediaType.MOVIE,movie.posterPath,movie.overview)
                 media.runtime = movie.runtime
                 MovieDAL.getDirector(movie)?.let{
                     media.director = it

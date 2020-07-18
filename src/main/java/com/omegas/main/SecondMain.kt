@@ -1,10 +1,10 @@
 package com.omegas.main
 
 import com.omegas.api.PTN
-import com.omegas.enums.MediaType
 import com.omegas.model.MediaInfo
+import com.omegas.util.AlertType
 import com.omegas.util.Constants
-import com.omegas.util.Type
+import com.omegas.util.MediaType
 import com.omegas.util.showMessage
 import javafx.application.Application
 import javafx.fxml.FXMLLoader
@@ -53,7 +53,7 @@ class SecondMain : Application() {
             }
 
             val directoryChooser = DirectoryChooser()
-            directoryChooser.title = "Choose Movie or TV Series Folder"
+            directoryChooser.title = "Choose a Movie or TV series folder"
             val file = directoryChooser.showDialog(primaryStage)
 
             if(file!=null){
@@ -62,8 +62,9 @@ class SecondMain : Application() {
                 start(primaryStage)
                 return
             }
+            primaryStage?.hide()
             showMessage()
-            Thread.sleep(10000)
+            Thread.sleep(7000)
             exitProcess(0)
         }
 
@@ -91,7 +92,7 @@ class SecondMain : Application() {
                 launch(SecondMain::class.java)
             }catch (exception:Exception){
                 exception.printStackTrace()
-                showMessage("TheMovieDB.org cannot be reached.",Type.ERROR,"Connection Error:")
+                showMessage("TheMovieDB.org cannot be reached.", AlertType.ERROR,"Connection Error:")
                 exitProcess(1)
             }
         }

@@ -2,7 +2,7 @@ package com.omegas.tasks
 
 import com.omegas.api.moviedb.TmdbManager
 import com.omegas.controllers.MediaItemController
-import com.omegas.enums.MediaType
+import com.omegas.util.MediaType
 import com.omegas.model.Media
 import com.omegas.util.addComponent
 import javafx.beans.binding.Bindings

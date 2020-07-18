@@ -1,9 +1,9 @@
 package com.omegas.model
 
-import com.omegas.enums.MediaType
+import com.omegas.util.MediaType
 import java.io.File
 
-data class MediaInfo(var title:String, val mediaType:MediaType, var file:File){
+data class MediaInfo(var title:String, val mediaType: MediaType, var file:File){
     var year:Int = 0
     var seasonNumber = 0
     var id = -1
