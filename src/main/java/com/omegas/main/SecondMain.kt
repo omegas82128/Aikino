@@ -73,7 +73,7 @@ class SecondMain : Application() {
     companion object{
         lateinit var args:Array<String>
         lateinit var stage: Stage
-        const val TITLE = "PosterDownloader"
+        const val TITLE = "Aikino"
         var mediaInfo:MediaInfo? = null
         fun changeScene(fxmlPath:String,title:String){
             try {
