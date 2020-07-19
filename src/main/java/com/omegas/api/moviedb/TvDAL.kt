@@ -1,5 +1,7 @@
 package com.omegas.api.moviedb
 
+import com.omegas.api.moviedb.TmdbManager.notFoundType
+import com.omegas.util.NotFoundType
 import info.movito.themoviedbapi.TmdbTV
 import info.movito.themoviedbapi.TmdbTvSeasons
 import info.movito.themoviedbapi.model.tv.TvSeries
@@ -20,6 +22,11 @@ object TvDAL {
             for(poster in posters.posters){
                 posterList.add(poster.filePath)
             }
+            if(posterList.isEmpty()){
+                notFoundType = NotFoundType.POSTER_NOT_FOUND
+            }
+        }else{
+            notFoundType = NotFoundType.MEDIA_NOT_FOUND
         }
         return posterList
     }

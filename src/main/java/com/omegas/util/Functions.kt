@@ -1,6 +1,7 @@
 package com.omegas.util
 
 import com.omegas.model.Icon
+import com.omegas.util.Preferences.hideIcon
 import javafx.scene.Node
 import javafx.scene.control.ButtonType
 import javafx.scene.control.Label
@@ -27,7 +28,7 @@ fun convertToIcon(file: File):String{
     return outputFile.name
 }
 
-private fun setIcon(folderPath: String, iconName:String, hideFile: Boolean= true) {
+private fun setIcon(folderPath: String, iconName:String, hideFile: Boolean) {
     try {
         val diPath = File("$folderPath\\desktop.ini")
         if (!diPath.exists()) {
@@ -51,7 +52,7 @@ private fun setIcon(folderPath: String, iconName:String, hideFile: Boolean= true
             }
             showMessage("Icon applied successfully", AlertType.INFO, "Icon applied to folder $folderPath")
         } else if (diPath.exists()) {
-            val alert = showAlert("Folder already has an icon. Do you want to overwrite icon?","Overwrite Icon Confirmation",false,ButtonType.YES,ButtonType.NO)
+            val alert = displayAlert("Folder already has an icon. Do you want to overwrite icon?","Overwrite Icon Confirmation",false,ButtonType.YES,ButtonType.NO)
             alert.showAndWait()
             if(alert.result == ButtonType.YES){
                 diPath.delete()
@@ -66,7 +67,7 @@ private fun setIcon(folderPath: String, iconName:String, hideFile: Boolean= true
 
 
 fun applyIcon(icon: Icon){
-    setIcon(icon.file.absolutePath, icon.iconName)
+    setIcon(icon.file.absolutePath, icon.iconName, hideIcon)
 }
 
 fun addComponent(pane: Pane, component: Node){

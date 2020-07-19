@@ -1,6 +1,7 @@
 package com.omegas.main
 
 import com.omegas.api.PTN
+import com.omegas.controllers.SearchController
 import com.omegas.model.MediaInfo
 import com.omegas.util.AlertType
 import com.omegas.util.Constants
@@ -75,11 +76,15 @@ class SecondMain : Application() {
         lateinit var stage: Stage
         const val TITLE = "Aikino"
         var mediaInfo:MediaInfo? = null
-        fun changeScene(fxmlPath:String,title:String){
+        fun changeScene(fxmlPath:String,title:String, search:Boolean = false){
             try {
-                val root = FXMLLoader.load<Parent>(SecondMain::class.java.getResource("/fxml/${fxmlPath}Window.fxml"))
+                val fxmlLoader =FXMLLoader(SecondMain::class.java.getResource("/fxml/${fxmlPath}Window.fxml"))
+                val root = fxmlLoader.load<Parent>()
                 stage.title = "$TITLE - $title"
                 stage.scene = Scene(root)
+                if (search){
+                    fxmlLoader.getController<SearchController>().search()
+                }
             } catch (e: java.lang.Exception) {
                 e.printStackTrace()
             }
@@ -87,7 +92,6 @@ class SecondMain : Application() {
         @JvmStatic
         fun main(args:Array<String>){
             Companion.args = args
-            //Companion.args = arrayOf("E:\\"+"Sucker Punch (2011)")
             try{
                 launch(SecondMain::class.java)
             }catch (exception:Exception){

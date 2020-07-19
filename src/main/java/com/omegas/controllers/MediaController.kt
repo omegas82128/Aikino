@@ -1,6 +1,7 @@
 package com.omegas.controllers
 
 import com.omegas.api.moviedb.MovieDAL
+import com.omegas.api.moviedb.TmdbManager.notFoundType
 import com.omegas.image.Downloader
 import com.omegas.image.ImageSaver.saveTransparentPng
 import com.omegas.image.TemplateImage
@@ -11,21 +12,26 @@ import com.omegas.model.MediaInfo
 import com.omegas.tasks.DisplayImageTask
 import com.omegas.util.*
 import com.omegas.util.Constants.APP_TYPE
-import com.omegas.util.Constants.ICON_TYPE
 import com.omegas.util.Constants.LOCATION
 import com.omegas.util.Constants.MAX_POSTERS
 import com.omegas.util.Constants.PLACEHOLDER_IMAGE_PATH
+import com.omegas.util.Preferences.iconType
+import javafx.application.Platform
 import javafx.fxml.FXML
+import javafx.fxml.FXMLLoader
 import javafx.fxml.Initializable
+import javafx.scene.Parent
+import javafx.scene.Scene
 import javafx.scene.control.Button
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
+import javafx.stage.Modality
+import javafx.stage.Stage
 import java.io.File
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import java.util.concurrent.Future
 import kotlin.concurrent.thread
-import kotlin.system.exitProcess
 
 
 abstract class MediaController:Initializable {
@@ -45,7 +51,7 @@ abstract class MediaController:Initializable {
     private var imageThread: Thread? = null
     fun search(){
         SecondMain.mediaInfo = mediaInfo
-        SecondMain.changeScene("Search","Search Window")
+        SecondMain.changeScene("Search","Search Window", true)
     }
 
     fun nextPoster() {
@@ -134,15 +140,39 @@ abstract class MediaController:Initializable {
         if(posterUrls.isNotEmpty()){
             nextPoster()
         }else{
-            showMessage(
-                title = "No Posters Found",
-                text = "${mediaInfo.toMovieName()} has no posters available"
-            )
-            exitProcess(1)
+            val name = when(mediaInfo.mediaType){
+                MediaType.MOVIE -> mediaInfo.toMovieName()
+                MediaType.TV -> mediaInfo.toTVSeriesName()
+            }
+            when(notFoundType){
+                NotFoundType.MEDIA_NOT_FOUND -> {
+                    showMessage(
+                        title = "No Posters Found",
+                        text = "$name has no posters available"
+                    )
+                }
+                NotFoundType.POSTER_NOT_FOUND -> {
+                    val media = when(mediaInfo.mediaType){
+                        MediaType.MOVIE -> "Movie"
+                        MediaType.TV -> "Tv Show"
+                    }
+                    showMessage(
+                        title = "$media not Found",
+                        text = "$name was not found"
+                    )
+                }
+                null -> {}
+            }
+            thread {
+                Thread.sleep(600)
+                Platform.runLater {
+                    search()
+                }
+            }
         }
     }
     fun createIcon(){
-        when(ICON_TYPE){
+        when(iconType){
             IconType.SIMPLE -> createIcon(true)
             IconType.WITH_TEMPLATE -> {
                 createIconChooserDialog(CreateType.CREATE)
@@ -155,7 +185,7 @@ abstract class MediaController:Initializable {
         return createIcon(pngFile, delete)
     }
     fun createAndApply(){
-        when(ICON_TYPE){
+        when(iconType){
             IconType.SIMPLE -> {
                 val icon = createIcon(false)
                 applyIcon(icon,this.file)
@@ -165,6 +195,20 @@ abstract class MediaController:Initializable {
             }
         }
 
+    }
+
+    fun openSettings(){
+        val fxmlLoader = FXMLLoader(javaClass.getResource("/fxml/SettingsWindow.fxml"))
+        val root : Parent = fxmlLoader.load()
+
+        val scene = Scene(root)
+        val stage = Stage()
+        stage.title = SecondMain.TITLE+" - Settings"
+        stage.initModality(Modality.APPLICATION_MODAL)
+        stage.icons.add(Image(javaClass.getResource("/icon.png").toString()))
+        stage.scene = scene
+        stage.isResizable = false
+        stage.show()
     }
 
     private fun createIconChooserDialog(createType: CreateType){

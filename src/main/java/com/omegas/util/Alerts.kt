@@ -9,7 +9,6 @@ import javafx.scene.layout.GridPane
 import javafx.scene.layout.Priority
 import javafx.scene.layout.Region
 import javafx.stage.Stage
-import javafx.stage.StageStyle
 import java.awt.AWTException
 import java.awt.SystemTray
 import java.awt.Toolkit
@@ -17,7 +16,7 @@ import java.awt.TrayIcon
 import java.io.PrintWriter
 import java.io.StringWriter
 
-fun showAlert(contentText: String= "Internet disconnected. Reconnect and try again.", title: String="Connection Error", show:Boolean = true, vararg buttonTypes: ButtonType): Alert {
+fun displayAlert(contentText: String= "Internet disconnected. Reconnect and try again.", title: String="Connection Error", show:Boolean = true, vararg buttonTypes: ButtonType): Alert {
     val alert = Alert(
         Alert.AlertType.NONE,
         contentText
@@ -31,7 +30,7 @@ fun showAlert(contentText: String= "Internet disconnected. Reconnect and try aga
     }else{
         alert.dialogPane.buttonTypes.addAll(buttonTypes)
     }
-
+    alert.dialogPane.stylesheets.addAll(object{}.javaClass.classLoader!!.getResource("css/alert.css")!!.toExternalForm())
     (alert.dialogPane.scene.window as Stage).
     icons.add(Constants.ICON)
 
@@ -79,18 +78,6 @@ fun exceptionDialog(exception: Exception) {
 
     alert.dialogPane.expandableContent = expContent
 
-    alert.showAndWait()
-}
-
-fun displayAlert(contentText: String, title: String) {
-    val alert = Alert(
-        Alert.AlertType.NONE,
-        contentText
-    )
-    alert.title = title
-    alert.initStyle(StageStyle.UTILITY)
-    alert.dialogPane.buttonTypes.add(ButtonType.OK)
-    alert.dialogPane.minHeight = Region.USE_PREF_SIZE
     alert.showAndWait()
 }
 

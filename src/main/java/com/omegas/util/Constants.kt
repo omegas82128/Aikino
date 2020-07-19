@@ -20,6 +20,11 @@ object Constants{
     val TEMPLATE_POSTER_DIMENSION = Dimension2D(338.0 ,460.0)
     val ICON = Image(javaClass.getResource("/icon.png").toString())
     val APP_TYPE: AppType = AppType.PUBLIC
-    val ICON_TYPE: IconType = IconType.WITH_TEMPLATE
+    val POSTER_SIZES = listOf("w500","w780","w1280","original")
+
+    //preferences keys
+    const val ICON_TYPE_KEY = "ICON_TYPE"
+    const val HIDE_ICONS_KEY = "HIDE_ICONS"
+    const val POSTER_SIZE_KEY = "POSTER_SIZE"
 
 }

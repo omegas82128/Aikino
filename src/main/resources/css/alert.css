@@ -1,0 +1,31 @@
+.root{
+	-fx-accent: #15BB32;
+    -fx-focus-color: #15BB32;
+}
+
+.dialog-pane .header-panel{
+    -fx-font-weight: 900;
+    -fx-background-color: #2C3440;
+}
+.dialog-pane{
+    -fx-background-color: #2C3440;
+    -fx-text-fill:white;
+}
+
+.dialog-pane > .content.label, .check-box {
+    -fx-text-fill: #99aabb;
+}
+.button{
+    -fx-text-fill: white;
+    -fx-background-color: #405060;
+}
+.button:hover{
+    -fx-background-color: #303C48;
+}
+.button:pressed{
+    -fx-background-color: #667788;
+}
+
+.label{
+   -fx-text-fill:white;
+}

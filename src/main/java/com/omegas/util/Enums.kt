@@ -19,3 +19,7 @@ enum class CreateType {
 enum class IconType{
     SIMPLE,WITH_TEMPLATE
 }
+
+enum class NotFoundType{
+    MEDIA_NOT_FOUND, POSTER_NOT_FOUND
+}

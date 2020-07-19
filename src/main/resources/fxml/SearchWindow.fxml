@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="420.0" prefHeight="473.4" prefWidth="430.0" styleClass="my-border-pane" stylesheets="@../myCss.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.omegas.controllers.SearchController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="420.0" prefHeight="473.4" prefWidth="430.0" styleClass="my-border-pane" stylesheets="@../css/myCss.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.omegas.controllers.SearchController">
    <top>
       <BorderPane BorderPane.alignment="CENTER">
          <BorderPane.margin>

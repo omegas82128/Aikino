@@ -1,11 +1,12 @@
 package com.omegas.api.moviedb
 
+import com.omegas.api.moviedb.TmdbManager.notFoundType
 import com.omegas.model.MediaInfo
+import com.omegas.util.NotFoundType
 import info.movito.themoviedbapi.TmdbMovies
 import info.movito.themoviedbapi.model.ArtworkType
 import info.movito.themoviedbapi.model.MovieDb
 import info.movito.themoviedbapi.model.core.MovieResultsPage
-import javafx.scene.control.Alert
 
 object MovieDAL {
     val movies: TmdbMovies = TheMovieDb.tmdbApi.movies
@@ -29,8 +30,6 @@ object MovieDAL {
             if (movieDbList.isEmpty()) {
                 movieDbList = search(movieName, year - 1)
                 if (movieDbList.isEmpty()) {
-                    val alert = Alert(Alert.AlertType.INFORMATION, "$movieName ($year) not found")
-                    alert.showAndWait()
                     return null
                 }
             }
@@ -98,8 +97,14 @@ object MovieDAL {
         val posterList:MutableList<String> = mutableListOf()
         if (movieId != null) {
             val movieDb = movies.getMovie(movieId, null, TmdbMovies.MovieMethod.images)
-            for (poster in movieDb.getImages(ArtworkType.POSTER))
+            for (poster in movieDb.getImages(ArtworkType.POSTER)){
                 posterList.add(poster.filePath)
+            }
+            if(posterList.isEmpty()){
+                notFoundType = NotFoundType.POSTER_NOT_FOUND
+            }
+        }else{
+            notFoundType = NotFoundType.MEDIA_NOT_FOUND
         }
         return posterList
     }

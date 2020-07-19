@@ -1,11 +1,13 @@
 package com.omegas.api.moviedb
 
-import com.omegas.util.MediaType
 import com.omegas.model.Media
+import com.omegas.util.MediaType
+import com.omegas.util.NotFoundType
 import info.movito.themoviedbapi.TmdbMovies
 import info.movito.themoviedbapi.TmdbTV
 
 object TmdbManager {
+    var notFoundType:NotFoundType? = null
     fun searchSeries(showName: String, seasonNumber:Int):List<Media>{
         val mediaList:MutableList<Media> = mutableListOf()
         val tvSeriesList = TvDAL.searchSeries(showName)

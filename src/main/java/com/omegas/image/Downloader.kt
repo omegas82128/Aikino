@@ -1,5 +1,6 @@
 package com.omegas.image
 
+import com.omegas.util.Preferences.posterSize
 import com.omegas.util.exceptionDialog
 import javafx.embed.swing.SwingFXUtils
 import javafx.scene.image.Image
@@ -13,10 +14,10 @@ object Downloader {
         return url?.let{url.substring(url.lastIndexOf("/"))}
     }
     fun getImage(imageURL: String): Image {
-        return Image(getFullURL(imageURL))
+        return Image(getFullURL(imageURL, posterSize))
     }
 
-    fun getFullURL(imageURL: String, size:String = "w1280"):String{
+    fun getFullURL(imageURL: String, size:String):String{
         return "https://image.tmdb.org/t/p/$size$imageURL"
     }
     fun download(imageURL: String?, folder: String, image:Image): String? {
