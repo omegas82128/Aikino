@@ -16,18 +16,22 @@ Features include:
 ## FAQ
 #### What folders will the app work on?
 * For **movie folders** that have the correct year of release in name. 
+
 *For example:*
 ```
 Doctor.Sleep.2019.DC.1080p.BluRay.x265-RARBG
 Magnolia (1999)
 ```
-* For **Tv Series folders** that either mention season number or have name followed by a Mini-Series tag
+* For **Tv Series folders** that either mention season number or have name followed by a Mini-Series tag.
+
 *For example:*
 ```
 Twin Peaks Season 2
 Devs (Mini-Series)
 ```
 * For **anime folders** that either have season number or have a sub, dub or dual-audio tag.
+
+*For example:*
 ```
 Legend of Galactic Heroes (Sub)
 Tatami Galaxy Season 1
