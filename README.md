@@ -3,6 +3,7 @@ Aikino is a windows application that downloads movie, anime and tv show posters,
 
 ![app-concept](./.github/readme-images/concept.png)
 
+![app-demo](./.github/readme-images/demo.gif)
 ## Features
 
 Features include:
