@@ -61,9 +61,14 @@ object PTN { // Parse Torrent Name
     }
 
     private fun parseTVFormat(file: File):MediaInfo{
-        val matcher = PREFERRED_TV_PATTERN.matcher(file.name)
-        matcher.find()
-        val name:String = matcher.group(1)
+
+        val name:String = if(file.name.contains("(mini-series)",true)){
+            val matcher = PREFERRED_TV_PATTERN.matcher(file.name)
+            matcher.find()
+            matcher.group(1)
+        }else{
+            file.name
+        }
         val seasonName = SeasonName(name)
 
         val animeName = seasonName.name
