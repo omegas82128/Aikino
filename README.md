@@ -1,5 +1,5 @@
 # ![app icon](./.github/readme-images/app-icon.png) Aikino
-Aikino is a windows application that downloads movie posters, converts them to icons and applies them
+Aikino is a windows application that downloads movie, anime and tv show posters, converts them to icons and applies them
 
 ![app-concept](./.github/readme-images/concept.png)
 
