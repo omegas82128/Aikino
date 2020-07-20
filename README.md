@@ -38,17 +38,17 @@ Tatami Galaxy Season 1
 Death Note (Dual-Audio)
 ```
 
-####I got the notification that icon was applied. Why isn't the icon displayed on the folder yet?
+#### I got the notification that icon was applied. Why isn't the icon displayed on the folder yet?
 Windows File Explorer updates on its own pace. It can apply the icon from a few seconds to about 2 minutes. It will update on refresh or when you restart the File Explorer.
 
-####I changed poster size from settings. Why is the downloaded poster of previous settings?
+#### I changed poster size from settings. Why is the downloaded poster of previous settings?
 The change takes effect on application restart. When you restart the application, Aikino will download the poster in the new size. 
 
-####Why doesn't my movie/tv show/anime not have more/any posters?
+#### Why doesn't my movie/tv show/anime not have more/any posters?
 All posters are provided by [TMDb](https://www.themoviedb.org/). If you have a poster that you want to add and it follows TMDb guidlines, you can upload on TMDb and access it through Aikino.
 
-####Can I use Aikino to create and apply an icon from a poster that I have?
-Currently you cannot. I might add that in future updates and releases. 
+#### Can I use Aikino to create and apply an icon from a poster that I have?
+Currently, you cannot. I might add that in future updates and releases. 
 
 ## Credits
 Aikino uses the following APIs:
