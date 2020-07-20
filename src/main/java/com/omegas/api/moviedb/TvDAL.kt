@@ -35,11 +35,11 @@ object TvDAL {
         val posterList = mutableListOf<String>()
         val season = tvSeasons.getSeason(series.id,seasonNumber,null, TmdbTvSeasons.SeasonMethod.images)
         val posters = season.images
-        series.posterPath?.let{
-            posterList.add(it)
-        }
         for(poster in posters.posters){
             posterList.add(poster.filePath)
+        }
+        series.posterPath?.let{
+            posterList.add(it)
         }
         return posterList
     }

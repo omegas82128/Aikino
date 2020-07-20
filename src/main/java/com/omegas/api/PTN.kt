@@ -1,13 +1,14 @@
 package com.omegas.api
 
-import com.omegas.util.MediaType
 import com.omegas.model.MediaInfo
 import com.omegas.model.SeasonName
 import com.omegas.util.Constants.ANIME_RE
 import com.omegas.util.Constants.MOVIE_RE
 import com.omegas.util.Constants.PREFERRED_ANIME_PATTERN
 import com.omegas.util.Constants.PREFERRED_MOVIE_PATTERN
+import com.omegas.util.Constants.PREFERRED_TV_PATTERN
 import com.omegas.util.Constants.TV_SERIES_RE
+import com.omegas.util.MediaType
 import org.python.core.PyString
 import org.python.util.PythonInterpreter
 import java.io.File
@@ -60,7 +61,9 @@ object PTN { // Parse Torrent Name
     }
 
     private fun parseTVFormat(file: File):MediaInfo{
-        val name:String = file.name.replace("\\(Mini-Series\\)","")
+        val matcher = PREFERRED_TV_PATTERN.matcher(file.name)
+        matcher.find()
+        val name:String = matcher.group(1)
         val seasonName = SeasonName(name)
 
         val animeName = seasonName.name

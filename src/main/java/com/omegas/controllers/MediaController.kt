@@ -163,6 +163,7 @@ abstract class MediaController:Initializable {
                 }
                 null -> {}
             }
+            notFoundType = null
             thread {
                 Thread.sleep(600)
                 Platform.runLater {

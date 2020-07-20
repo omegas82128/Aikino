@@ -9,10 +9,11 @@ import java.util.regex.Pattern
 
 object Constants{
     val ANIME_RE = Regex("(.+) \\((([DdSs]ub)|([Dd]ual-[Aa]udio))\\)")
-    val TV_SERIES_RE = Regex(".+ ((\\(Mini-Series\\))|([Ss]eason \\d+))")
+    val TV_SERIES_RE = Regex("(.+) ((\\([Mm]ini-[Ss]eries\\))|([Ss]eason \\d+))")
     val MOVIE_RE = Regex("(.+) \\((\\d{4})\\)$")
     val PREFERRED_MOVIE_PATTERN: Pattern = Pattern.compile(MOVIE_RE.pattern)
     val PREFERRED_ANIME_PATTERN:Pattern = Pattern.compile(ANIME_RE.pattern)
+    val PREFERRED_TV_PATTERN:Pattern = Pattern.compile(TV_SERIES_RE.pattern)
     val LOCATION =  File("F:\\(Icons)\\(New Projects)\\")
     val PLACEHOLDER_IMAGE_PATH = javaClass.getResource("/placeholder.jpg").toString()
     const val MAX_POSTERS = 80
