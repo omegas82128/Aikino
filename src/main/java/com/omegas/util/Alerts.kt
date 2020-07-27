@@ -1,6 +1,6 @@
 package com.omegas.util
 
-import com.omegas.main.SecondMain
+import com.omegas.main.Main
 import javafx.scene.control.Alert
 import javafx.scene.control.ButtonType
 import javafx.scene.control.Label
@@ -98,7 +98,7 @@ fun displayTray(title: String, text: String, type: AlertType, action:()->Unit ) 
 
     //If the icon is a file
     val image = Toolkit.getDefaultToolkit()
-        .createImage(SecondMain::class.java.getResource("/icon.gif"))
+        .createImage(Main::class.java.getResource("/icon.gif"))
     //Alternative (if the icon is on the classpath):
     //Image image = Toolkit.getDefaultToolkit().createImage(getClass().getResource("icon.png"));
 

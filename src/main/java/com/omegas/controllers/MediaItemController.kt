@@ -2,8 +2,8 @@ package com.omegas.controllers
 
 import com.omegas.api.moviedb.TheMovieDb.TIMEOUT
 import com.omegas.util.MediaType
-import com.omegas.main.SecondMain
-import com.omegas.main.SecondMain.Companion.changeScene
+import com.omegas.main.Main
+import com.omegas.main.Main.Companion.changeScene
 import com.omegas.model.Media
 import com.omegas.util.Constants
 import com.omegas.util.toHoursAndMinutes
@@ -66,7 +66,7 @@ class MediaItemController:Initializable {
     override fun initialize(location: URL?, resources: ResourceBundle?) {
     }
     fun select(){
-        SecondMain.mediaInfo?.let {
+        Main.mediaInfo?.let {
             val media = this.media!!
             it.id = media.id
             it.title = media.title

@@ -1,6 +1,6 @@
 package com.omegas.controllers
 
-import com.omegas.main.SecondMain
+import com.omegas.main.Main
 import com.omegas.model.MediaInfo
 import com.omegas.tasks.SearchTask
 import com.omegas.util.MediaType
@@ -28,7 +28,7 @@ class SearchController:Initializable {
     @FXML
     lateinit var vbox:VBox
     override fun initialize(location: URL?, resources: ResourceBundle?) {
-        mediaInfo = SecondMain.mediaInfo!!
+        mediaInfo = Main.mediaInfo!!
         mediaType = mediaInfo.mediaType
         vbox.isFocusTraversable = false
         val integerFilter: UnaryOperator<TextFormatter.Change?>? = UnaryOperator { change ->

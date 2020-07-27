@@ -1,6 +1,6 @@
 package com.omegas.image
 
-import com.omegas.main.SecondMain
+import com.omegas.main.Main
 import com.omegas.util.Constants.PNG_POSTER_DIMENSION
 import com.omegas.util.Constants.TEMPLATE_POSTER_DIMENSION
 import javafx.embed.swing.SwingFXUtils
@@ -35,11 +35,11 @@ object TemplateImage {
         // draw poster
         g.drawImage(input, 29, 23, null)
 
-        val templateFrame = ImageIO.read(SecondMain::class.java.getResource("/template/frame.png"))
+        val templateFrame = ImageIO.read(Main::class.java.getResource("/template/frame.png"))
         //Draw the template frame
         g.drawImage(templateFrame, 0, 0, null)
 
-        val templateLightEffect = ImageIO.read(SecondMain::class.java.getResource("/template/lightEffect.png"))
+        val templateLightEffect = ImageIO.read(Main::class.java.getResource("/template/lightEffect.png"))
         //Draw the template Light Effect
         g.drawImage(templateLightEffect, 0, 0, null)
 

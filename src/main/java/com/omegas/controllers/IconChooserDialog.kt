@@ -2,7 +2,7 @@ package com.omegas.controllers
 
 import com.omegas.image.ImageSaver.saveTemplatePng
 import com.omegas.image.getImage
-import com.omegas.main.SecondMain
+import com.omegas.main.Main
 import com.omegas.model.Icon
 import com.omegas.util.AlertType
 import com.omegas.util.CreateType
@@ -50,7 +50,7 @@ class IconChooserDialog(var iconImages:List<BufferedImage>, private val createTy
 
         val scene = Scene(root)
         stage = Stage()
-        stage.title = SecondMain.TITLE+" - Icon Selection"
+        stage.title = Main.TITLE+" - Icon Selection"
         stage.initModality(Modality.APPLICATION_MODAL)
         stage.icons.add(Image(javaClass.getResource("/icon.png").toString()))
         stage.scene = scene

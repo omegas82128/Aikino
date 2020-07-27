@@ -5,8 +5,8 @@ import com.omegas.api.moviedb.TmdbManager.notFoundType
 import com.omegas.image.Downloader
 import com.omegas.image.ImageSaver.saveTransparentPng
 import com.omegas.image.TemplateImage
-import com.omegas.main.SecondMain
-import com.omegas.main.SecondMain.Companion.stage
+import com.omegas.main.Main
+import com.omegas.main.Main.Companion.stage
 import com.omegas.model.Icon
 import com.omegas.model.MediaInfo
 import com.omegas.tasks.DisplayImageTask
@@ -50,8 +50,8 @@ abstract class MediaController:Initializable {
     private var executorService: ExecutorService? = null
     private var imageThread: Thread? = null
     fun search(){
-        SecondMain.mediaInfo = mediaInfo
-        SecondMain.changeScene("Search","Search Window", true)
+        Main.mediaInfo = mediaInfo
+        Main.changeScene("Search","Search Window", true)
     }
 
     fun nextPoster() {
@@ -207,7 +207,7 @@ abstract class MediaController:Initializable {
 
         val scene = Scene(root)
         val stage = Stage()
-        stage.title = SecondMain.TITLE+" - Settings"
+        stage.title = Main.TITLE+" - Settings"
         stage.initModality(Modality.APPLICATION_MODAL)
         stage.icons.add(Image(javaClass.getResource("/icon.png").toString()))
         stage.scene = scene

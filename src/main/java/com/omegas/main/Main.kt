@@ -16,7 +16,7 @@ import javafx.stage.Stage
 import java.io.File
 import kotlin.system.exitProcess
 
-class SecondMain : Application() {
+class Main : Application() {
     override fun start(primaryStage: Stage?) {
         primaryStage?.icons?.add(Constants.ICON)
         if (args.isNotEmpty()){
@@ -78,7 +78,7 @@ class SecondMain : Application() {
         var mediaInfo:MediaInfo? = null
         fun changeScene(fxmlPath:String,title:String, search:Boolean = false){
             try {
-                val fxmlLoader =FXMLLoader(SecondMain::class.java.getResource("/fxml/${fxmlPath}Window.fxml"))
+                val fxmlLoader =FXMLLoader(Main::class.java.getResource("/fxml/${fxmlPath}Window.fxml"))
                 val root = fxmlLoader.load<Parent>()
                 stage.title = "$TITLE - $title"
                 stage.scene = Scene(root)
@@ -93,7 +93,7 @@ class SecondMain : Application() {
         fun main(args:Array<String>){
             Companion.args = args
             try{
-                launch(SecondMain::class.java)
+                launch(Main::class.java)
             }catch (exception:Exception){
                 exception.printStackTrace()
                 showMessage("TheMovieDB.org cannot be reached.", AlertType.ERROR,"Connection Error:")
