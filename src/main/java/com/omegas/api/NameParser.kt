@@ -14,7 +14,7 @@ import org.python.util.PythonInterpreter
 import java.io.File
 
 
-object PTN { // Parse Torrent Name
+object NameParser {
     fun getMediaInfo(folder:File):MediaInfo?{
         return when {
             MOVIE_RE.matches(folder.name) -> {

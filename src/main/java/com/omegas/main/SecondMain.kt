@@ -1,6 +1,6 @@
 package com.omegas.main
 
-import com.omegas.api.PTN
+import com.omegas.api.NameParser
 import com.omegas.controllers.SearchController
 import com.omegas.model.MediaInfo
 import com.omegas.util.AlertType
@@ -21,7 +21,7 @@ class SecondMain : Application() {
         primaryStage?.icons?.add(Constants.ICON)
         if (args.isNotEmpty()){
             stage = primaryStage!!
-            mediaInfo = PTN.getMediaInfo(File(args[0]))
+            mediaInfo = NameParser.getMediaInfo(File(args[0]))
             if(mediaInfo==null){
                 showMessage(
                     "Incomplete information in folder name.",
