@@ -2,11 +2,7 @@ package com.omegas.util
 
 import com.omegas.model.Icon
 import com.omegas.util.Preferences.hideIcon
-import javafx.scene.Node
 import javafx.scene.control.ButtonType
-import javafx.scene.control.Label
-import javafx.scene.layout.BorderPane
-import javafx.scene.layout.Pane
 import net.sf.image4j.codec.ico.ICOEncoder
 import org.ini4j.Wini
 import java.io.File
@@ -20,7 +16,7 @@ fun convertToIcon(file: File):String{
     var outputFile = File(pngFileName.replace(".png", " Icon.ico"))
     var version = 1
     while(outputFile.exists()){
-        outputFile =  File(pngFileName.replace(".png","Icon v$version.ico"))
+        outputFile =  File(pngFileName.replace(".png","  Icon v$version.ico"))
         version++
     }
     val bi = ImageIO.read(file)
@@ -70,15 +66,6 @@ fun applyIcon(icon: Icon){
     setIcon(icon.file.absolutePath, icon.iconName, hideIcon)
 }
 
-fun addComponent(pane: Pane, component: Node){
-    pane.children.clear()
-    for(i in 1..7){
-        pane.children.add(Label(""))
-    }
-    val border = BorderPane()
-    border.center= component
-    pane.children.add(border)
-}
 fun createIcon(pngFile:File?, delete:Boolean):Icon?{
     val name =
         pngFile?.let{
