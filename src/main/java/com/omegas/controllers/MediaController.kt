@@ -174,7 +174,10 @@ abstract class MediaController:Initializable {
     }
     fun createIcon(){
         when(iconType){
-            IconType.SIMPLE -> createIcon(true)
+            IconType.SIMPLE -> {
+                createIcon(true)
+                showMessage("Icon created successfully", AlertType.INFO, "Icon saved to folder ${file.name}")
+            }
             IconType.WITH_TEMPLATE -> {
                 createIconChooserDialog(CreateType.CREATE)
             }

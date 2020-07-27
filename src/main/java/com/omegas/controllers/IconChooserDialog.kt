@@ -4,8 +4,10 @@ import com.omegas.image.ImageSaver.saveTemplatePng
 import com.omegas.image.getImage
 import com.omegas.main.SecondMain
 import com.omegas.model.Icon
+import com.omegas.util.AlertType
 import com.omegas.util.CreateType
 import com.omegas.util.applyIcon
+import com.omegas.util.showMessage
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
 import javafx.fxml.Initializable
@@ -100,7 +102,10 @@ class IconChooserDialog(var iconImages:List<BufferedImage>, private val createTy
         if(index>=0){
             val image = iconImages[index]
             when(createType){
-                CreateType.CREATE -> createIcon(image,true)
+                CreateType.CREATE -> {
+                    createIcon(image,true)
+                    showMessage("Icon created successfully", AlertType.INFO, "Icon saved to folder ${file.name}")
+                }
                 CreateType.CREATE_AND_APPLY -> createAndApply(image)
             }
             btnSelect.scene.window.hide()
