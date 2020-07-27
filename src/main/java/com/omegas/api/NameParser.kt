@@ -55,9 +55,8 @@ object NameParser {
         val matcher = PREFERRED_ANIME_PATTERN.matcher(file.name)
         matcher.find()
         val seasonName = SeasonName(matcher.group(1))
-        val animeName = seasonName.name
-        val seasonNumber = seasonName.number
-        return MediaInfo(animeName, MediaType.TV,seasonNumber,file)
+
+        return MediaInfo(seasonName.name, MediaType.TV,seasonName.number,file)
     }
 
     private fun parseTVFormat(file: File):MediaInfo{
@@ -71,10 +70,7 @@ object NameParser {
         }
         val seasonName = SeasonName(name)
 
-        val animeName = seasonName.name
-        val seasonNumber = seasonName.number
-
-        return MediaInfo(animeName, MediaType.TV,seasonNumber,file)
+        return MediaInfo(seasonName.name, MediaType.TV,seasonName.number,file)
     }
 
     private fun parseMovieFormat(file: File): MediaInfo {
