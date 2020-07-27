@@ -8,7 +8,7 @@ import java.util.regex.Pattern
 
 
 object Constants{
-    val ANIME_RE = Regex("(.+) \\((([DdSs]ub)|([Dd]ual-[Aa]udio))\\)")
+    val ANIME_RE = Regex("(.+) \\((([DdSs]ub)|([Dd]ual-[Aa]udio)|([aA][nN][iI][mM][eE]))\\)")
     val TV_SERIES_RE = Regex("(.+) ((\\([Mm]ini-[Ss]eries\\))|([Ss]eason \\d+))")
     val MOVIE_RE = Regex("(.+) \\((\\d{4})\\)$")
     val PREFERRED_MOVIE_PATTERN: Pattern = Pattern.compile(MOVIE_RE.pattern)
