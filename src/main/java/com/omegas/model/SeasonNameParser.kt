@@ -1,6 +1,6 @@
 package com.omegas.model
 
-class SeasonName(seasonName:String) {
+class SeasonNameParser(seasonName:String) {
 
     companion object {
         val regex = Regex("[Ss]eason [0-9]+")

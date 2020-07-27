@@ -1,7 +1,7 @@
 package com.omegas.api
 
 import com.omegas.model.MediaInfo
-import com.omegas.model.SeasonName
+import com.omegas.model.SeasonNameParser
 import com.omegas.util.Constants.ANIME_RE
 import com.omegas.util.Constants.MOVIE_RE
 import com.omegas.util.Constants.PREFERRED_ANIME_PATTERN
@@ -54,7 +54,7 @@ object NameParser {
     private fun parseAnimeFormat(file: File):MediaInfo{
         val matcher = PREFERRED_ANIME_PATTERN.matcher(file.name)
         matcher.find()
-        val seasonName = SeasonName(matcher.group(1))
+        val seasonName = SeasonNameParser(matcher.group(1))
 
         return MediaInfo(seasonName.name, MediaType.TV,seasonName.number,file)
     }
@@ -68,7 +68,7 @@ object NameParser {
         }else{
             file.name
         }
-        val seasonName = SeasonName(name)
+        val seasonName = SeasonNameParser(name)
 
         return MediaInfo(seasonName.name, MediaType.TV,seasonName.number,file)
     }
