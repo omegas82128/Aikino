@@ -1,11 +1,11 @@
 package com.omegas.controllers
 
 import com.omegas.api.moviedb.TheMovieDb.TIMEOUT
-import com.omegas.util.MediaType
 import com.omegas.main.Main
 import com.omegas.main.Main.Companion.changeScene
 import com.omegas.model.Media
 import com.omegas.util.Constants
+import com.omegas.util.MediaType
 import com.omegas.util.toHoursAndMinutes
 import javafx.fxml.FXML
 import javafx.fxml.Initializable
@@ -30,8 +30,8 @@ class MediaItemController:Initializable {
     @FXML
     lateinit var txtOverview:TextArea
     var media: Media? = null
-    set(it){
-        field = it
+    set(media){
+        field = media
         field?.let{
             if(it.posterPath!=null){
                 val url = URL(it.posterPath)
