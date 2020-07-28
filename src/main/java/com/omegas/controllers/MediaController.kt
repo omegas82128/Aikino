@@ -145,13 +145,13 @@ abstract class MediaController:Initializable {
                 MediaType.TV -> mediaInfo.toTVSeriesName()
             }
             when(notFoundType){
-                NotFoundType.MEDIA_NOT_FOUND -> {
+                NotFoundType.POSTER_NOT_FOUND -> {
                     showMessage(
                         title = "No Posters Found",
                         text = "$name has no posters available"
                     )
                 }
-                NotFoundType.POSTER_NOT_FOUND -> {
+                NotFoundType.MEDIA_NOT_FOUND -> {
                     val media = when(mediaInfo.mediaType){
                         MediaType.MOVIE -> "Movie"
                         MediaType.TV -> "Tv Show"
