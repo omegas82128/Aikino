@@ -16,6 +16,7 @@ import javafx.scene.image.ImageView
 import java.net.URL
 import java.util.*
 
+
 class MediaItemController:Initializable {
     @FXML
     lateinit var lblTitle: Label
@@ -46,7 +47,11 @@ class MediaItemController:Initializable {
 
             lblTitle.text = it.title
 
-            txtOverview.text = it.overView
+            txtOverview.text = if(it.overView.isNotEmpty()){
+                it.overView
+            }else{
+                "Synopsis not available".toUpperCase()
+            }
 
             when(it.mediaType){
                 MediaType.MOVIE -> {
