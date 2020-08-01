@@ -5,7 +5,7 @@
       <options>
         <option name="appClass" value="com.omegas.main.Main" />
         <option name="description" value="" />
-        <option name="height" value="502.6663" />
+        <option name="height" value="388" />
         <option name="htmlPlaceholderId" value="" />
         <option name="icons">
           <JavaFxApplicationIcons>
@@ -16,7 +16,7 @@
         <option name="title" value="Aikino" />
         <option name="vendor" value="" />
         <option name="version" value="1.8.10" />
-        <option name="width" value="400" />
+        <option name="width" value="488" />
       </options>
     </properties>
     <root id="root">
