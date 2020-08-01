@@ -11,8 +11,6 @@ import com.omegas.model.Icon
 import com.omegas.model.MediaInfo
 import com.omegas.tasks.DisplayImageTask
 import com.omegas.util.*
-import com.omegas.util.Constants.APP_TYPE
-import com.omegas.util.Constants.LOCATION
 import com.omegas.util.Constants.MAX_POSTERS
 import com.omegas.util.Constants.PLACEHOLDER_IMAGE_PATH
 import com.omegas.util.Preferences.iconType
@@ -88,10 +86,8 @@ abstract class MediaController:Initializable {
     fun downloadPoster(name:String){
         if(imageView.image!=null){
 
-            val folder:String = when(APP_TYPE){
-                AppType.PERSONAL->LOCATION.absolutePath + "\\" + name
-                AppType.PUBLIC -> file.absolutePath
-            }
+            val folder:String = file.absolutePath
+
 
             val filePath:String? = Downloader.download(
                 posterUrls[currentPosition],
