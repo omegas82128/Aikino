@@ -3,8 +3,10 @@
     <output-path>$PROJECT_DIR$/out/artifacts/Aikino</output-path>
     <properties id="javafx-properties">
       <options>
+        <option name="alias" value="" />
         <option name="appClass" value="com.omegas.main.Main" />
         <option name="description" value="" />
+        <option name="enabledSigning" value="true" />
         <option name="height" value="388" />
         <option name="htmlPlaceholderId" value="" />
         <option name="icons">
@@ -12,6 +14,7 @@
             <option name="windowsIcon" value="$PROJECT_DIR$/src/main/resources/icon.ico" />
           </JavaFxApplicationIcons>
         </option>
+        <option name="keystore" value="" />
         <option name="nativeBundle" value="all" />
         <option name="title" value="Aikino" />
         <option name="vendor" value="" />
