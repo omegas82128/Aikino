@@ -23,7 +23,6 @@ fun displayAlert(contentText: String= "Internet disconnected. Reconnect and try 
     )
 
     alert.title = title
-    //alert.initStyle(StageStyle.UTILITY)
 
     if (buttonTypes.isEmpty()){
         alert.dialogPane.buttonTypes.add(ButtonType.OK)
@@ -93,19 +92,16 @@ fun showMessage(text: String = "No Folder Selected", type: AlertType = AlertType
 
 @Throws(AWTException::class)
 fun displayTray(title: String, text: String, type: AlertType, action:()->Unit ) {
-    //Obtain only one instance of the SystemTray object
     val tray = SystemTray.getSystemTray()
 
-    //If the icon is a file
     val image = Toolkit.getDefaultToolkit()
         .createImage(Main::class.java.getResource("/icon.gif"))
-    //Alternative (if the icon is on the classpath):
-    //Image image = Toolkit.getDefaultToolkit().createImage(getClass().getResource("icon.png"));
 
     val trayIcon = TrayIcon(image, "Poster downloader")
-    //Let the system resize the image if needed
+
     trayIcon.isImageAutoSize = true
     tray.add(trayIcon)
+
     val messageType: TrayIcon.MessageType = if (type == AlertType.ERROR) {
         TrayIcon.MessageType.ERROR
     } else {
