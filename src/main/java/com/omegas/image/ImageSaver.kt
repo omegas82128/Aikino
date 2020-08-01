@@ -37,7 +37,7 @@ object ImageSaver {
     fun saveImage(image:Image, outputFile: File){
         saveImage(SwingFXUtils.fromFXImage(image, null), outputFile)
     }
-    fun saveImage(bufferedImage:BufferedImage, outputFile: File, format:String = "png"){
+    private fun saveImage(bufferedImage:BufferedImage, outputFile: File, format:String = "png"){
         ImageIO.write(bufferedImage,format, outputFile)
     }
     fun saveTemplatePng(bufferedImage: BufferedImage, file:File):File?{
