@@ -28,10 +28,11 @@ Magnolia (1999)
 Twin Peaks Season 2
 Devs (Mini-Series)
 ```
-* For **anime folders** that either have season number or have a sub, dub or dual-audio tag.
+* For **anime folders** that either have season number or have an anime, sub, dub or dual-audio tag.
 
 *For example:*
 ```
+Monster (anime)
 Legend of Galactic Heroes (Sub)
 Tatami Galaxy Season 1
 Death Note (Dual-Audio)
