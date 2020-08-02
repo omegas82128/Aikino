@@ -1,3 +1,6 @@
+| Download | Views | Vulnerabilities | 
+|-------| ---------| --------------- |
+| [![latest release](https://img.shields.io/badge/download-latest%20build-blue.svg)](https://github.com/omegas82128/Aikino/releases/download/v1.8.10/Aikino.Setup.v1.8.10.exe) | [![HitCount](http://hits.dwyl.com/omegas82128/aikino.svg)](http://hits.dwyl.com/omegas82128/aikino) | [![Known Vulnerabilities](https://snyk.io/test/github/omegas82128/Aikino/badge.svg?targetFile=pom.xml)](https://snyk.io/test/github/omegas82128/Aikino?targetFile=pom.xml) |
 # ![app icon](./.github/readme-images/app-icon.png) Aikino
 Aikino is an open source windows application that downloads movie, anime and tv show posters, converts them to icons and applies them
 
@@ -39,13 +42,13 @@ Death Note (Dual-Audio)
 ```
 
 #### I got the notification that icon was applied. Why isn't the icon displayed on the folder yet?
-Windows File Explorer updates on its own pace. It can apply the icon from a few seconds to about 2 minutes. It will update on refresh or when you restart the File Explorer.
+Windows File Explorer updates on its own pace. It can apply the icon from a few seconds to about 2 minutes. It will update on refreshing or when you restart the File Explorer.
 
 #### I changed poster size from settings. Why is the downloaded poster of previous size?
 The change takes effect on application restart. So when you restart the application, Aikino will download the poster in the new size. 
 
 #### Why doesn't my movie/tv show/anime have more/any posters?
-All posters are provided by [TMDb](https://www.themoviedb.org/). If you have a poster that you want to add and it follows TMDb guidlines, you can upload on TMDb and access it through Aikino.
+All posters are provided by [TMDb](https://www.themoviedb.org/). If you have a poster that you want to add, and it follows TMDb guidelines, you can upload on TMDb and access it through Aikino.
 
 #### Can I use Aikino to create and apply an icon from a poster that I have?
 Currently, you cannot. I might add that in future updates and releases. 
@@ -58,4 +61,4 @@ Aikino uses the following APIs:
 * <img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg" width="80"> - **holgerbrandl** - [TheMovieDB API](https://github.com/holgerbrandl/themoviedbapi) 
 
 ## Disclaimer
-**Aikino uses the TMDb API but it is not endorsed or certified by [TMDb](https://www.themoviedb.org/).**
+**Aikino uses the TMDb API, but it is not endorsed or certified by [TMDb](https://www.themoviedb.org/).**
