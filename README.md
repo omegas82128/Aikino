@@ -42,7 +42,7 @@ Death Note (Dual-Audio)
 ```
 
 #### I got the notification that icon was applied. Why isn't the icon displayed on the folder yet?
-Windows File Explorer updates on its own pace. It can apply the icon from a few seconds to about 2 minutes. It will update on refreshing or when you restart the File Explorer.
+Windows File Explorer updates on its own pace. It can apply the icon in a few seconds to about 2 minutes. It will update on refreshing or when you restart the File Explorer.
 
 #### I changed poster size from settings. Why is the downloaded poster of previous size?
 The change takes effect on application restart. So when you restart the application, Aikino will download the poster in the new size. 
@@ -59,6 +59,23 @@ Aikino uses the following APIs:
 * **Ivan Szkiba**- [ini4j](http://ini4j.sourceforge.net/)
 * **divijbindlish** - [parse-torrent-name](https://github.com/divijbindlish/parse-torrent-name)
 * <img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg" width="80"> - **holgerbrandl** - [TheMovieDB API](https://github.com/holgerbrandl/themoviedbapi) 
+
+## License
+
+    Copyright 2020 Muhammad Haris
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
 
 ## Disclaimer
 **Aikino uses the TMDb API, but it is not endorsed or certified by [TMDb](https://www.themoviedb.org/).**
