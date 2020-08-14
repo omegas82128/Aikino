@@ -46,7 +46,7 @@ private fun setIcon(folderPath: String, iconName:String, hideFile: Boolean) {
             } else {
                 Runtime.getRuntime().exec("attrib -a -r -h -s \"$folderPath\\$iconName\"")
             }
-            showMessage("Icon applied successfully", AlertType.INFO, "Icon applied to folder $folderPath")
+            showMessage("Icon applied to folder $folderPath", AlertType.INFO, "Icon applied successfully")
         } else if (diPath.exists()) {
             val alert = displayAlert("Folder already has an icon. Do you want to overwrite icon?","Overwrite Icon Confirmation",false,ButtonType.YES,ButtonType.NO)
             alert.showAndWait()

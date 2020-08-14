@@ -104,16 +104,16 @@ abstract class MediaController:Initializable {
                 }
             }else{
                 showMessage(
-                    "No image found",
+                    "Due to some error, poster was not downloaded. ",
                     AlertType.ERROR,
-                    "Error:"
+                    "Poster Not Downloaded"
                 )
             }
         }else{
             showMessage(
-                "No image found",
+                "Due to some error, poster was not downloaded. ",
                 AlertType.ERROR,
-                "Error:"
+                "Poster Not Downloaded"
             )
         }
     }
@@ -172,7 +172,7 @@ abstract class MediaController:Initializable {
         when(iconType){
             IconType.SIMPLE -> {
                 createIcon(true)
-                showMessage("Icon created successfully", AlertType.INFO, "Icon saved to folder ${file.name}")
+                showMessage("Icon saved to folder ${file.name}", AlertType.INFO, "Icon created successfully")
             }
             IconType.WITH_TEMPLATE -> {
                 createIconChooserDialog(CreateType.CREATE)
