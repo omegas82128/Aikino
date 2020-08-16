@@ -171,8 +171,10 @@ abstract class MediaController:Initializable {
     fun createIcon(){
         when(iconType){
             IconType.SIMPLE -> {
-                createIcon(true)
-                showMessage("Icon saved to folder ${file.name}", AlertType.INFO, "Icon created successfully")
+                thread(true) {
+                    createIcon(true)
+                    showMessage("Icon saved to folder ${file.name}", AlertType.INFO, "Icon created successfully")
+                }
             }
             IconType.WITH_TEMPLATE -> {
                 createIconChooserDialog(CreateType.CREATE)
@@ -187,8 +189,10 @@ abstract class MediaController:Initializable {
     fun createAndApply(){
         when(iconType){
             IconType.SIMPLE -> {
-                val icon = createIcon(false)
-                applyIconAsync(icon,this.file)
+                thread(true) {
+                    val icon = createIcon(false)
+                    applyIcon(icon,this.file)
+                }
             }
             IconType.WITH_TEMPLATE -> {
                 createIconChooserDialog(CreateType.CREATE_AND_APPLY)

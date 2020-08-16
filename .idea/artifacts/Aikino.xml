@@ -15,7 +15,7 @@
         <option name="nativeBundle" value="all" />
         <option name="title" value="Aikino" />
         <option name="vendor" value="" />
-        <option name="version" value="1.9.3" />
+        <option name="version" value="1.9.4" />
         <option name="width" value="488" />
       </options>
     </properties>
@@ -47,7 +47,6 @@
       <element id="library" level="project" name="Maven: info.movito:themoviedbapi:1.10" />
       <element id="library" level="project" name="Maven: org.ini4j:ini4j:0.5.4" />
       <element id="library" level="project" name="Maven: org.jclarion:image4j:0.7" />
-      <element id="library" level="project" name="Maven: com.googlecode.json-simple:json-simple:1.1.1" />
     </root>
   </artifact>
 </component>

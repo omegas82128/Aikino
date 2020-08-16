@@ -2,11 +2,13 @@ package com.omegas.util
 
 import com.omegas.model.Icon
 import com.omegas.util.Preferences.hideIcon
+import javafx.application.Platform
 import javafx.scene.control.ButtonType
 import net.sf.image4j.codec.ico.ICOEncoder
 import org.ini4j.Wini
 import java.io.File
 import java.io.FileWriter
+import java.util.concurrent.CompletableFuture
 import javax.imageio.ImageIO
 import kotlin.concurrent.thread
 
@@ -40,22 +42,31 @@ private fun setIcon(folderPath: String, iconName:String, hideFile: Boolean) {
             desktopIni.store()
             println("attrib +h +s \"$diPath\"")
             println("attrib +s \"$folderPath\"")
-            Runtime.getRuntime().exec("attrib +h +s \"$diPath\"")
-            Runtime.getRuntime().exec("attrib +s \"$folderPath\"")
+            val runtime = Runtime.getRuntime()
+            runtime.exec("attrib +h +s \"$diPath\"")
+            runtime.exec("attrib +s \"$folderPath\"")
             if (hideFile) {
-                Runtime.getRuntime().exec("attrib -a -r +h -s \"$folderPath\\$iconName\"")
+                runtime.exec("attrib +h \"$folderPath\\$iconName\"")
             } else {
-                Runtime.getRuntime().exec("attrib -a -r -h -s \"$folderPath\\$iconName\"")
+                runtime.exec("attrib -h \"$folderPath\\$iconName\"")
             }
             showMessage("Icon applied to folder $folderPath", AlertType.INFO, "Icon applied successfully")
         } else if (diPath.exists()) {
-            val alert = displayAlert("Folder already has an icon. Do you want to overwrite icon?","Overwrite Icon Confirmation",false,ButtonType.YES,ButtonType.NO)
-            alert.showAndWait()
-            if(alert.result == ButtonType.YES){
-                diPath.delete()
-                setIcon(folderPath, iconName, hideFile)
-            }
-            alert.close()
+            CompletableFuture.supplyAsync<Any?>({
+                val alert = displayAlert("Folder already has an icon. Do you want to overwrite icon?",
+                    "Overwrite Icon Confirmation",false,
+                    ButtonType.YES,
+                    ButtonType.NO)
+                alert.showAndWait()
+                if(alert.result == ButtonType.YES){
+                    thread(true) {
+                        diPath.delete()
+                        setIcon(folderPath, iconName, hideFile)
+                    }
+                }
+                alert.close()
+                null
+            }) { runnable -> Platform.runLater(runnable) }.join()
         }
     } catch (e: Exception) {
         exceptionDialog(e)
@@ -83,7 +94,7 @@ fun createIcon(pngFile:File?, delete:Boolean):Icon?{
     }
 }
 
-private fun applyIcon(icon: Icon?, file: File){
+fun applyIcon(icon: Icon?, file: File){
     val fileToDelete = icon?.file
     icon?.file = file
     if(icon!=null){
@@ -92,10 +103,4 @@ private fun applyIcon(icon: Icon?, file: File){
         showMessage("Icon could not be created.", AlertType.ERROR,"Icon Creation Failed")
     }
     fileToDelete?.delete()
-}
-
-fun applyIconAsync(icon: Icon?, file: File){
-    thread() {
-        applyIcon(icon, file)
-    }
 }

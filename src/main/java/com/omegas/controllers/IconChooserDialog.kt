@@ -6,7 +6,7 @@ import com.omegas.main.Main
 import com.omegas.model.Icon
 import com.omegas.util.AlertType
 import com.omegas.util.CreateType
-import com.omegas.util.applyIconAsync
+import com.omegas.util.applyIcon
 import com.omegas.util.showMessage
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
@@ -23,6 +23,7 @@ import java.awt.image.BufferedImage
 import java.io.File
 import java.net.URL
 import java.util.*
+import kotlin.concurrent.thread
 
 class IconChooserDialog(var iconImages:List<BufferedImage>, private val createType: CreateType, private val file: File) : Initializable {
     @FXML
@@ -103,8 +104,10 @@ class IconChooserDialog(var iconImages:List<BufferedImage>, private val createTy
             val image = iconImages[index]
             when(createType){
                 CreateType.CREATE -> {
-                    createIcon(image,true)
-                    showMessage("Icon created successfully", AlertType.INFO, "Icon saved to folder ${file.name}")
+                    thread(true) {
+                        createIcon(image,true)
+                        showMessage("Icon created successfully", AlertType.INFO, "Icon saved to folder ${file.name}")
+                    }
                 }
                 CreateType.CREATE_AND_APPLY -> createAndApply(image)
             }
@@ -116,7 +119,9 @@ class IconChooserDialog(var iconImages:List<BufferedImage>, private val createTy
         return com.omegas.util.createIcon(pngFile, delete)
     }
     private fun createAndApply(bufferedImage: BufferedImage){
-        val icon = createIcon(bufferedImage,false)
-        applyIconAsync(icon,this.file)
+        thread(true) {
+            val icon = createIcon(bufferedImage,false)
+            applyIcon(icon,this.file)
+        }
     }
 }
