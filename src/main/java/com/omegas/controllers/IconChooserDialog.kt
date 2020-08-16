@@ -6,7 +6,7 @@ import com.omegas.main.Main
 import com.omegas.model.Icon
 import com.omegas.util.AlertType
 import com.omegas.util.CreateType
-import com.omegas.util.applyIcon
+import com.omegas.util.applyIconAsync
 import com.omegas.util.showMessage
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
@@ -117,6 +117,6 @@ class IconChooserDialog(var iconImages:List<BufferedImage>, private val createTy
     }
     private fun createAndApply(bufferedImage: BufferedImage){
         val icon = createIcon(bufferedImage,false)
-        applyIcon(icon,this.file)
+        applyIconAsync(icon,this.file)
     }
 }

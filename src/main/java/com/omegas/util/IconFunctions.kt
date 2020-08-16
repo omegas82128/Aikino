@@ -8,10 +8,11 @@ import org.ini4j.Wini
 import java.io.File
 import java.io.FileWriter
 import javax.imageio.ImageIO
+import kotlin.concurrent.thread
 
 
 @Throws(Exception::class)
-fun convertToIcon(file: File):String{
+private fun convertToIcon(file: File):String{
     val pngFileName = file.toString()
     var outputFile = File(pngFileName.replace(".png", " Icon.ico"))
     var version = 1
@@ -62,7 +63,7 @@ private fun setIcon(folderPath: String, iconName:String, hideFile: Boolean) {
 }
 
 
-fun applyIcon(icon: Icon){
+private fun applyIcon(icon: Icon){
     setIcon(icon.file.absolutePath, icon.iconName, hideIcon)
 }
 
@@ -82,7 +83,7 @@ fun createIcon(pngFile:File?, delete:Boolean):Icon?{
     }
 }
 
-fun applyIcon(icon: Icon?, file: File){
+private fun applyIcon(icon: Icon?, file: File){
     val fileToDelete = icon?.file
     icon?.file = file
     if(icon!=null){
@@ -91,4 +92,10 @@ fun applyIcon(icon: Icon?, file: File){
         showMessage("Icon could not be created.", AlertType.ERROR,"Icon Creation Failed")
     }
     fileToDelete?.delete()
+}
+
+fun applyIconAsync(icon: Icon?, file: File){
+    thread() {
+        applyIcon(icon, file)
+    }
 }

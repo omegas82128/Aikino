@@ -188,7 +188,7 @@ abstract class MediaController:Initializable {
         when(iconType){
             IconType.SIMPLE -> {
                 val icon = createIcon(false)
-                applyIcon(icon,this.file)
+                applyIconAsync(icon,this.file)
             }
             IconType.WITH_TEMPLATE -> {
                 createIconChooserDialog(CreateType.CREATE_AND_APPLY)
