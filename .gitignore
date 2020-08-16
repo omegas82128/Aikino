@@ -2,3 +2,4 @@
 /target
 /venv
 dev registry settings.reg
+/src/main/resources/app.config.json
