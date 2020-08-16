@@ -20,7 +20,7 @@
       </options>
     </properties>
     <root id="root">
-      <element id="archive" name="PosterDownloader.jar">
+      <element id="archive" name="Aikino.jar">
         <element id="module-output" name="Aikino" />
       </element>
       <element id="library" level="project" name="KotlinJavaRuntime" />
