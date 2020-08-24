@@ -4,7 +4,7 @@ import com.omegas.main.Main
 import com.omegas.model.MediaInfo
 import com.omegas.tasks.SearchTask
 import com.omegas.util.MediaType
-import com.omegas.util.addComponent
+import com.omegas.util.functions.addComponent
 import javafx.concurrent.Task
 import javafx.fxml.FXML
 import javafx.fxml.Initializable

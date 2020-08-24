@@ -1,19 +1,25 @@
 package com.omegas.controllers
 
 import com.omegas.api.moviedb.MovieDAL
-import com.omegas.api.moviedb.TmdbManager.notFoundType
-import com.omegas.image.Downloader
-import com.omegas.image.ImageSaver.saveTransparentPng
-import com.omegas.image.TemplateImage
+import com.omegas.api.moviedb.TheMovieDb
+import com.omegas.api.moviedb.TmdbManager
 import com.omegas.main.Main
 import com.omegas.main.Main.Companion.stage
 import com.omegas.model.Icon
 import com.omegas.model.MediaInfo
+import com.omegas.model.Poster
+import com.omegas.services.DownloadService
+import com.omegas.services.ImageSaveService.saveTransparentPng
+import com.omegas.services.LocalPosterService
+import com.omegas.services.TemplateService
 import com.omegas.tasks.DisplayImageTask
 import com.omegas.util.*
 import com.omegas.util.Constants.MAX_POSTERS
 import com.omegas.util.Constants.PLACEHOLDER_IMAGE_PATH
 import com.omegas.util.Preferences.iconType
+import com.omegas.util.Preferences.localPostersAllowed
+import com.omegas.util.functions.applyIcon
+import com.omegas.util.functions.showMessage
 import javafx.application.Platform
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
@@ -26,10 +32,12 @@ import javafx.scene.image.ImageView
 import javafx.stage.Modality
 import javafx.stage.Stage
 import java.io.File
+import java.net.URL
+import java.util.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
-import java.util.concurrent.Future
 import kotlin.concurrent.thread
+import kotlin.system.exitProcess
 
 
 abstract class MediaController:Initializable {
@@ -39,14 +47,24 @@ abstract class MediaController:Initializable {
     protected lateinit var btnPrevious: Button
     @FXML
     protected lateinit var imageView:ImageView
+    @FXML
+    protected lateinit var btnSearch: Button
+    @FXML
+    protected lateinit var btnDownload: Button
 
-    protected lateinit var file:File
+    protected lateinit var folder:File
     protected lateinit var mediaInfo: MediaInfo
     private var currentPosition = -1
-    private lateinit var posterUrls:MutableList<String>
-    private var posters: MutableList<Future<Image>> = mutableListOf()
+    private var posters: MutableList<Poster> = mutableListOf()
     private var executorService: ExecutorService? = null
     private var imageThread: Thread? = null
+    override fun initialize(location: URL?, resources: ResourceBundle?) {
+        imageView.image = Image(PLACEHOLDER_IMAGE_PATH)
+        if (TheMovieDb.isNotConnected()){
+            btnDownload.isDisable = true
+            btnSearch.isDisable = true
+        }
+    }
     fun search(){
         Main.mediaInfo = mediaInfo
         Main.changeScene("Search","Search Window", true)
@@ -62,13 +80,18 @@ abstract class MediaController:Initializable {
     }
     private fun applyPoster(){
         imageThread?.interrupt()
-        //imageView.image = posters[currentPosition].get()
+
+        when (posters[currentPosition].posterType){
+            PosterType.LOCAL ->  btnDownload.isDisable = true
+            PosterType.TMDB ->  btnDownload.isDisable = false
+        }
+
         imageView.image = Image(PLACEHOLDER_IMAGE_PATH)
         if(currentPosition in 0 until posters.size){
             imageThread = Thread(
                 DisplayImageTask(
                     imageView,
-                    posters[currentPosition]
+                    posters[currentPosition].poster
                 )
             )
             imageThread!!.start()
@@ -86,11 +109,11 @@ abstract class MediaController:Initializable {
     fun downloadPoster(name:String){
         if(imageView.image!=null){
 
-            val folder:String = file.absolutePath
+            val folder:String = folder.absolutePath
 
 
-            val filePath:String? = Downloader.download(
-                posterUrls[currentPosition],
+            val filePath:String? = DownloadService.download(
+                posters[currentPosition].posterURL,
                 folder,
                 imageView.image
             )
@@ -121,59 +144,87 @@ abstract class MediaController:Initializable {
         stage.title = mediaInfo.title
         imageView.image = null
         currentPosition = -1
-        posterUrls = function(mediaInfo)
+        var posterUrls: List<String>
+        try {
+            posterUrls = function(mediaInfo)
+
+        }catch (exception: RuntimeException){
+            posterUrls = emptyList<String>().toMutableList()
+            println(exception)
+        }
+
+        //Create new Executor Service and close an already existing one if there is one
         val thread = thread(true) { posters.clear() }
         executorService?.shutdownNow()
         executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors()*2)
         thread.join()
+
+        // check if local posters are allowed
+        if(localPostersAllowed){
+            // add local posters
+            val localPosterService = LocalPosterService(folder,executorService!!)
+            posters.addAll(localPosterService.getPosters())
+        }
+
         for (posterUrl in posterUrls){
+            val futureImage = executorService!!.submit<Image> {
+                DownloadService.getImage(posterUrl)
+            }
             posters.add(
-                executorService!!.submit<Image> {
-                    Downloader.getImage(posterUrl)
-                }
+                Poster(futureImage, PosterType.TMDB, posterUrl)
             )
         }
-        if(posterUrls.isNotEmpty()){
+        if(posters.isNotEmpty()){
             nextPoster()
+            if(TheMovieDb.isNotConnected()){
+                showMessage("TheMovieDB.org cannot be reached. Showing local posters.", AlertType.ERROR,"Connection Error")
+            }
         }else{
-            val name = when(mediaInfo.mediaType){
-                MediaType.MOVIE -> mediaInfo.toMovieName()
-                MediaType.TV -> mediaInfo.toTVSeriesName()
-            }
-            when(notFoundType){
-                NotFoundType.POSTER_NOT_FOUND -> {
-                    showMessage(
-                        title = "No Posters Found",
-                        text = "$name has no posters available"
-                    )
-                }
-                NotFoundType.MEDIA_NOT_FOUND -> {
-                    val media = when(mediaInfo.mediaType){
-                        MediaType.MOVIE -> "Movie"
-                        MediaType.TV -> "Tv Show"
+            if (TheMovieDb.isNotConnected()){
+                showMessage("TheMovieDB.org cannot be reached.", AlertType.ERROR,"Connection Error")
+                exitProcess(1)
+            }else{
+                thread {
+                    // waits till scene has been displayed before changing to search window
+                    // if it does not wait through thread.sleep(), then the search window will be replaced by tv/movie window
+                    Thread.sleep(300)
+                    Platform.runLater {
+                        search()
                     }
-                    showMessage(
-                        title = "$media not Found",
-                        text = "$name was not found"
-                    )
-                }
-                null -> {}
-            }
-            notFoundType = null
-            thread {
-                Thread.sleep(600)
-                Platform.runLater {
-                    search()
                 }
             }
         }
+        val name = when(mediaInfo.mediaType){
+            MediaType.MOVIE -> mediaInfo.toMovieName()
+            MediaType.TV -> mediaInfo.toTVSeriesName()
+        }
+        when(TmdbManager.notFoundType){
+            NotFoundType.POSTER_NOT_FOUND -> {
+                showMessage(
+                    title = "No Posters Found",
+                    text = "$name has no posters available"
+                )
+            }
+            NotFoundType.MEDIA_NOT_FOUND -> {
+                val media = when(mediaInfo.mediaType){
+                    MediaType.MOVIE -> "Movie"
+                    MediaType.TV -> "Tv Show"
+                }
+                showMessage(
+                    title = "$media not Found",
+                    text = "$name was not found"
+                )
+            }
+            null -> {}
+        }
+        TmdbManager.notFoundType = null
     }
     fun createIcon(){
         when(iconType){
             IconType.SIMPLE -> {
                 thread(true) {
                     createIcon(true)
-                    showMessage("Icon saved to folder ${file.name}", AlertType.INFO, "Icon created successfully")
+                    showMessage("Icon saved to folder ${folder.name}", AlertType.INFO, "Icon created successfully")
                 }
             }
             IconType.WITH_TEMPLATE -> {
@@ -183,15 +234,15 @@ abstract class MediaController:Initializable {
 
     }
     private fun createIcon(delete:Boolean): Icon?{
-        val pngFile = saveTransparentPng(imageView.image,file)
-        return createIcon(pngFile, delete)
+        val pngFile = saveTransparentPng(imageView.image,folder)
+        return com.omegas.util.functions.createIcon(pngFile, delete)
     }
     fun createAndApply(){
         when(iconType){
             IconType.SIMPLE -> {
                 thread(true) {
                     val icon = createIcon(false)
-                    applyIcon(icon,this.file)
+                    applyIcon(icon,this.folder)
                 }
             }
             IconType.WITH_TEMPLATE -> {
@@ -216,8 +267,8 @@ abstract class MediaController:Initializable {
     }
 
     private fun createIconChooserDialog(createType: CreateType){
-        val list = TemplateImage.getShortenedImages(imageView.image,file)
-        val iconChooserDialog = IconChooserDialog(list,createType, file)
+        val list = TemplateService.getShortenedImages(imageView.image,folder)
+        val iconChooserDialog = IconChooserDialog(list,createType, folder)
         iconChooserDialog.show()
     }
     private val normalForPosters : (mediaInfo: MediaInfo) -> MutableList<String> = { mediaInfo->

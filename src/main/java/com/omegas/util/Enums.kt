@@ -19,3 +19,7 @@ enum class IconType{
 enum class NotFoundType{
     MEDIA_NOT_FOUND, POSTER_NOT_FOUND
 }
+
+enum class PosterType{
+    LOCAL, TMDB
+}

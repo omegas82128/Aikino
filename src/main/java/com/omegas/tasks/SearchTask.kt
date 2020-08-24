@@ -4,7 +4,7 @@ import com.omegas.api.moviedb.TmdbManager
 import com.omegas.controllers.MediaItemController
 import com.omegas.util.MediaType
 import com.omegas.model.Media
-import com.omegas.util.addComponent
+import com.omegas.util.functions.addComponent
 import javafx.beans.binding.Bindings
 import javafx.beans.property.SimpleDoubleProperty
 import javafx.beans.property.SimpleIntegerProperty

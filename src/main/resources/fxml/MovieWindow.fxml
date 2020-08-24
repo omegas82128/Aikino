@@ -29,8 +29,8 @@
                <Font name="System Bold" size="14.0" />
             </font>
          </Label>
-         <Button mnemonicParsing="false" onAction="#search" prefHeight="25.0" prefWidth="214.0" text="Search" />
-         <Button mnemonicParsing="false" onAction="#downloadPoster" prefHeight="25.0" prefWidth="214.0" text="Download Poster" />
+         <Button fx:id="btnSearch" mnemonicParsing="false" onAction="#search" prefHeight="25.0" prefWidth="214.0" text="Search" />
+         <Button fx:id="btnDownload" mnemonicParsing="false" onAction="#downloadPoster" prefHeight="25.0" prefWidth="214.0" text="Download Poster" />
          <Button mnemonicParsing="false" onAction="#createIcon" prefHeight="25.0" prefWidth="214.0" text="Create Icon" />
          <Button mnemonicParsing="false" onAction="#createAndApply" prefHeight="25.0" prefWidth="214.0" text="Create and Apply Icon" />
       </VBox>
@@ -64,7 +64,7 @@
                </BorderPane.margin>
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                     <Image url="@../settings.png"/>
+                     <Image url="@../settings.png" />
                   </ImageView>
                </graphic>
             </Button>

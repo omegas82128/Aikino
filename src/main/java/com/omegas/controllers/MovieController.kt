@@ -9,9 +9,10 @@ import java.util.*
 class MovieController:MediaController() {
 
     override fun initialize(location: URL?, resources: ResourceBundle?) {
+        super.initialize(location, resources)
         btnPrevious.isDisable = true
         mediaInfo = Main.mediaInfo!!
-        file = mediaInfo.file
+        folder = mediaInfo.file
         if(mediaInfo.id<0){
             getPosters(mediaInfo)
         }else{
@@ -21,7 +22,7 @@ class MovieController:MediaController() {
         }
     }
     fun downloadPoster(){
-        super.downloadPoster(file.name)
+        super.downloadPoster(folder.name)
     }
 
 }

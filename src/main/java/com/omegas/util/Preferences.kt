@@ -7,4 +7,5 @@ object Preferences {
     var iconType: IconType = IconType.valueOf(preferences[Constants.ICON_TYPE_KEY,IconType.WITH_TEMPLATE.name])
     var hideIcon = preferences.getBoolean(Constants.HIDE_ICONS_KEY,true)
     var posterSize: String =  preferences[Constants.POSTER_SIZE_KEY, "w1280"]
+    var localPostersAllowed: Boolean = preferences.getBoolean(Constants.LOCAL_POSTERS_ALLOWED_KEY,true)
 }

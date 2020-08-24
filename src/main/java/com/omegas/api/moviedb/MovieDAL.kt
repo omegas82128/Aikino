@@ -9,7 +9,7 @@ import info.movito.themoviedbapi.model.MovieDb
 import info.movito.themoviedbapi.model.core.MovieResultsPage
 
 object MovieDAL {
-    val movies: TmdbMovies = TheMovieDb.tmdbApi.movies
+    val movies: TmdbMovies? = TheMovieDb.tmdbApi?.movies
 
     fun search(movieName: String, year: Int): List<MovieDb> {
         val page: MovieResultsPage = TheMovieDb.tmdbSearch.searchMovie(movieName, year, null, false, 0)
@@ -96,7 +96,7 @@ object MovieDAL {
     fun getMoviePosters(movieId: Int?):MutableList<String> {
         val posterList:MutableList<String> = mutableListOf()
         if (movieId != null) {
-            val movieDb = movies.getMovie(movieId, null, TmdbMovies.MovieMethod.images)
+            val movieDb = movies?.getMovie(movieId, null, TmdbMovies.MovieMethod.images) ?: return posterList
             for (poster in movieDb.getImages(ArtworkType.POSTER)){
                 posterList.add(poster.filePath)
             }

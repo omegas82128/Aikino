@@ -6,7 +6,7 @@ import com.omegas.model.MediaInfo
 import com.omegas.util.AlertType
 import com.omegas.util.Constants
 import com.omegas.util.MediaType
-import com.omegas.util.showMessage
+import com.omegas.util.functions.showMessage
 import javafx.application.Application
 import javafx.fxml.FXMLLoader
 import javafx.scene.Parent
@@ -65,7 +65,7 @@ class Main : Application() {
             }
             primaryStage?.hide()
             showMessage()
-            Thread.sleep(7000)
+            Thread.sleep(3000)
             exitProcess(0)
         }
 

@@ -1,14 +1,14 @@
-package com.omegas.image
+package com.omegas.services
 
 import com.omegas.util.Preferences.posterSize
-import com.omegas.util.exceptionDialog
+import com.omegas.util.functions.exceptionDialog
 import javafx.embed.swing.SwingFXUtils
 import javafx.scene.image.Image
 import java.awt.image.BufferedImage
 import java.io.File
 import javax.imageio.ImageIO
 
-object Downloader {
+object DownloadService {
     @Throws(java.lang.Exception::class)
     fun getFileName(url: String?): String? {
         return url?.let{url.substring(url.lastIndexOf("/"))}

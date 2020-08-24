@@ -1,7 +1,7 @@
 package com.omegas.model
 
 import com.omegas.util.MediaType
-import com.omegas.image.Downloader.getFullURL
+import com.omegas.services.DownloadService.getFullURL
 import java.time.LocalDate
 
 class Media (var id:Int, var title:String, var mediaType: MediaType, posterP:String?, var overView:String){

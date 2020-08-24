@@ -28,6 +28,7 @@ object Constants{
     //dimensions
     val PNG_POSTER_DIMENSION = Dimension(512,512)
     val TEMPLATE_POSTER_DIMENSION = Dimension2D(338.0 ,460.0)
+    const val TEMPLATE_POSTER_RATIO = 1.36094675
 
     //poster util
     val POSTER_SIZES = listOf("w500","w780","w1280","original")
@@ -37,5 +38,9 @@ object Constants{
     const val ICON_TYPE_KEY = "ICON_TYPE"
     const val HIDE_ICONS_KEY = "HIDE_ICONS"
     const val POSTER_SIZE_KEY = "POSTER_SIZE"
+    const val LOCAL_POSTERS_ALLOWED_KEY = "LOCAL_POSTERS_ALLOWED"
+
+    // supported local poster file types
+    val POSTER_EXTENSIONS_LIST = listOf(".png", ".jpeg", ".jpg")
 
 }
