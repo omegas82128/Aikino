@@ -1,6 +1,8 @@
-package com.omegas.util
+package com.omegas.util.functions
 
 import com.omegas.main.Main
+import com.omegas.util.AlertType
+import com.omegas.util.Constants
 import javafx.scene.control.Alert
 import javafx.scene.control.ButtonType
 import javafx.scene.control.Label

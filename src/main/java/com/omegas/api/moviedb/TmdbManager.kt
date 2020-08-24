@@ -14,7 +14,7 @@ object TmdbManager {
         if(tvSeriesList.isNotEmpty()){
             for(tvSeries in tvSeriesList){
                 // tvSeries is used to get refreshedTvSeries which has values of totalSeasons and episodes
-                val refreshedTvSeries=TvDAL.tmdbTV.getSeries(tvSeries.id,null, TmdbTV.TvMethod.credits)
+                val refreshedTvSeries=TvDAL.tmdbTV!!.getSeries(tvSeries.id,null, TmdbTV.TvMethod.credits)
                 if(refreshedTvSeries.numberOfSeasons>=seasonNumber){
                     val media = Media(refreshedTvSeries.id,refreshedTvSeries.name,
                         MediaType.TV,refreshedTvSeries.posterPath, refreshedTvSeries.overview)
@@ -33,7 +33,7 @@ object TmdbManager {
         val movieList = MovieDAL.search(movieName,year)
         if(movieList.isNotEmpty()){
             for(movieDB in movieList){
-                val movie = MovieDAL.movies.getMovie(movieDB.id, null, TmdbMovies.MovieMethod.credits)
+                val movie = MovieDAL.movies!!.getMovie(movieDB.id, null, TmdbMovies.MovieMethod.credits)
                 val media = Media(movie.id,movie.title,
                     MediaType.MOVIE,movie.posterPath,movie.overview)
                 media.runtime = movie.runtime

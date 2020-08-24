@@ -1,6 +1,7 @@
-package com.omegas.util
+package com.omegas.util.functions
 
 import com.omegas.model.Icon
+import com.omegas.util.AlertType
 import com.omegas.util.Preferences.hideIcon
 import javafx.application.Platform
 import javafx.scene.control.ButtonType
@@ -8,7 +9,7 @@ import net.sf.image4j.codec.ico.ICOEncoder
 import org.ini4j.Wini
 import java.io.File
 import java.io.FileWriter
-import java.util.concurrent.CompletableFuture
+import java.nio.file.Files
 import javax.imageio.ImageIO
 import kotlin.concurrent.thread
 
@@ -40,19 +41,15 @@ private fun setIcon(folderPath: String, iconName:String, hideFile: Boolean) {
             desktopIni.put("ViewState", "Vid", null)
             desktopIni.put("ViewState", "FolderType", "Pictures")
             desktopIni.store()
-            println("attrib +h +s \"$diPath\"")
-            println("attrib +s \"$folderPath\"")
             val runtime = Runtime.getRuntime()
             runtime.exec("attrib +h +s \"$diPath\"")
             runtime.exec("attrib +s \"$folderPath\"")
             if (hideFile) {
-                runtime.exec("attrib +h \"$folderPath\\$iconName\"")
-            } else {
-                runtime.exec("attrib -h \"$folderPath\\$iconName\"")
+                Files.setAttribute(File("$folderPath\\$iconName").toPath(), "dos:hidden", true)
             }
             showMessage("Icon applied to folder $folderPath", AlertType.INFO, "Icon applied successfully")
         } else if (diPath.exists()) {
-            CompletableFuture.supplyAsync<Any?>({
+            Platform.runLater{// displays alert on FX thread
                 val alert = displayAlert("Folder already has an icon. Do you want to overwrite icon?",
                     "Overwrite Icon Confirmation",false,
                     ButtonType.YES,
@@ -65,11 +62,12 @@ private fun setIcon(folderPath: String, iconName:String, hideFile: Boolean) {
                     }
                 }
                 alert.close()
-                null
-            }) { runnable -> Platform.runLater(runnable) }.join()
+            }
         }
     } catch (e: Exception) {
-        exceptionDialog(e)
+        Platform.runLater {
+            exceptionDialog(e)
+        }
     }
 }
 

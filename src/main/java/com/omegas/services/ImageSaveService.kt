@@ -1,7 +1,9 @@
-package com.omegas.image
+package com.omegas.services
 
 import com.omegas.util.Constants.PNG_POSTER_DIMENSION
-import com.omegas.util.exceptionDialog
+import com.omegas.util.functions.exceptionDialog
+import com.omegas.util.functions.getOutputFile
+import com.omegas.util.functions.increaseSize
 import javafx.embed.swing.SwingFXUtils
 import javafx.scene.image.Image
 import java.awt.image.BufferedImage
@@ -9,7 +11,7 @@ import java.io.File
 import javax.imageio.ImageIO
 
 
-object ImageSaver {
+object ImageSaveService {
     fun saveTransparentPng(image:Image, file: File):File?{
         return try {
             val outputFile = getOutputFile(file)

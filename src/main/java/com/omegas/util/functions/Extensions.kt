@@ -1,4 +1,4 @@
-package com.omegas.util
+package com.omegas.util.functions
 
 fun Int.toHoursAndMinutes():String{
     var hoursAndMinutes:String = if(this>60){

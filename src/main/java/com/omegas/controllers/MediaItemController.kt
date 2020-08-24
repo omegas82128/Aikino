@@ -6,7 +6,7 @@ import com.omegas.main.Main.Companion.changeScene
 import com.omegas.model.Media
 import com.omegas.util.Constants
 import com.omegas.util.MediaType
-import com.omegas.util.toHoursAndMinutes
+import com.omegas.util.functions.toHoursAndMinutes
 import javafx.fxml.FXML
 import javafx.fxml.Initializable
 import javafx.scene.control.Label

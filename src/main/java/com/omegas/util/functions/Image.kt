@@ -1,4 +1,4 @@
-package com.omegas.image
+package com.omegas.util.functions
 
 import javafx.embed.swing.SwingFXUtils
 import javafx.scene.image.Image

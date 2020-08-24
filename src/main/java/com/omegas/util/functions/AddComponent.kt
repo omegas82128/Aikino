@@ -1,4 +1,4 @@
-package com.omegas.util
+package com.omegas.util.functions
 
 import javafx.scene.Node
 import javafx.scene.control.Label

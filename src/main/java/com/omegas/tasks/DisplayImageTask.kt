@@ -10,11 +10,9 @@ class DisplayImageTask(private val imageView: ImageView, private val futureImage
     override fun call(): Image? {
         while (!futureImage.isDone){
             if (Thread.interrupted()){
-                println("interrupted")
                 return null
             }
         }
-        println("done")
         return futureImage.get()
     }
 

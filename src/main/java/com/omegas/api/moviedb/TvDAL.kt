@@ -7,14 +7,14 @@ import info.movito.themoviedbapi.TmdbTvSeasons
 import info.movito.themoviedbapi.model.tv.TvSeries
 
 object TvDAL {
-    private val tvSeasons: TmdbTvSeasons = TheMovieDb.tmdbApi.tvSeasons
-    val tmdbTV: TmdbTV = TheMovieDb.tmdbApi.tvSeries
+    private val tvSeasons: TmdbTvSeasons? = TheMovieDb.tmdbApi?.tvSeasons
+    val tmdbTV: TmdbTV? = TheMovieDb.tmdbApi?.tvSeries
     fun getShowPosters(showName:String,seasonNumber: Int):MutableList<String>{
         val results = searchSeries(showName)
         val posterList = mutableListOf<String>()
         if(results.isNotEmpty()){
             val series: TvSeries = findSeries(showName, results)
-            val season = tvSeasons.getSeason(series.id,seasonNumber,null, TmdbTvSeasons.SeasonMethod.images)
+            val season = tvSeasons?.getSeason(series.id,seasonNumber,null, TmdbTvSeasons.SeasonMethod.images) ?: return posterList
             val posters = season.images
             for(poster in posters.posters){
                 posterList.add(poster.filePath)
@@ -31,9 +31,9 @@ object TvDAL {
         return posterList
     }
     fun getShowPosters(showId:Int,seasonNumber: Int):MutableList<String>{
-        val series: TvSeries = tmdbTV.getSeries(showId,null)
         val posterList = mutableListOf<String>()
-        val season = tvSeasons.getSeason(series.id,seasonNumber,null, TmdbTvSeasons.SeasonMethod.images)
+        val series: TvSeries? = tmdbTV?.getSeries(showId,null) ?: return posterList
+        val season = tvSeasons!!.getSeason(series!!.id,seasonNumber,null, TmdbTvSeasons.SeasonMethod.images)
         val posters = season.images
         for(poster in posters.posters){
             posterList.add(poster.filePath)

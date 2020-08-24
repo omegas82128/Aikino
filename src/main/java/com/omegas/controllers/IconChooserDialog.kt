@@ -1,13 +1,13 @@
 package com.omegas.controllers
 
-import com.omegas.image.ImageSaver.saveTemplatePng
-import com.omegas.image.getImage
 import com.omegas.main.Main
 import com.omegas.model.Icon
+import com.omegas.services.ImageSaveService.saveTemplatePng
 import com.omegas.util.AlertType
 import com.omegas.util.CreateType
-import com.omegas.util.applyIcon
-import com.omegas.util.showMessage
+import com.omegas.util.functions.applyIcon
+import com.omegas.util.functions.getImage
+import com.omegas.util.functions.showMessage
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
 import javafx.fxml.Initializable
@@ -61,7 +61,7 @@ class IconChooserDialog(var iconImages:List<BufferedImage>, private val createTy
         stage.show()
     }
     override fun initialize(location: URL?, resources: ResourceBundle?) {
-        btnSelect.setOnAction{
+        btnSelect.setOnAction {
             select()
         }
         iconOne.image = getImage(iconImages[0])
@@ -116,7 +116,7 @@ class IconChooserDialog(var iconImages:List<BufferedImage>, private val createTy
     }
     private fun createIcon(bufferedImage: BufferedImage, delete:Boolean):Icon?{
         val pngFile = saveTemplatePng(bufferedImage, file)
-        return com.omegas.util.createIcon(pngFile, delete)
+        return com.omegas.util.functions.createIcon(pngFile, delete)
     }
     private fun createAndApply(bufferedImage: BufferedImage){
         thread(true) {
