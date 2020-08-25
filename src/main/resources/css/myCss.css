@@ -30,15 +30,15 @@
 .button{
     -fx-background-color: #405060;
     -fx-text-fill: #ffffff;
-    -fx-text-alignment: center;
 }
 .button:hover{
     -fx-background-color: #303C48;
-    -fx-text-alignment: center;
 }
 .button:pressed{
     -fx-background-color: #667788;
-    -fx-text-alignment: center;
+}
+.button:hover, .button:pressed, .button:active, .button:focus{
+    -fx-alignment: center;
 }
 
 
