@@ -58,6 +58,7 @@ abstract class MediaController:Initializable {
     private var posters: MutableList<Poster> = mutableListOf()
     private var executorService: ExecutorService? = null
     private var imageThread: Thread? = null
+    private val placeholderImage = Image(PLACEHOLDER_IMAGE_PATH)
     override fun initialize(location: URL?, resources: ResourceBundle?) {
         imageView.image = Image(PLACEHOLDER_IMAGE_PATH)
         if (TheMovieDb.isNotConnected()){
@@ -86,7 +87,7 @@ abstract class MediaController:Initializable {
             PosterType.TMDB ->  btnDownload.isDisable = false
         }
 
-        imageView.image = Image(PLACEHOLDER_IMAGE_PATH)
+        imageView.image = placeholderImage
         if(currentPosition in 0 until posters.size){
             imageThread = Thread(
                 DisplayImageTask(
@@ -107,10 +108,15 @@ abstract class MediaController:Initializable {
         applyPoster()
     }
     fun downloadPoster(name:String){
-        if(imageView.image!=null){
+        if(imageView.image == placeholderImage){
+            showMessage(
+                "Cannot download, poster has not finished loading",
+                AlertType.ERROR,
+                "Poster Not Loaded"
+            )
+        }else if(imageView.image!=null){
 
             val folder:String = folder.absolutePath
-
 
             val filePath:String? = DownloadService.download(
                 posters[currentPosition].posterURL,
@@ -220,6 +226,14 @@ abstract class MediaController:Initializable {
         TmdbManager.notFoundType = null
     }
     fun createIcon(){
+        if(imageView.image == placeholderImage){
+            showMessage(
+                "Cannot create icon, poster has not finished loading",
+                AlertType.ERROR,
+                "Poster Not Loaded"
+            )
+            return
+        }
         when(iconType){
             IconType.SIMPLE -> {
                 thread(true) {
@@ -238,6 +252,14 @@ abstract class MediaController:Initializable {
         return com.omegas.util.functions.createIcon(pngFile, delete)
     }
     fun createAndApply(){
+        if(imageView.image == placeholderImage){
+            showMessage(
+                "Cannot create and apply icon, poster has not finished loading.",
+                AlertType.ERROR,
+                "Poster Not Loaded"
+            )
+            return
+        }
         when(iconType){
             IconType.SIMPLE -> {
                 thread(true) {
