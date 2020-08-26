@@ -11,7 +11,7 @@
 
 <!--suppress JavaFxEventHandler -->
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="400.0" styleClass="my-border-pane" stylesheets="@../css/myCss.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.omegas.controllers.MovieController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="400.0" styleClass="my-border-pane" stylesheets="@../css/myCss.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <BorderPane maxWidth="214.0" styleClass="image-view-wrapper" BorderPane.alignment="CENTER">
          <BorderPane.margin>
@@ -24,19 +24,19 @@
    </center>
    <bottom>
       <VBox alignment="BASELINE_CENTER" prefHeight="170.0" prefWidth="400.0" spacing="5.0" BorderPane.alignment="CENTER">
-         <Label text="Not the desired movie? Search." textFill="WHITE">
+         <Label fx:id="lblSearch" textFill="WHITE">
             <font>
                <Font name="System Bold" size="14.0" />
             </font>
          </Label>
-         <Button fx:id="btnSearch" mnemonicParsing="false" onAction="#search" prefHeight="25.0" prefWidth="214.0" text="Search" />
-         <Button fx:id="btnDownload" mnemonicParsing="false" onAction="#downloadPoster" prefHeight="25.0" prefWidth="214.0" text="Download Poster" />
-         <Button mnemonicParsing="false" onAction="#createIcon" prefHeight="25.0" prefWidth="214.0" text="Create Icon" />
-         <Button mnemonicParsing="false" onAction="#createAndApply" prefHeight="25.0" prefWidth="214.0" text="Create and Apply Icon" />
+         <Button fx:id="btnSearch" mnemonicParsing="false" prefHeight="25.0" prefWidth="214.0" text="Search" />
+         <Button fx:id="btnDownload" mnemonicParsing="false" prefHeight="25.0" prefWidth="214.0" text="Download Poster" />
+         <Button fx:id="btnCreate" mnemonicParsing="false" prefHeight="25.0" prefWidth="214.0" text="Create Icon" />
+         <Button fx:id="btnApply" mnemonicParsing="false" prefHeight="25.0" prefWidth="214.0" text="Create and Apply Icon" />
       </VBox>
    </bottom>
    <left>
-      <Button fx:id="btnPrevious" mnemonicParsing="false" onAction="#previousPoster" text="&lt;" BorderPane.alignment="CENTER">
+      <Button fx:id="btnPrevious" mnemonicParsing="false" text="&lt;" BorderPane.alignment="CENTER">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
@@ -48,7 +48,7 @@
    <right>
       <BorderPane BorderPane.alignment="CENTER">
          <center>
-            <Button fx:id="btnNext" mnemonicParsing="false" onAction="#nextPoster" text="&gt;">
+            <Button fx:id="btnNext" mnemonicParsing="false" text="&gt;">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -58,7 +58,7 @@
             </Button>
          </center>
          <top>
-            <Button alignment="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#openSettings" BorderPane.alignment="CENTER">
+            <Button fx:id="btnSettings" alignment="CENTER" graphicTextGap="0.0" mnemonicParsing="false" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets top="10.0" />
                </BorderPane.margin>

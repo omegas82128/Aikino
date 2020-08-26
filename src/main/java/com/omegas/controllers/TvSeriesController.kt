@@ -8,9 +8,9 @@ import java.util.*
 
 class TvSeriesController:MediaController() {
     override fun initialize(location: URL?, resources: ResourceBundle?) {
+        mediaInfo = Main.mediaInfo!!
         super.initialize(location, resources)
         btnPrevious.isDisable = true
-        mediaInfo = Main.mediaInfo!!
         folder = mediaInfo.file
         if(mediaInfo.id<0){
             getPosters(mediaInfo){
@@ -20,7 +20,7 @@ class TvSeriesController:MediaController() {
             loadPostersById()
         }
     }
-    fun downloadPoster(){
+    override fun downloadPoster(){
         super.downloadPoster(folder.name)
     }
     private fun loadPostersById(){

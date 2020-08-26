@@ -2,10 +2,11 @@ package com.omegas.controllers
 
 import com.omegas.api.moviedb.TheMovieDb.TIMEOUT
 import com.omegas.main.Main
-import com.omegas.main.Main.Companion.changeScene
+import com.omegas.main.Main.Companion.setScene
 import com.omegas.model.Media
 import com.omegas.util.Constants
 import com.omegas.util.MediaType
+import com.omegas.util.WindowType
 import com.omegas.util.functions.toHoursAndMinutes
 import javafx.fxml.FXML
 import javafx.fxml.Initializable
@@ -78,11 +79,11 @@ class MediaItemController:Initializable {
             when(media.mediaType){
                 MediaType.MOVIE ->{
                     it.year = media.yearOfRelease
-                    changeScene("Movie",it.title)
+                    setScene(it.title, WindowType.MOVIE)
                 }
                 MediaType.TV ->{
                     it.seasonNumber = media.currentSeason
-                    changeScene("TvSeries",it.title)
+                    setScene(it.title, WindowType.TV)
                 }
             }
         }

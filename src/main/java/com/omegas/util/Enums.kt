@@ -23,3 +23,7 @@ enum class NotFoundType{
 enum class PosterType{
     LOCAL, TMDB
 }
+
+enum class WindowType{
+    MOVIE, TV, SEARCH
+}

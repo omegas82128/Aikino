@@ -1,11 +1,15 @@
 package com.omegas.main
 
 import com.omegas.api.NameParser
+import com.omegas.controllers.MovieController
 import com.omegas.controllers.SearchController
+import com.omegas.controllers.TvSeriesController
 import com.omegas.model.MediaInfo
 import com.omegas.util.AlertType
 import com.omegas.util.Constants
+import com.omegas.util.Constants.APP_NAME
 import com.omegas.util.MediaType
+import com.omegas.util.WindowType
 import com.omegas.util.functions.showMessage
 import javafx.application.Application
 import javafx.fxml.FXMLLoader
@@ -30,14 +34,13 @@ class Main : Application() {
                 Thread.sleep(10000)
                 exitProcess(0)
             }else{
-                val windowType:String? = when(mediaInfo!!.mediaType) {
-                    MediaType.TV-> "TvSeries"
-                    MediaType.MOVIE-> "Movie"
+                val windowType:WindowType = when(mediaInfo!!.mediaType) {
+                    MediaType.TV-> WindowType.TV
+                    MediaType.MOVIE-> WindowType.MOVIE
                 }
 
-                val root = FXMLLoader.load<Parent>(javaClass.getResource("/fxml/${windowType}Window.fxml"))
-                stage.title = TITLE+" - "+mediaInfo!!.title
-                stage.scene = Scene(root)
+                setScene(mediaInfo!!.title, windowType)
+
                 stage.sizeToScene()
                 stage.show()
                 stage.isResizable = false
@@ -74,15 +77,27 @@ class Main : Application() {
     companion object{
         lateinit var args:Array<String>
         lateinit var stage: Stage
-        const val TITLE = "Aikino"
         var mediaInfo:MediaInfo? = null
-        fun changeScene(fxmlPath:String,title:String, search:Boolean = false){
+        fun setScene(title: String, windowType: WindowType){
             try {
+                val fxmlPath:String = when(windowType){
+                    WindowType.MOVIE,WindowType.TV -> "Media"
+                    WindowType.SEARCH ->"Search"
+                }
                 val fxmlLoader =FXMLLoader(Main::class.java.getResource("/fxml/${fxmlPath}Window.fxml"))
+
+                when(windowType){
+                    WindowType.MOVIE -> fxmlLoader.setController(MovieController())
+                    WindowType.TV -> fxmlLoader.setController(TvSeriesController())
+
+                    WindowType.SEARCH -> {
+                    }
+                }
+
                 val root = fxmlLoader.load<Parent>()
-                stage.title = "$TITLE - $title"
+                stage.title = "$APP_NAME - $title"
                 stage.scene = Scene(root)
-                if (search){
+                if (windowType == WindowType.SEARCH){
                     fxmlLoader.getController<SearchController>().search()
                 }
             } catch (e: java.lang.Exception) {

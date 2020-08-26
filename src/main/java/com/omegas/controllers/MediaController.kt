@@ -14,6 +14,7 @@ import com.omegas.services.LocalPosterService
 import com.omegas.services.TemplateService
 import com.omegas.tasks.DisplayImageTask
 import com.omegas.util.*
+import com.omegas.util.Constants.APP_NAME
 import com.omegas.util.Constants.MAX_POSTERS
 import com.omegas.util.Constants.PLACEHOLDER_IMAGE_PATH
 import com.omegas.util.Preferences.iconType
@@ -27,6 +28,7 @@ import javafx.fxml.Initializable
 import javafx.scene.Parent
 import javafx.scene.Scene
 import javafx.scene.control.Button
+import javafx.scene.control.Label
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import javafx.stage.Modality
@@ -51,6 +53,14 @@ abstract class MediaController:Initializable {
     protected lateinit var btnSearch: Button
     @FXML
     protected lateinit var btnDownload: Button
+    @FXML
+    protected lateinit var btnCreate: Button
+    @FXML
+    protected lateinit var btnApply: Button
+    @FXML
+    protected lateinit var btnSettings: Button
+    @FXML
+    protected lateinit var lblSearch:Label
 
     protected lateinit var folder:File
     protected lateinit var mediaInfo: MediaInfo
@@ -60,15 +70,46 @@ abstract class MediaController:Initializable {
     private var imageThread: Thread? = null
     private val placeholderImage = Image(PLACEHOLDER_IMAGE_PATH)
     override fun initialize(location: URL?, resources: ResourceBundle?) {
+
+        initButtonListeners()
         imageView.image = Image(PLACEHOLDER_IMAGE_PATH)
         if (TheMovieDb.isNotConnected()){
             btnDownload.isDisable = true
             btnSearch.isDisable = true
         }
+        lblSearch.text = when(mediaInfo.mediaType){
+            MediaType.MOVIE ->  "Not the desired movie? Search."
+            MediaType.TV -> "Not the desired show? Search."
+        }
     }
+
+    private fun initButtonListeners() {
+        btnSearch.setOnAction {
+            search()
+        }
+        btnDownload.setOnAction {
+            downloadPoster()
+        }
+        btnCreate.setOnAction{
+            createIcon()
+        }
+        btnApply.setOnAction {
+            createAndApply()
+        }
+        btnPrevious.setOnAction {
+            previousPoster()
+        }
+        btnNext.setOnAction {
+            nextPoster()
+        }
+        btnSettings.setOnAction{
+            openSettings()
+        }
+    }
+
     fun search(){
         Main.mediaInfo = mediaInfo
-        Main.changeScene("Search","Search Window", true)
+        Main.setScene("Search Window", WindowType.SEARCH)
     }
 
     fun nextPoster() {
@@ -107,6 +148,7 @@ abstract class MediaController:Initializable {
         currentPosition--
         applyPoster()
     }
+    abstract fun downloadPoster()
     fun downloadPoster(name:String){
         if(imageView.image == placeholderImage){
             showMessage(
@@ -251,7 +293,7 @@ abstract class MediaController:Initializable {
         val pngFile = saveTransparentPng(imageView.image,folder)
         return com.omegas.util.functions.createIcon(pngFile, delete)
     }
-    fun createAndApply(){
+    private fun createAndApply(){
         if(imageView.image == placeholderImage){
             showMessage(
                 "Cannot create and apply icon, poster has not finished loading.",
@@ -280,7 +322,7 @@ abstract class MediaController:Initializable {
 
         val scene = Scene(root)
         val stage = Stage()
-        stage.title = Main.TITLE+" - Settings"
+        stage.title = "$APP_NAME - Settings"
         stage.initModality(Modality.APPLICATION_MODAL)
         stage.icons.add(Image(javaClass.getResource("/icon.png").toString()))
         stage.scene = scene

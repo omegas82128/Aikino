@@ -1,9 +1,9 @@
 package com.omegas.controllers
 
-import com.omegas.main.Main
 import com.omegas.model.Icon
 import com.omegas.services.ImageSaveService.saveTemplatePng
 import com.omegas.util.AlertType
+import com.omegas.util.Constants.APP_NAME
 import com.omegas.util.CreateType
 import com.omegas.util.functions.applyIcon
 import com.omegas.util.functions.getImage
@@ -47,11 +47,11 @@ class IconChooserDialog(var iconImages:List<BufferedImage>, private val createTy
     init {
         val fxmlLoader = FXMLLoader(javaClass.getResource("/fxml/IconChooserDialog.fxml"))
         fxmlLoader.setController(this)
-        val root :Parent = fxmlLoader.load()
+        val root : Parent = fxmlLoader.load()
 
         val scene = Scene(root)
         stage = Stage()
-        stage.title = Main.TITLE+" - Icon Selection"
+        stage.title = "$APP_NAME - Icon Selection"
         stage.initModality(Modality.APPLICATION_MODAL)
         stage.icons.add(Image(javaClass.getResource("/icon.png").toString()))
         stage.scene = scene

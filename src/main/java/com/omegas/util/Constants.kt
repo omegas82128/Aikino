@@ -8,6 +8,8 @@ import java.util.regex.Pattern
 
 object Constants{
 
+    const val APP_NAME = "Aikino"
+
     //resources
     val PLACEHOLDER_IMAGE_PATH = javaClass.getResource("/placeholder.jpg").toString()
     val ICON = Image(javaClass.getResource("/icon.png").toString())
