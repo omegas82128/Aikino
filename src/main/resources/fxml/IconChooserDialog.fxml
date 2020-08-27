@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="400.0" styleClass="my-border-pane" stylesheets="@../css/myCss.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" styleClass="my-border-pane" stylesheets="@../css/myCss.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <bottom>
-      <Button fx:id="btnSelect" mnemonicParsing="false" prefWidth="128.0" text="Select" BorderPane.alignment="CENTER">
+      <Button fx:id="btnSelect" mnemonicParsing="false" prefWidth="214.0" text="Select" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="20.0" />
          </BorderPane.margin>
@@ -20,14 +20,12 @@
       </Button>
    </bottom>
    <center>
-      <HBox alignment="CENTER" maxHeight="128.0" spacing="20.0" BorderPane.alignment="CENTER_LEFT">
+      <HBox alignment="CENTER" maxHeight="128.0" spacing="15.0" BorderPane.alignment="CENTER_LEFT">
          <BorderPane.margin>
-            <Insets left="44.0"/>
+            <Insets left="39.0" />
          </BorderPane.margin>
-         <ImageView fx:id="imageView" fitHeight="128.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true"/>
-         <JFXSlider fx:id="slider" blockIncrement="1.0" indicatorPosition="RIGHT" max="50.0"
-                    nodeOrientation="RIGHT_TO_LEFT" orientation="VERTICAL" rotate="180.0" showTickMarks="true"
-                    stylesheets="@../css/slider.css" value="25.0"/>
+         <ImageView fx:id="imageView" fitHeight="230.0" fitWidth="230.0" pickOnBounds="true" preserveRatio="true" />
+         <JFXSlider fx:id="slider" blockIncrement="1.0" indicatorPosition="RIGHT" max="50.0" minorTickCount="5" nodeOrientation="RIGHT_TO_LEFT" orientation="VERTICAL" rotate="180.0" showTickMarks="true" stylesheets="@../css/slider.css" value="25.0" />
       </HBox>
    </center>
 </BorderPane>
