@@ -331,8 +331,8 @@ abstract class MediaController:Initializable {
     }
 
     private fun createIconChooserDialog(createType: CreateType){
-        val list = TemplateService.getShortenedImages(imageView.image,folder)
-        val iconChooserDialog = IconChooserDialog(list,createType, folder)
+        val templateService = TemplateService(imageView.image, folder)
+        val iconChooserDialog = IconChooserDialog(templateService,createType, folder)
         iconChooserDialog.show()
     }
     private val normalForPosters : (mediaInfo: MediaInfo) -> MutableList<String> = { mediaInfo->
