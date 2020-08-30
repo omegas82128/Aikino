@@ -1,7 +1,9 @@
 package com.omegas.util
 
 import javafx.geometry.Dimension2D
+import javafx.scene.control.Tooltip
 import javafx.scene.image.Image
+import javafx.util.Duration
 import java.awt.Dimension
 import java.util.regex.Pattern
 
@@ -45,4 +47,10 @@ object Constants{
     // supported local poster file types
     val POSTER_EXTENSIONS_LIST = listOf(".png", ".jpeg", ".jpg")
 
+    // UI
+    val LOCAL_POSTER_TOOL_TIP = Tooltip("Local Poster")
+
+    init {
+        LOCAL_POSTER_TOOL_TIP.showDelay = Duration(10.0)
+    }
 }

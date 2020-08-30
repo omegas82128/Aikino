@@ -55,7 +55,7 @@
          </BorderPane>
          <BorderPane>
             <left>
-               <Label text="Show local posters" textFill="WHITE" BorderPane.alignment="CENTER">
+               <Label text="Show Local Posters" textFill="WHITE" BorderPane.alignment="CENTER">
                   <font>
                      <Font name="System Bold" size="24.0" />
                   </font>

@@ -25,5 +25,5 @@ enum class PosterType{
 }
 
 enum class WindowType{
-    MOVIE, TV, SEARCH
+    MOVIE, TV, SEARCH, START
 }

@@ -8,7 +8,9 @@ import com.omegas.util.AlertType
 import com.omegas.util.Constants.APP_NAME
 import com.omegas.util.CreateType
 import com.omegas.util.functions.applyIcon
+import com.omegas.util.functions.progressDialog
 import com.omegas.util.functions.showMessage
+import javafx.application.Platform
 import javafx.embed.swing.SwingFXUtils
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
@@ -20,6 +22,8 @@ import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import javafx.scene.input.KeyCode
 import javafx.scene.input.KeyEvent
+import javafx.scene.input.ScrollEvent
+import javafx.scene.layout.StackPane
 import javafx.stage.Modality
 import javafx.stage.Stage
 import java.awt.image.BufferedImage
@@ -27,11 +31,13 @@ import java.io.File
 import java.net.URL
 import java.util.*
 import kotlin.concurrent.thread
+import kotlin.math.absoluteValue
 
-class IconChooserDialog(
+class IconDialog(
     private val templateService: TemplateService,
     private val createType: CreateType,
-    private val file: File
+    private val file: File,
+    private val root:StackPane
 ) : Initializable{
 
     @FXML
@@ -44,7 +50,7 @@ class IconChooserDialog(
     private var stage: Stage
     private lateinit var image:BufferedImage
     init {
-        val fxmlLoader = FXMLLoader(javaClass.getResource("/fxml/IconChooserDialog.fxml"))
+        val fxmlLoader = FXMLLoader(javaClass.getResource("/fxml/IconDialog.fxml"))
         fxmlLoader.setController(this)
         val root : Parent = fxmlLoader.load()
 
@@ -63,6 +69,14 @@ class IconChooserDialog(
         slider.addEventFilter(KeyEvent.KEY_PRESSED) { event ->
             event.consume()
             onKeyPressed(event)
+        }
+        imageView.parent.parent.addEventFilter(ScrollEvent.SCROLL){event ->
+            event.consume()
+            val incrementOrDecrement = (event.deltaY / 26.666666666666664).absoluteValue.toInt()
+            when{ // values are inverted because slider is inverted
+                event.deltaY > 0 -> slider.value = slider.value - incrementOrDecrement
+                event.deltaY < 0 ->  slider.value = slider.value + incrementOrDecrement
+            }
         }
         btnSelect.setOnAction {
             select()
@@ -89,9 +103,12 @@ class IconChooserDialog(
     fun select(){
         when(createType){
             CreateType.CREATE -> {
+                val progressDialog = progressDialog(root, "created")
+                progressDialog.show(root)
                 thread(true) {
                     createIcon(image, true)
                     showMessage("Icon created successfully", AlertType.INFO, "Icon saved to folder ${file.name}")
+                    progressDialog.close()
                 }
             }
             CreateType.CREATE_AND_APPLY -> createAndApply(image)
@@ -103,14 +120,19 @@ class IconChooserDialog(
         return com.omegas.util.functions.createIcon(pngFile, delete)
     }
     private fun createAndApply(bufferedImage: BufferedImage){
+        val progressDialog = progressDialog(root)
+        progressDialog.show(root)
         thread(true) {
             val icon = createIcon(bufferedImage, false)
             applyIcon(icon, this.file)
+            Platform.runLater {
+                progressDialog.close()
+            }
         }
     }
 
     private fun onKeyPressed(event: KeyEvent) {
-        when(event.code) {
+        when(event.code) { // values are inverted because slider is inverted
             KeyCode.UP -> slider.value = slider.value-1
             KeyCode.DOWN -> slider.value = slider.value+1
             else -> {}

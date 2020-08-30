@@ -15,16 +15,31 @@ import javafx.application.Application
 import javafx.fxml.FXMLLoader
 import javafx.scene.Parent
 import javafx.scene.Scene
-import javafx.stage.DirectoryChooser
 import javafx.stage.Stage
 import java.io.File
 import kotlin.system.exitProcess
 
 class Main : Application() {
     override fun start(primaryStage: Stage?) {
-        primaryStage?.icons?.add(Constants.ICON)
+        stage = primaryStage!!
+        primaryStage.icons?.add(Constants.ICON)
+        stage.isResizable = false
+        stage.setOnCloseRequest {
+            exitProcess(0)
+        }
         if (args.isNotEmpty()){
-            stage = primaryStage!!
+            startAikino()
+        }else{
+            setScene("Start Menu",WindowType.START)
+        }
+        stage.show()
+    }
+
+    companion object{
+        lateinit var args:Array<String>
+        lateinit var stage: Stage
+        var mediaInfo:MediaInfo? = null
+        fun startAikino(){
             mediaInfo = NameParser.getMediaInfo(File(args[0]))
             if(mediaInfo==null){
                 showMessage(
@@ -32,66 +47,29 @@ class Main : Application() {
                     title = "Invalid Folder Name"
                 )
                 Thread.sleep(10000)
-                exitProcess(0)
+                exitProcess(1)
             }else{
                 val windowType:WindowType = when(mediaInfo!!.mediaType) {
                     MediaType.TV-> WindowType.TV
                     MediaType.MOVIE-> WindowType.MOVIE
                 }
-
                 setScene(mediaInfo!!.title, windowType)
-
                 stage.sizeToScene()
-                stage.show()
-                stage.isResizable = false
-                stage.setOnCloseRequest {
-                    exitProcess(0)
-                }
             }
-        }else{
-
-            primaryStage?.let {
-                it.height = 0.0
-                it.width = 0.0
-                it.show()
-            }
-
-            val directoryChooser = DirectoryChooser()
-            directoryChooser.title = "Choose a Movie or TV series folder"
-            val file = directoryChooser.showDialog(primaryStage)
-
-            if(file!=null){
-                args = arrayOf(file.absolutePath)
-                primaryStage?.hide()
-                start(primaryStage)
-                return
-            }
-            primaryStage?.hide()
-            showMessage()
-            Thread.sleep(3000)
-            exitProcess(0)
         }
-
-    }
-
-    companion object{
-        lateinit var args:Array<String>
-        lateinit var stage: Stage
-        var mediaInfo:MediaInfo? = null
         fun setScene(title: String, windowType: WindowType){
             try {
                 val fxmlPath:String = when(windowType){
                     WindowType.MOVIE,WindowType.TV -> "Media"
                     WindowType.SEARCH ->"Search"
+                    WindowType.START -> "Start"
                 }
                 val fxmlLoader =FXMLLoader(Main::class.java.getResource("/fxml/${fxmlPath}Window.fxml"))
 
                 when(windowType){
                     WindowType.MOVIE -> fxmlLoader.setController(MovieController())
                     WindowType.TV -> fxmlLoader.setController(TvSeriesController())
-
-                    WindowType.SEARCH -> {
-                    }
+                    else -> {}
                 }
 
                 val root = fxmlLoader.load<Parent>()
@@ -107,6 +85,7 @@ class Main : Application() {
         @JvmStatic
         fun main(args:Array<String>){
             Companion.args = args
+            //Companion.args = arrayOf("E:\\Public Enemies (2012)")
             try{
                 launch(Main::class.java)
             }catch (exception:Exception){
