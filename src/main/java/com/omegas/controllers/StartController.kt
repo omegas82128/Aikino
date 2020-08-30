@@ -4,7 +4,6 @@ import com.omegas.controllers.controls.OpenSettingsControl
 import com.omegas.main.Main
 import com.omegas.main.Main.Companion.stage
 import com.omegas.main.Main.Companion.startAikino
-import com.omegas.util.functions.showMessage
 import javafx.fxml.Initializable
 import javafx.stage.DirectoryChooser
 import java.awt.Desktop
@@ -23,8 +22,6 @@ class StartController : Initializable, OpenSettingsControl(){
         if(file!=null){
             Main.args = arrayOf(file.absolutePath)
             startAikino()
-        }else{
-            showMessage()
         }
     }
     fun help(){
