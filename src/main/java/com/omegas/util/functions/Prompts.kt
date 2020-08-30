@@ -7,6 +7,7 @@ import com.omegas.util.AlertType
 import com.omegas.util.Constants.ICON
 import com.omegas.util.Preferences.removeNotification
 import com.omegas.util.Preferences.removeSeconds
+import javafx.geometry.Pos
 import javafx.scene.control.*
 import javafx.scene.layout.*
 import javafx.stage.Stage
@@ -140,6 +141,8 @@ fun progressDialog(root:StackPane, text: String = "created and applied"): JFXDia
     layout.prefWidth = 350.0
     layout.style = "-fx-background-color: $backgroundColor;"
     val label = Label("Please wait, while Icon is being $text")
+    label.alignment = Pos.CENTER
+    label.prefWidth = layout.prefWidth
     label.style = "-fx-text-fill: $textColor"
     layout.setHeading(label)
     val progressIndicator = ProgressIndicator(-1.0)
