@@ -15,7 +15,7 @@
         <option name="nativeBundle" value="all" />
         <option name="title" value="Aikino" />
         <option name="vendor" value="" />
-        <option name="version" value="1.9.7" />
+        <option name="version" value="2.0.1" />
         <option name="width" value="488" />
       </options>
     </properties>
@@ -35,7 +35,6 @@
       <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.14" />
       <element id="library" level="project" name="Maven: org.python:jython-standalone:2.7.2" />
       <element id="library" level="project" name="Maven: org.slf4j:jcl-over-slf4j:1.7.30" />
-      <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.30" />
       <element id="library" level="project" name="Maven: org.apache.commons:commons-lang3:3.11" />
       <element id="library" level="project" name="Maven: info.movito:themoviedbapi:1.10" />
       <element id="library" level="project" name="Maven: org.ini4j:ini4j:0.5.4" />
@@ -47,6 +46,8 @@
       <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.11.2" />
       <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.11.2" />
       <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.11.2" />
+      <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:2.0.0-alpha1" />
+      <element id="library" level="project" name="Maven: com.jfoenix:jfoenix:9.0.10" />
     </root>
   </artifact>
 </component>

@@ -85,9 +85,11 @@
 
         <dependency>
             <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${version.slf4j}</version>
+            <artifactId>slf4j-nop</artifactId>
+            <version>2.0.0-alpha1</version>
+            <scope>test</scope>
         </dependency>
+
 
 
         <dependency>
@@ -109,14 +111,6 @@
             <artifactId>api-common</artifactId>
             <version>1.1</version>
             <scope>provided</scope>
-        </dependency>
-
-
-
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jcl-over-slf4j</artifactId>
-            <version>1.7.30</version>
         </dependency>
 
         <!--TESTING-->
@@ -169,6 +163,12 @@
             <groupId>info.movito</groupId>
             <artifactId>themoviedbapi</artifactId>
             <version>1.10</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.jfoenix</groupId>
+            <artifactId>jfoenix</artifactId>
+            <version>9.0.10</version>
         </dependency>
     </dependencies>
 

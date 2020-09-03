@@ -70,3 +70,8 @@
 .text-area .scroll-bar:vertical {
     -fx-opacity: 0;
 }
+
+.start-button{
+    -fx-pref-width: 350px;
+    -fx-pref-height: 50px;
+}

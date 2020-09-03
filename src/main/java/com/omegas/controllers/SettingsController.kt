@@ -1,5 +1,6 @@
 package com.omegas.controllers
 
+import com.jfoenix.controls.JFXToggleButton
 import com.omegas.util.AlertType
 import com.omegas.util.Constants.HIDE_ICONS_KEY
 import com.omegas.util.Constants.ICON_TYPE_KEY
@@ -15,16 +16,15 @@ import com.omegas.util.Preferences.preferences
 import com.omegas.util.functions.showMessage
 import javafx.fxml.FXML
 import javafx.fxml.Initializable
-import javafx.scene.control.CheckBox
 import javafx.scene.control.ComboBox
 import java.net.URL
 import java.util.*
 
 class SettingsController:Initializable {
     @FXML
-    lateinit var chkBoxHidden : CheckBox
+    lateinit var tglBtnHidden : JFXToggleButton
     @FXML
-    lateinit var chkBoxPosters : CheckBox
+    lateinit var tglBtnPosters : JFXToggleButton
     @FXML
     lateinit var dpdPosterQuality:ComboBox<String>
     @FXML
@@ -36,13 +36,18 @@ class SettingsController:Initializable {
         dpdPosterQuality.items.addAll(POSTER_SIZES)
         dpdPosterQuality.value = posterSize
 
-        chkBoxHidden.isSelected = hideIcon
-        chkBoxPosters.isSelected = localPostersAllowed
+        tglBtnHidden.isSelected = hideIcon
+        tglBtnPosters.isSelected = localPostersAllowed
     }
 
     fun iconTypeChanged(){
         iconType = dpdIconType.value
         preferences.put(ICON_TYPE_KEY, iconType.name)
+        showMessage(
+            text = "Icon type changed to ${iconType.name}",
+            type = AlertType.INFO,
+            title = "Icon Type Changed"
+        )
     }
     fun posterQualityChanged(){
         posterSize = dpdPosterQuality.value
@@ -50,17 +55,29 @@ class SettingsController:Initializable {
         showMessage("New Poster size will take effect after app restart",AlertType.INFO,"Poster Size Changed")
     }
     fun iconHiddenPropertyChanged(){
-        hideIcon = chkBoxHidden.isSelected
+        hideIcon = tglBtnHidden.isSelected
         preferences.putBoolean(HIDE_ICONS_KEY, hideIcon)
+        var not = ""
+        val hideOrShown:String = if(hideIcon){
+            "Hidden"
+        }else{
+            not =  "not "
+            "Shown"
+        }
+        showMessage(
+            text = "Icons will ${not}be hidden, after they have been applied.",
+            type = AlertType.INFO,
+            title = "Icons $hideOrShown"
+        )
     }
     fun localPostersAllowedPropertyChanged(){
-        localPostersAllowed = chkBoxPosters.isSelected
+        localPostersAllowed = tglBtnPosters.isSelected
         preferences.putBoolean(LOCAL_POSTERS_ALLOWED_KEY, localPostersAllowed)
         val showOrHidden = if (localPostersAllowed){
             "shown"
         }else{
             "hidden"
         }
-        showMessage("Local posters will be $showOrHidden after app restart",AlertType.INFO,"Local Poster Setting Changed")
+        showMessage("Local posters will be $showOrHidden after app restart",AlertType.INFO,"Local Posters ${showOrHidden.capitalize()}")
     }
 }

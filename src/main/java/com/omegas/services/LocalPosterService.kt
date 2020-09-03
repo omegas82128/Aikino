@@ -1,7 +1,6 @@
 package com.omegas.services
 
 import com.omegas.model.Poster
-import com.omegas.util.Constants
 import com.omegas.util.Constants.POSTER_EXTENSIONS_LIST
 import javafx.scene.image.Image
 import java.io.File
@@ -25,8 +24,7 @@ class LocalPosterService(val folder: File, private val executorService: Executor
             if(imageFiles != null){
                 for(imageFile in imageFiles){
                     val image =  Image(imageFile.toURI().toString())
-                    val ratio:Double = image.height / image.width
-                    if(ratio >= Constants.TEMPLATE_POSTER_RATIO){
+                    if(image.height>image.width){
                         localPosters.add(image)
                     }
                 }

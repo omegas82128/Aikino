@@ -1,12 +1,16 @@
 package com.omegas.util
 
 import javafx.geometry.Dimension2D
+import javafx.scene.control.Tooltip
 import javafx.scene.image.Image
+import javafx.util.Duration
 import java.awt.Dimension
 import java.util.regex.Pattern
 
 
 object Constants{
+
+    const val APP_NAME = "Aikino"
 
     //resources
     val PLACEHOLDER_IMAGE_PATH = javaClass.getResource("/placeholder.jpg").toString()
@@ -43,4 +47,13 @@ object Constants{
     // supported local poster file types
     val POSTER_EXTENSIONS_LIST = listOf(".png", ".jpeg", ".jpg")
 
+    // colors
+    const val VALID_COLOR = "#8ccfb9"
+    const val INVALID_COLOR = "#d67774"
+
+    // UI
+    val LOCAL_POSTER_TOOL_TIP = Tooltip("Local Poster")
+    init {
+        LOCAL_POSTER_TOOL_TIP.showDelay = Duration(10.0)
+    }
 }

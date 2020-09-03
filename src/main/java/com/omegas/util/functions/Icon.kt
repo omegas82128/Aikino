@@ -60,6 +60,10 @@ private fun setIcon(folderPath: String, iconName:String, hideFile: Boolean) {
                         diPath.delete()
                         setIcon(folderPath, iconName, hideFile)
                     }
+                }else{
+                    thread {
+                        File("$folderPath\\$iconName").delete()
+                    }
                 }
                 alert.close()
             }

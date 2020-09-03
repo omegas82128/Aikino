@@ -1,7 +1,7 @@
 package com.omegas.controllers
 
 import com.omegas.api.moviedb.MovieDAL
-import com.omegas.main.Main
+import com.omegas.model.MediaInfo
 import java.net.URL
 import java.util.*
 
@@ -10,19 +10,19 @@ class MovieController:MediaController() {
 
     override fun initialize(location: URL?, resources: ResourceBundle?) {
         super.initialize(location, resources)
-        btnPrevious.isDisable = true
-        mediaInfo = Main.mediaInfo!!
-        folder = mediaInfo.file
         if(mediaInfo.id<0){
-            getPosters(mediaInfo)
+            getPosters(mediaInfo, function = getMoviePosters)
         }else{
             getPosters(mediaInfo) {
                 MovieDAL.getMoviePosters(mediaInfo.id)
             }
         }
     }
-    fun downloadPoster(){
+    override fun downloadPoster(){
         super.downloadPoster(folder.name)
     }
 
+    private val getMoviePosters : (mediaInfo: MediaInfo) -> MutableList<String> = { mediaInfo->
+        MovieDAL.getMoviePosters(mediaInfo)
+    }
 }
