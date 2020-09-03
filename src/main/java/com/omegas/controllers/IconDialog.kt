@@ -25,7 +25,6 @@ import javafx.scene.input.KeyEvent
 import javafx.scene.input.ScrollEvent
 import javafx.scene.layout.BorderPane
 import javafx.scene.layout.StackPane
-import javafx.stage.Stage
 import java.awt.image.BufferedImage
 import java.io.File
 import java.net.URL
@@ -46,7 +45,6 @@ class IconDialog(
     @FXML
     lateinit var slider:JFXSlider
 
-    private val stage = Stage()
     private lateinit var image:BufferedImage
     private val iconDialog = JFXDialog()
     init {
@@ -69,32 +67,16 @@ class IconDialog(
         layout.prefWidth = prefWidth
         layout.prefHeight = 300.0
         layout.style = "-fx-background-color: $backgroundColor;"
-        /*
-        val lblHeading = Label("Position Icon")
-        lblHeading.alignment = Pos.CENTER
-        lblHeading.prefWidth = layout.prefWidth
-        lblHeading.style = "-fx-text-fill: $textColor"
-        val headerBorderPane = BorderPane(lblHeading)
-        layout.setHeading(headerBorderPane)
-        // */
+
 
         layout.setBody(content)
         layout.setActions(btnBorderPane)
 
         iconDialog.content = layout
         iconDialog.dialogContainer = root
-        /*
-        val scene = Scene(root)
-        stage.title = "$APP_NAME - Icon Selection"
-        stage.initModality(Modality.APPLICATION_MODAL)
-        stage.icons.add(Image(javaClass.getResource("/icon.png").toString()))
-        stage.scene = scene
-        stage.isResizable = false
-        // */
     }
     fun show(){
         iconDialog.show()
-        //stage.show()
     }
     override fun initialize(location: URL?, resources: ResourceBundle?) {
         slider.addEventFilter(KeyEvent.KEY_PRESSED) { event ->
@@ -145,7 +127,6 @@ class IconDialog(
             CreateType.CREATE_AND_APPLY -> createAndApply(image)
         }
         iconDialog.close()
-        //stage.hide()
     }
     private fun createIcon(bufferedImage: BufferedImage, delete: Boolean):Icon?{
         val pngFile = saveTemplatePng(bufferedImage, file)
