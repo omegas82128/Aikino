@@ -1,11 +1,12 @@
 package com.omegas.controllers
 
+import com.jfoenix.controls.JFXDialog
+import com.jfoenix.controls.JFXDialogLayout
 import com.jfoenix.controls.JFXSlider
 import com.omegas.model.Icon
 import com.omegas.services.ImageSaveService.saveTemplatePng
 import com.omegas.services.TemplateService
 import com.omegas.util.AlertType
-import com.omegas.util.Constants.APP_NAME
 import com.omegas.util.CreateType
 import com.omegas.util.functions.applyIcon
 import com.omegas.util.functions.progressDialog
@@ -15,16 +16,15 @@ import javafx.embed.swing.SwingFXUtils
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
 import javafx.fxml.Initializable
+import javafx.geometry.Insets
 import javafx.scene.Parent
-import javafx.scene.Scene
 import javafx.scene.control.Button
-import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import javafx.scene.input.KeyCode
 import javafx.scene.input.KeyEvent
 import javafx.scene.input.ScrollEvent
+import javafx.scene.layout.BorderPane
 import javafx.scene.layout.StackPane
-import javafx.stage.Modality
 import javafx.stage.Stage
 import java.awt.image.BufferedImage
 import java.io.File
@@ -40,37 +40,68 @@ class IconDialog(
     private val root:StackPane
 ) : Initializable{
 
-    @FXML
-    lateinit var btnSelect:Button
+    private val btnSelect:Button
     @FXML
     lateinit var imageView: ImageView
     @FXML
     lateinit var slider:JFXSlider
 
-    private var stage: Stage
+    private val stage = Stage()
     private lateinit var image:BufferedImage
+    private val iconDialog = JFXDialog()
     init {
+        val backgroundColor = "#2C3440"
+        val textColor = "white"
+        val prefWidth = 300.0
+
         val fxmlLoader = FXMLLoader(javaClass.getResource("/fxml/IconDialog.fxml"))
         fxmlLoader.setController(this)
-        val root : Parent = fxmlLoader.load()
 
+        btnSelect = Button("Select")
+        btnSelect.style = "-fx-text-fill: $textColor"
+        btnSelect.prefWidth = 214.0
+        val btnBorderPane = BorderPane(btnSelect)
+        btnBorderPane.padding = Insets(0.0,30.0,10.0,0.0)
+        btnBorderPane.prefWidth = prefWidth
+
+        val content : Parent = fxmlLoader.load()
+        val layout = JFXDialogLayout()
+        layout.prefWidth = prefWidth
+        layout.prefHeight = 300.0
+        layout.style = "-fx-background-color: $backgroundColor;"
+        /*
+        val lblHeading = Label("Position Icon")
+        lblHeading.alignment = Pos.CENTER
+        lblHeading.prefWidth = layout.prefWidth
+        lblHeading.style = "-fx-text-fill: $textColor"
+        val headerBorderPane = BorderPane(lblHeading)
+        layout.setHeading(headerBorderPane)
+        // */
+
+        layout.setBody(content)
+        layout.setActions(btnBorderPane)
+
+        iconDialog.content = layout
+        iconDialog.dialogContainer = root
+        /*
         val scene = Scene(root)
-        stage = Stage()
         stage.title = "$APP_NAME - Icon Selection"
         stage.initModality(Modality.APPLICATION_MODAL)
         stage.icons.add(Image(javaClass.getResource("/icon.png").toString()))
         stage.scene = scene
         stage.isResizable = false
+        // */
     }
     fun show(){
-        stage.show()
+        iconDialog.show()
+        //stage.show()
     }
     override fun initialize(location: URL?, resources: ResourceBundle?) {
         slider.addEventFilter(KeyEvent.KEY_PRESSED) { event ->
             event.consume()
             onKeyPressed(event)
         }
-        imageView.parent.parent.addEventFilter(ScrollEvent.SCROLL){event ->
+        iconDialog.addEventFilter(ScrollEvent.SCROLL){event ->
             event.consume()
             val incrementOrDecrement = (event.deltaY / 26.666666666666664).absoluteValue.toInt()
             when{ // values are inverted because slider is inverted
@@ -113,7 +144,8 @@ class IconDialog(
             }
             CreateType.CREATE_AND_APPLY -> createAndApply(image)
         }
-        stage.hide()
+        iconDialog.close()
+        //stage.hide()
     }
     private fun createIcon(bufferedImage: BufferedImage, delete: Boolean):Icon?{
         val pngFile = saveTemplatePng(bufferedImage, file)

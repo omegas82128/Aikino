@@ -8,15 +8,13 @@ import com.omegas.main.Main.Companion.stage
 import com.omegas.model.Icon
 import com.omegas.model.MediaInfo
 import com.omegas.model.Poster
-import com.omegas.services.DownloadService
-import com.omegas.services.ImageSaveService
-import com.omegas.services.LocalPosterService
-import com.omegas.services.TemplateService
+import com.omegas.services.*
 import com.omegas.tasks.DisplayImageTask
 import com.omegas.util.*
 import com.omegas.util.Constants.LOCAL_POSTER_TOOL_TIP
 import com.omegas.util.Constants.PLACEHOLDER_IMAGE_PATH
 import com.omegas.util.functions.applyIcon
+import com.omegas.util.functions.posterConditionsDialog
 import com.omegas.util.functions.progressDialog
 import com.omegas.util.functions.showMessage
 import javafx.application.Platform
@@ -365,8 +363,13 @@ abstract class MediaController:Initializable, OpenSettingsControl() {
         }
     }
     private fun showIconDialog(createType: CreateType){
-        val templateService = TemplateService(imageView.image, folder)
-        val iconChooserDialog = IconDialog(templateService, createType, folder, root)
-        iconChooserDialog.show()
+        val authService = TemplateAuthService(imageView.image)
+        if(authService.isPosterValid){
+            val templateService = TemplateService(imageView.image, folder)
+            val iconChooserDialog = IconDialog(templateService, createType, folder, root)
+            iconChooserDialog.show()
+        }else{
+            posterConditionsDialog(authService,root).show()
+        }
     }
 }

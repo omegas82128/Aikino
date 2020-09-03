@@ -3,13 +3,24 @@ package com.omegas.util.functions
 import com.jfoenix.controls.JFXDialog
 import com.jfoenix.controls.JFXDialogLayout
 import com.omegas.main.Main
+import com.omegas.services.TemplateAuthService
 import com.omegas.util.AlertType
+import com.omegas.util.Constants
 import com.omegas.util.Constants.ICON
+import com.omegas.util.Constants.INVALID_COLOR
+import com.omegas.util.Constants.TEMPLATE_POSTER_DIMENSION
+import com.omegas.util.Constants.TEMPLATE_POSTER_RATIO
+import com.omegas.util.Constants.VALID_COLOR
 import com.omegas.util.Preferences.removeNotification
 import com.omegas.util.Preferences.removeSeconds
+import javafx.geometry.Insets
 import javafx.geometry.Pos
 import javafx.scene.control.*
+import javafx.scene.image.Image
+import javafx.scene.image.ImageView
 import javafx.scene.layout.*
+import javafx.scene.text.Font
+import javafx.scene.text.FontWeight
 import javafx.stage.Stage
 import java.awt.AWTException
 import java.awt.SystemTray
@@ -155,5 +166,127 @@ fun progressDialog(root:StackPane, text: String = "created and applied"): JFXDia
     dialog.content = layout
     dialog.dialogContainer = root
     dialog.isOverlayClose = false
+    return dialog
+}
+
+fun posterConditionsDialog(templateAuthService: TemplateAuthService, root: StackPane): JFXDialog{
+    val dialog = JFXDialog()
+    val layout = JFXDialogLayout()
+    val backgroundColor = "#2C3440"
+    val textColor = "white"
+    layout.prefWidth = 350.0
+    layout.prefHeight = 200.0
+    layout.style = "-fx-background-color: $backgroundColor;"
+    val arrayOfViolations = arrayOf("one","two","all")
+    val titleContent = Label("Icon Cannot be Created")
+    titleContent.alignment = Pos.CENTER
+    titleContent.prefWidth = layout.prefWidth
+    titleContent.font = Font.font("System",FontWeight.BOLD, 16.0)
+    titleContent.style = "-fx-text-fill: $textColor"
+    layout.setHeading(titleContent)
+
+    val spacing = 20.0
+    val vBox = VBox(spacing)
+    vBox.prefHeight = layout.prefWidth
+
+    for(i in 1..3){
+        val hBox = HBox(20.0)
+        val imageView = ImageView()
+        imageView.fitHeight = 50.0
+        imageView.fitWidth = 50.0
+        val label = Label("TEST LABEL")
+        label.prefHeight = 50.0
+        label.font = Font.font("System Bold")
+        hBox.children.addAll(imageView,label)
+        vBox.children.addAll(hBox)
+    }
+    val arrayLabel = arrayOf("Image dimension ratio should be ${TEMPLATE_POSTER_RATIO.round(2)} or higher (ratio = ${templateAuthService.ratio})",
+        "Image height should be ${TEMPLATE_POSTER_DIMENSION.height} or higher (height = ${templateAuthService.height})",
+        "Image width should be ${TEMPLATE_POSTER_DIMENSION.width} or higher (width = ${templateAuthService.width})")
+
+    for ((index, node) in vBox.children.withIndex()){
+        val hBox = node as HBox
+        for (child in hBox.children){
+            when (child) {
+                is Label -> {
+                    child.text = arrayLabel[index]
+                    child.style = "-fx-text-fill: ${
+                        when (index) {
+                            0 -> {
+                                if (templateAuthService.isRatioValid) {
+                                    VALID_COLOR
+                                } else {
+                                    INVALID_COLOR
+                                }
+                            }
+                            1 -> {
+                                if (templateAuthService.isHeightValid) {
+                                    VALID_COLOR
+                                } else {
+                                    INVALID_COLOR
+                                }
+                            }
+                            2 -> {
+                                if (templateAuthService.isWidthValid) {
+                                    VALID_COLOR
+                                } else {
+                                    INVALID_COLOR
+                                }
+                            }
+                            else -> ""
+                        }
+                    }"
+                }
+                is ImageView -> {
+                    val imageLocation = when (index) {
+                        0 -> {
+                            if (templateAuthService.isRatioValid) {
+                                "/ok.png"
+                            } else {
+                                "/cancel.png"
+                            }
+                        }
+                        1 -> {
+                            if (templateAuthService.isHeightValid) {
+                                "/ok.png"
+                            } else {
+                                "/cancel.png"
+                            }
+                        }
+                        2 -> {
+                            if (templateAuthService.isWidthValid) {
+                                "/ok.png"
+                            } else {
+                                "/cancel.png"
+                            }
+                        }
+                        else -> ""
+                    }
+                    val image = Image(Constants.javaClass.getResource(imageLocation).toString())
+                    child.image = image
+                }
+                else -> {}
+            }
+        }
+    }
+    val label = Label(" Poster violates ${arrayOfViolations[templateAuthService.conditionsViolated-1]} of the following Conditions")
+    label.style = "-fx-text-fill: $textColor"
+    label.prefHeight = 50.0
+    label.font = Font.font("System",FontWeight.BOLD,11.5 )
+    label.prefWidth = layout.prefWidth
+    label.alignment = Pos.CENTER
+    vBox.children.add(0, label)
+
+    layout.setBody(vBox)
+    val button = Button("Okay")
+    button.setOnAction { dialog.close() }
+    button.style = "-fx-text-fill: $textColor"
+    button.prefWidth = 214.0
+    val borderPane = BorderPane(button)
+    borderPane.padding = Insets(0.0, 0.0, 10.0, 0.0)
+    borderPane.prefWidth = layout.prefWidth
+    layout.actions.add(borderPane)
+    dialog.content = layout
+    dialog.dialogContainer = root
     return dialog
 }

@@ -47,9 +47,12 @@ object Constants{
     // supported local poster file types
     val POSTER_EXTENSIONS_LIST = listOf(".png", ".jpeg", ".jpg")
 
+    // colors
+    const val VALID_COLOR = "#8ccfb9"
+    const val INVALID_COLOR = "#d67774"
+
     // UI
     val LOCAL_POSTER_TOOL_TIP = Tooltip("Local Poster")
-
     init {
         LOCAL_POSTER_TOOL_TIP.showDelay = Duration(10.0)
     }
