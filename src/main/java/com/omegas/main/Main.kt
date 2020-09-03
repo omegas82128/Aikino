@@ -85,7 +85,7 @@ class Main : Application() {
         @JvmStatic
         fun main(args:Array<String>){
             Companion.args = args
-            Companion.args = arrayOf("E:\\Hajime no Ippo Rising (Sub)")
+            //Companion.args = arrayOf("E:\\Hajime no Ippo Rising (Sub)")
             try{
                 launch(Main::class.java)
             }catch (exception:Exception){
