@@ -365,7 +365,6 @@ abstract class MediaController:Initializable, OpenSettingsControl() {
     private fun showIconDialog(createType: CreateType){
         val authService = TemplateAuthService(imageView.image)
         if(authService.isPosterValid){
-            // TODO add thread and use progress dialog
             val templateService = TemplateService(imageView.image, folder)
             val iconChooserDialog = IconDialog(templateService, createType, folder, root)
             iconChooserDialog.show()
