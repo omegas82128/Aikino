@@ -5,6 +5,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -13,98 +14,112 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="569.0" prefWidth="400.0" styleClass="my-border-pane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.omegas.controllers.SettingsController">
    <center>
-      <VBox maxHeight="308.0" minHeight="33.0" spacing="20.0" BorderPane.alignment="CENTER">
+      <ScrollPane BorderPane.alignment="CENTER">
          <BorderPane.margin>
-            <Insets bottom="45.0" left="45.0" right="45.0" top="25.0" />
+            <Insets right="5.0" top="25.0"/>
          </BorderPane.margin>
-         <BorderPane>
-            <left>
-               <VBox BorderPane.alignment="CENTER">
-                  <Label prefWidth="147.0" text="Icon Type" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="22.0"/>
-                     </font>
-                  </Label>
-                  <Label prefHeight="30.0" prefWidth="136.0"
-                         text="Changes the type of icons that are created and applied" textAlignment="JUSTIFY"
-                         textFill="#c8c7c7" wrapText="true">
-                     <font>
-                        <Font size="10.0"/>
-                     </font>
-                  </Label>
-               </VBox>
-            </left>
-            <right>
-               <ComboBox fx:id="dpdIconType" onAction="#iconTypeChanged" prefHeight="26.0" prefWidth="150.0" BorderPane.alignment="CENTER">
-                  <BorderPane.margin>
-                     <Insets />
-                  </BorderPane.margin></ComboBox>
-            </right>
-         </BorderPane>
-         <BorderPane>
-            <left>
-               <VBox BorderPane.alignment="CENTER">
-                  <Label prefWidth="147.0" text="Poster Quality" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="22.0"/>
-                     </font>
-                  </Label>
-                  <Label prefHeight="30.0" prefWidth="135.0" text="Changes the size of posters that are downloaded"
-                         textAlignment="JUSTIFY" textFill="#c8c7c7" wrapText="true">
-                     <font>
-                        <Font size="10.0"/>
-                     </font>
-                  </Label>
-               </VBox>
-            </left>
-            <right>
-               <ComboBox fx:id="dpdPosterQuality" onAction="#posterQualityChanged" prefHeight="26.0" prefWidth="126.0" BorderPane.alignment="CENTER">
-                  <BorderPane.margin>
-                     <Insets />
-                  </BorderPane.margin></ComboBox>
-            </right>
-         </BorderPane>
-         <BorderPane>
-            <left>
-               <VBox BorderPane.alignment="CENTER">
-                  <Label text="Hide Icons" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="22.0"/>
-                     </font>
-                  </Label>
-                  <Label prefHeight="30.0" prefWidth="136.0" text="Hides icon after they have been applied"
-                         textAlignment="JUSTIFY" textFill="#c8c7c7" wrapText="true">
-                     <font>
-                        <Font size="10.0"/>
-                     </font>
-                  </Label>
-               </VBox>
-            </left>
-            <right>
-               <JFXToggleButton fx:id="tglBtnHidden" contentDisplay="GRAPHIC_ONLY" onAction="#iconHiddenPropertyChanged" selected="true" toggleColor="#526575" toggleLineColor="#405060" BorderPane.alignment="CENTER" />
-            </right>
-         </BorderPane>
-         <BorderPane>
-            <left>
-               <VBox BorderPane.alignment="CENTER">
-                  <Label text="Local Posters" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="22.0"/>
-                     </font>
-                  </Label>
-                  <Label prefHeight="30.0" prefWidth="136.0" text="Show posters that are stored in the opened directory"
-                         textAlignment="JUSTIFY" textFill="#c8c7c7" wrapText="true">
-                     <font>
-                        <Font size="10.0"/>
-                     </font>
-                  </Label>
-               </VBox>
-            </left>
-            <right>
-               <JFXToggleButton fx:id="tglBtnPosters" contentDisplay="GRAPHIC_ONLY" onAction="#localPostersAllowedPropertyChanged" selected="true" toggleColor="#526575" toggleLineColor="#405060" BorderPane.alignment="CENTER" />
-            </right>
-         </BorderPane>
-      </VBox>
+         <VBox minHeight="328.0" spacing="20.0">
+            <BorderPane>
+               <left>
+                  <VBox BorderPane.alignment="CENTER">
+                     <Label prefWidth="147.0" text="Icon Type" textFill="WHITE">
+                        <font>
+                           <Font name="System Bold" size="22.0"/>
+                        </font>
+                     </Label>
+                     <Label prefHeight="30.0" prefWidth="136.0"
+                            text="Changes the type of icons that are created and applied" textAlignment="JUSTIFY"
+                            textFill="#c8c7c7" wrapText="true">
+                        <font>
+                           <Font size="10.0"/>
+                        </font>
+                     </Label>
+                  </VBox>
+               </left>
+               <right>
+                  <ComboBox fx:id="dpdIconType" onAction="#iconTypeChanged" prefHeight="26.0" prefWidth="150.0"
+                            BorderPane.alignment="CENTER">
+                     <BorderPane.margin>
+                        <Insets/>
+                     </BorderPane.margin>
+                  </ComboBox>
+               </right>
+            </BorderPane>
+            <BorderPane>
+               <left>
+                  <VBox BorderPane.alignment="CENTER">
+                     <Label prefWidth="147.0" text="Poster Quality" textFill="WHITE">
+                        <font>
+                           <Font name="System Bold" size="22.0"/>
+                        </font>
+                     </Label>
+                     <Label prefHeight="30.0" prefWidth="135.0" text="Changes the size of posters that are downloaded"
+                            textAlignment="JUSTIFY" textFill="#c8c7c7" wrapText="true">
+                        <font>
+                           <Font size="10.0"/>
+                        </font>
+                     </Label>
+                  </VBox>
+               </left>
+               <right>
+                  <ComboBox fx:id="dpdPosterQuality" onAction="#posterQualityChanged" prefHeight="26.0"
+                            prefWidth="126.0" BorderPane.alignment="CENTER">
+                     <BorderPane.margin>
+                        <Insets/>
+                     </BorderPane.margin>
+                  </ComboBox>
+               </right>
+            </BorderPane>
+            <BorderPane>
+               <left>
+                  <VBox BorderPane.alignment="CENTER">
+                     <Label text="Hide Icons" textFill="WHITE">
+                        <font>
+                           <Font name="System Bold" size="22.0"/>
+                        </font>
+                     </Label>
+                     <Label prefHeight="30.0" prefWidth="136.0" text="Hides icon after they have been applied"
+                            textAlignment="JUSTIFY" textFill="#c8c7c7" wrapText="true">
+                        <font>
+                           <Font size="10.0"/>
+                        </font>
+                     </Label>
+                  </VBox>
+               </left>
+               <right>
+                  <JFXToggleButton fx:id="tglBtnHidden" contentDisplay="GRAPHIC_ONLY"
+                                   onAction="#iconHiddenPropertyChanged" selected="true" toggleColor="#526575"
+                                   toggleLineColor="#405060" BorderPane.alignment="CENTER"/>
+               </right>
+            </BorderPane>
+            <BorderPane>
+               <left>
+                  <VBox BorderPane.alignment="CENTER">
+                     <Label text="Local Posters" textFill="WHITE">
+                        <font>
+                           <Font name="System Bold" size="22.0"/>
+                        </font>
+                     </Label>
+                     <Label prefHeight="30.0" prefWidth="136.0"
+                            text="Load posters that are stored in the opened directory" textAlignment="JUSTIFY"
+                            textFill="#c8c7c7" wrapText="true">
+                        <font>
+                           <Font size="10.0"/>
+                        </font>
+                     </Label>
+                  </VBox>
+               </left>
+               <right>
+                  <JFXToggleButton fx:id="tglBtnPosters" contentDisplay="GRAPHIC_ONLY"
+                                   onAction="#localPostersAllowedPropertyChanged" selected="true" toggleColor="#526575"
+                                   toggleLineColor="#405060" BorderPane.alignment="CENTER"/>
+               </right>
+            </BorderPane>
+            <padding>
+               <Insets left="45.0" right="35.0"/>
+            </padding>
+         </VBox>
+      </ScrollPane>
    </center>
    <top>
       <ImageView fitHeight="150.0" fitWidth="150.0" opacity="0.22" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
@@ -117,5 +132,6 @@
    <stylesheets>
       <URL value="@../css/myCss.css" />
       <URL value="@../css/comboxBoxPlain.css" />
+      <URL value="@../css/settings.css" />
    </stylesheets>
 </BorderPane>
