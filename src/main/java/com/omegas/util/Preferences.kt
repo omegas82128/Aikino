@@ -8,6 +8,7 @@ object Preferences {
     var hideIcon = preferences.getBoolean(Constants.HIDE_ICONS_KEY,true)
     var posterSize: String =  preferences[Constants.POSTER_SIZE_KEY, "w1280"]
     var localPostersAllowed: Boolean = preferences.getBoolean(Constants.LOCAL_POSTERS_ALLOWED_KEY,true)
-    var removeNotification: Boolean = true
+    // TODO add in settings
+    var removeNotification: Boolean = false
     var removeSeconds: Long = 3
 }
