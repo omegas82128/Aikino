@@ -82,13 +82,10 @@ object MovieDAL {
     }
 
     fun getMoviePosters(mediaInfo: MediaInfo):MutableList<String>{
-        return getMoviePosters(mediaInfo.title, mediaInfo.year)
-    }
-    private fun getMoviePosters(movieName: String, year: Int):MutableList<String> {
         return getMoviePosters(
             getMovie(
-                movieName,
-                year
+                mediaInfo.title,
+                mediaInfo.year
             )?.id
         )
     }
