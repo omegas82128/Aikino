@@ -1,6 +1,7 @@
 package com.omegas.api.moviedb
 
 import com.omegas.api.moviedb.TmdbManager.notFoundType
+import com.omegas.main.Main
 import com.omegas.util.NotFoundType
 import info.movito.themoviedbapi.TmdbTV
 import info.movito.themoviedbapi.TmdbTvSeasons
@@ -25,6 +26,7 @@ object TvDAL {
             if(posterList.isEmpty()){
                 notFoundType = NotFoundType.POSTER_NOT_FOUND
             }
+            Main.mediaInfo!!.id = series.id
         }else{
             notFoundType = NotFoundType.MEDIA_NOT_FOUND
         }
