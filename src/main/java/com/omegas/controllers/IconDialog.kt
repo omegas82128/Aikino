@@ -108,7 +108,7 @@ class IconDialog(
         displayImage(slider.value.toInt())
     }
 
-    fun displayImage(y: Int){
+    private fun displayImage(y: Int){
         image = templateService.getImageInTemplate(y)
         imageView.image = SwingFXUtils.toFXImage(image, null)
     }

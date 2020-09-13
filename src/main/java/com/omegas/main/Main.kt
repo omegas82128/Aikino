@@ -5,6 +5,7 @@ import com.omegas.controllers.MovieController
 import com.omegas.controllers.SearchController
 import com.omegas.controllers.TvSeriesController
 import com.omegas.model.MediaInfo
+import com.omegas.services.UpdateService
 import com.omegas.util.AlertType
 import com.omegas.util.Constants
 import com.omegas.util.Constants.APP_NAME
@@ -87,6 +88,7 @@ class Main : Application() {
             Companion.args = args
             //Companion.args = arrayOf("E:\\Hajime no Ippo Rising (Sub)")
             try{
+                UpdateService.automaticStart()
                 launch(Main::class.java)
             }catch (exception:Exception){
                 exception.printStackTrace()

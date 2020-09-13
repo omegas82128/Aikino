@@ -116,7 +116,7 @@ fun showMessage(
 }
 
 @Throws(AWTException::class)
-fun displayTray(title: String, text: String, type: AlertType, action: () -> Unit) {
+private fun displayTray(title: String, text: String, type: AlertType, action: () -> Unit) {
     val tray = SystemTray.getSystemTray()
 
     val image = Toolkit.getDefaultToolkit()

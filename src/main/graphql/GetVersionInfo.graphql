@@ -1,0 +1,7 @@
+query getVersionInfo($app_name:String!) {
+    applications_by_pk(app_name: $app_name) {
+        app_name
+        app_version
+        download_link
+    }
+}
