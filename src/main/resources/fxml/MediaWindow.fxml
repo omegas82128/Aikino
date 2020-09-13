@@ -7,6 +7,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -29,16 +30,42 @@
          </BorderPane>
       </center>
       <bottom>
-         <VBox alignment="BASELINE_CENTER" prefHeight="170.0" prefWidth="400.0" spacing="5.0" BorderPane.alignment="CENTER">
+         <VBox fx:id="actionsVBox" alignment="BASELINE_CENTER" prefHeight="150.0" prefWidth="400.0" spacing="5.0" BorderPane.alignment="CENTER">
             <Label fx:id="lblSearch" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
+            <BorderPane fx:id="seasonBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="214.0">
+               <left>
+                  <Button fx:id="btnPreviousSeason" disable="true" mnemonicParsing="false" prefWidth="50.0" text="&lt;" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+               </left>
+               <right>
+                  <Button fx:id="btnNextSeason" disable="true" mnemonicParsing="false" prefWidth="50.0" text="&gt;" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+               </right>
+               <center>
+                  <HBox alignment="CENTER" prefHeight="113.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <Label alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="63.6" text="Season: "
+                            textFill="#f8f8f8"/>
+                     <Label fx:id="lblSeasonInfo" prefHeight="26.0" prefWidth="50.0" text="?/?" textFill="WHITE"/>
+                  </HBox>
+               </center>
+            </BorderPane>
             <Button fx:id="btnSearch" mnemonicParsing="false" prefHeight="25.0" prefWidth="214.0" text="Search" />
             <Button fx:id="btnDownload" mnemonicParsing="false" prefHeight="25.0" prefWidth="214.0" text="Download Poster" />
             <Button fx:id="btnCreate" mnemonicParsing="false" prefHeight="25.0" prefWidth="214.0" text="Create Icon" />
             <Button fx:id="btnApply" mnemonicParsing="false" prefHeight="25.0" prefWidth="214.0" text="Create and Apply Icon" />
+            <BorderPane.margin>
+               <Insets bottom="20.0" />
+            </BorderPane.margin>
          </VBox>
       </bottom>
       <left>

@@ -11,6 +11,7 @@ import java.util.regex.Pattern
 object Constants{
 
     const val APP_NAME = "Aikino"
+    const val VERSION = "2.0.1"
 
     //resources
     val PLACEHOLDER_IMAGE_PATH = javaClass.getResource("/placeholder.jpg").toString()

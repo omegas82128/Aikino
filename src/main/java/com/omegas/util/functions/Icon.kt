@@ -104,5 +104,8 @@ fun applyIcon(icon: Icon?, file: File){
     }else{
         showMessage("Icon could not be created.", AlertType.ERROR,"Icon Creation Failed")
     }
-    fileToDelete?.delete()
+    thread(isDaemon = false){
+        Thread.sleep(900) // waits till File Explorer has time to process desktop.ini file
+        fileToDelete?.delete() // deletes png folder file in folder which causes File Explorer to apply changes to folder icon
+    }
 }

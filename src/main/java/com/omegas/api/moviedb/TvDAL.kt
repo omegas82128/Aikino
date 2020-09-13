@@ -26,6 +26,7 @@ object TvDAL {
             if(posterList.isEmpty()){
                 notFoundType = NotFoundType.POSTER_NOT_FOUND
             }
+            Main.mediaInfo!!.totalSeasons = tmdbTV!!.getSeries(series.id,null).numberOfSeasons
             Main.mediaInfo!!.id = series.id
         }else{
             notFoundType = NotFoundType.MEDIA_NOT_FOUND

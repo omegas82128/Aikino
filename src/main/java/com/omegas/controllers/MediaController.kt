@@ -131,13 +131,13 @@ abstract class MediaController:Initializable, OpenSettingsControl() {
         Main.mediaInfo = mediaInfo
         Main.setScene("Search Window", WindowType.SEARCH)
     }
-    fun nextPoster() {
+    private fun nextPoster() {
         if(!btnNext.isDisabled){
             currentPosition++
             showPoster()
         }
     }
-    fun  previousPoster() {
+    private fun  previousPoster() {
         if(!btnPrevious.isDisabled){
             currentPosition--
             showPoster()
@@ -214,11 +214,13 @@ abstract class MediaController:Initializable, OpenSettingsControl() {
             )
         }
     }
+    abstract fun showSeasonInfo()
     protected fun getPosters(mediaInfo: MediaInfo, function: (mediaInfo: MediaInfo) -> MutableList<String>){
         btnNext.isDisable = true
         btnPrevious.isDisable = true
         imageView.image = null
         currentPosition = -1
+        showSeasonInfo()
         val task = object: Task<List<String>>() {
             override fun call(): List<String> {
                 return try {
@@ -231,6 +233,9 @@ abstract class MediaController:Initializable, OpenSettingsControl() {
             }
             override fun succeeded() {
                 stage.title = mediaInfo.title
+                if(mediaInfo.mediaType == MediaType.TV){
+                    showSeasonInfo()
+                }
                 //Create new Executor Service and close an already existing one if there is one
                 val thread = thread(true) { posters.clear() }
                 executorService?.shutdownNow()
@@ -304,8 +309,6 @@ abstract class MediaController:Initializable, OpenSettingsControl() {
                 TmdbManager.notFoundType = null
             }
         }
-        // TODO add option to choose from multiple seasons,
-        //  restart stage again but with different season number
         Thread(task).start()
     }
 
