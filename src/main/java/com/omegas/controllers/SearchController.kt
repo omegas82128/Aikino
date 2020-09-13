@@ -62,6 +62,8 @@ class SearchController:Initializable {
         }
     }
     private fun simulateLoad(){
-        addComponent(vbox, ProgressIndicator(-1.0))
+        val progressIndicator = ProgressIndicator(-1.0)
+        progressIndicator.style = "-fx-accent: white"
+        addComponent(vbox, progressIndicator)
     }
 }

@@ -8,16 +8,6 @@
     -fx-border-width: 2.5;
 }
 
-.image-view-wrapper-two{
-    -fx-border-color: black;
-    -fx-border-width: 0 3.2 0 0;
-}
-.image-view-wrapper-three{
-    -fx-border-color: black;
-    -fx-border-style: solid;
-    -fx-border-width: 3.2;
-}
-
 .text-area:focused, .scroll-pane:focused, .scroll-pane > .viewport:focused, .my-border-pane {
   -fx-background-color: transparent
 }

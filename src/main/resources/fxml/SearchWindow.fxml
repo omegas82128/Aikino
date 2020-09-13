@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
@@ -7,7 +8,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="420.0" prefHeight="473.4" prefWidth="430.0" style="-fx-accent: black;" styleClass="my-border-pane" stylesheets="@../css/myCss.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.omegas.controllers.SearchController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="420.0" prefHeight="473.4" prefWidth="430.0" styleClass="my-border-pane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.omegas.controllers.SearchController">
    <top>
       <BorderPane BorderPane.alignment="CENTER">
          <BorderPane.margin>
@@ -18,7 +19,7 @@
                <BorderPane.margin>
                   <Insets />
                </BorderPane.margin>
-               <TextField fx:id="txtName" alignment="CENTER" layoutX="6.0" onAction="#search" prefHeight="25.0" prefWidth="250.0" promptText="Enter movie name" AnchorPane.leftAnchor="6.0" />
+               <TextField fx:id="txtName" alignment="CENTER" layoutX="6.0" onAction="#search" prefHeight="25.0" prefWidth="245.0" promptText="Enter movie name" AnchorPane.leftAnchor="10.0" />
                <TextField fx:id="txtYearOrSeason" alignment="CENTER" layoutX="261.0" minWidth="147.0" onAction="#search" prefHeight="25.0" prefWidth="150.0" promptText="Enter year of release" AnchorPane.rightAnchor="19.0" />
             </AnchorPane>
          </center>
@@ -29,13 +30,17 @@
          <BorderPane.margin>
             <Insets top="10.0" />
          </BorderPane.margin>
-         <VBox fx:id="vbox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="427.8" prefWidth="435.0" spacing="5.0">
+         <VBox fx:id="vbox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="427.8" prefWidth="435.0" spacing="10.0">
             <padding>
-               <Insets left="5.0" right="10.0" top="5.0" />
+               <Insets left="10.0" right="10.0" top="5.0" />
             </padding></VBox>
          <padding>
             <Insets bottom="5.0" />
          </padding>
       </ScrollPane>
    </center>
+   <stylesheets>
+      <URL value="@../css/myCss.css" />
+      <URL value="@../css/settings.css" />
+   </stylesheets>
 </BorderPane>
