@@ -7,7 +7,7 @@ import com.g00fy2.versioncompare.Version
 import com.omegas.graphql.GetVersionInfoQuery
 import com.omegas.util.AlertType
 import com.omegas.util.Constants.APP_NAME
-import com.omegas.util.Constants.VERSION
+import com.omegas.util.Constants.APP_VERSION
 import com.omegas.util.functions.showMessage
 import okhttp3.OkHttpClient
 import java.awt.Desktop
@@ -32,7 +32,7 @@ class UpdateService {
                     override fun onResponse(response: Response<Optional<GetVersionInfoQuery.Data>>) {
                         val versionInDB = response.data!!.get().applications_by_pk.get().app_version
                         println(versionInDB)
-                        if(Version(versionInDB).isHigherThan(VERSION)){
+                        if(Version(versionInDB).isHigherThan(APP_VERSION)){
                             showMessage(title = "Aikino v$versionInDB Available",text = "Click to Download",type = AlertType.INFO){
                                 if (Desktop.isDesktopSupported() ) {
                                     Desktop.getDesktop().browse(URI(response.data!!.get().applications_by_pk.get().download_link.get()))
