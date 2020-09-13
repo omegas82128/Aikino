@@ -52,7 +52,7 @@ The change takes effect on application restart. So when you restart the applicat
 All posters are provided by [TMDb](https://www.themoviedb.org/). If you have a poster that you want to add, and it follows TMDb guidelines, you can upload on TMDb and access it through Aikino.
 
 #### Can I use Aikino to create and apply an icon from a poster that I have?
-Yes you can. Just turn on Local Posters feature from settings. After that posters in the folder you opened will display with posters provided by the app for icon creation. (It is turned on by default)
+Yes you can. Just turn on Local Posters feature from settings. After that posters in the folder you opened will display, along with posters provided by the app, for icon creation. (It is turned on by default)
 
 ## Credits
 Aikino uses the following APIs:
