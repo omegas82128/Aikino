@@ -3,13 +3,12 @@ package com.omegas.controllers
 import com.jfoenix.controls.JFXToggleButton
 import com.omegas.util.AlertType
 import com.omegas.util.Constants.HIDE_ICONS_KEY
-import com.omegas.util.Constants.ICON_TYPE_KEY
 import com.omegas.util.Constants.LOCAL_POSTERS_ALLOWED_KEY
 import com.omegas.util.Constants.POSTER_SIZES
 import com.omegas.util.Constants.POSTER_SIZE_KEY
 import com.omegas.util.IconType
 import com.omegas.util.Preferences.hideIcon
-import com.omegas.util.Preferences.iconType
+import com.omegas.util.Preferences.iconTypeProperty
 import com.omegas.util.Preferences.localPostersAllowed
 import com.omegas.util.Preferences.posterSize
 import com.omegas.util.Preferences.preferences
@@ -31,7 +30,7 @@ class SettingsController:Initializable {
     lateinit var dpdIconType:ComboBox<IconType>
     override fun initialize(location: URL?, resources: ResourceBundle?) {
         dpdIconType.items.addAll(IconType.values())
-        dpdIconType.value = iconType
+        dpdIconType.value = iconTypeProperty.value!!
 
         dpdPosterQuality.items.addAll(POSTER_SIZES)
         dpdPosterQuality.value = posterSize
@@ -40,14 +39,10 @@ class SettingsController:Initializable {
         tglBtnPosters.isSelected = localPostersAllowed
     }
 
-    fun iconTypeChanged(){
-        iconType = dpdIconType.value
-        preferences.put(ICON_TYPE_KEY, iconType.name)
-        showMessage(
-            text = "Icon type changed to ${iconType.name}",
-            type = AlertType.INFO,
-            title = "Icon Type Changed"
-        )
+    fun iconTypeChanged() {
+        iconTypeProperty.value = dpdIconType.value
+        // updated in preferences through changeListener
+        // notification/message is generated in changeListener as well
     }
     fun posterQualityChanged(){
         posterSize = dpdPosterQuality.value

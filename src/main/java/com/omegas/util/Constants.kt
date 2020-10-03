@@ -14,7 +14,7 @@ object Constants{
     const val APP_VERSION = "2.0.5"
 
     //resources
-    val PLACEHOLDER_IMAGE_PATH = javaClass.getResource("/placeholder.jpg").toString()
+    val PLACEHOLDER_IMAGE_PATH = javaClass.getResource("/images/placeholder.jpg").toString()
     val ICON = Image(javaClass.getResource("/icon.png").toString())
 
     //tmdb api key

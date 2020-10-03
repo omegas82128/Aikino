@@ -2,8 +2,8 @@ package com.omegas.tasks
 
 import com.omegas.api.moviedb.TmdbManager
 import com.omegas.controllers.MediaItemController
-import com.omegas.util.MediaType
 import com.omegas.model.Media
+import com.omegas.util.MediaType
 import com.omegas.util.functions.addComponent
 import javafx.beans.binding.Bindings
 import javafx.beans.property.SimpleDoubleProperty
@@ -14,6 +14,7 @@ import javafx.geometry.Pos
 import javafx.scene.control.Label
 import javafx.scene.layout.BorderPane
 import javafx.scene.layout.VBox
+
 class SearchTask(private val vBox: VBox, private val mediaType: MediaType, private val name:String,
                  private val number:Int) : Task<List<Media>>() {
 
@@ -41,7 +42,8 @@ class SearchTask(private val vBox: VBox, private val mediaType: MediaType, priva
         if(value.isNotEmpty()){
             for(media in value){
                 val fxmlLoader = FXMLLoader()
-                val mediaItem = fxmlLoader.load<BorderPane>(javaClass.getResource("/fxml/MediaItem.fxml").openStream())
+                val mediaItem =
+                    fxmlLoader.load<BorderPane>(javaClass.getResource("/fxml/partials/MediaItem.fxml").openStream())
                 fxmlLoader.getController<MediaItemController>().media = media
                 vBox.children.add(mediaItem)
             }

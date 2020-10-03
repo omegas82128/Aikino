@@ -13,6 +13,7 @@ import com.omegas.tasks.DisplayImageTask
 import com.omegas.util.*
 import com.omegas.util.Constants.LOCAL_POSTER_TOOL_TIP
 import com.omegas.util.Constants.PLACEHOLDER_IMAGE_PATH
+import com.omegas.util.Preferences.iconTypeProperty
 import com.omegas.util.functions.applyIcon
 import com.omegas.util.functions.posterConditionsDialog
 import com.omegas.util.functions.progressDialog
@@ -21,10 +22,7 @@ import javafx.application.Platform
 import javafx.concurrent.Task
 import javafx.fxml.FXML
 import javafx.fxml.Initializable
-import javafx.scene.control.Button
-import javafx.scene.control.Label
-import javafx.scene.control.ProgressIndicator
-import javafx.scene.control.Tooltip
+import javafx.scene.control.*
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import javafx.scene.input.KeyCode
@@ -54,18 +52,26 @@ abstract class MediaController:Initializable, OpenSettingsControl() {
     protected lateinit var btnCreate: Button
     @FXML
     protected lateinit var btnApply: Button
+
     @FXML
     protected lateinit var btnSettings: Button
+
     @FXML
-    protected lateinit var lblSearch:Label
+    protected lateinit var lblSearch: Label
+
     @FXML
-    private lateinit var root:StackPane
+    private lateinit var root: StackPane
+
     @FXML
     private lateinit var progressIndicator: ProgressIndicator
-    @FXML
-    private lateinit var stackPane:StackPane
 
-    protected lateinit var folder:File
+    @FXML
+    private lateinit var stackPane: StackPane
+
+    @FXML
+    private lateinit var tglBtnIconType: ToggleButton
+
+    protected lateinit var folder: File
     protected lateinit var mediaInfo: MediaInfo
     private var currentPosition = -1
     private var posters: MutableList<Poster> = mutableListOf()
@@ -92,14 +98,35 @@ abstract class MediaController:Initializable, OpenSettingsControl() {
             }
         }
         initButtonListeners()
+        initToggleButton()
         imageView.image = Image(PLACEHOLDER_IMAGE_PATH)
-        if (TheMovieDb.isNotConnected()){
+        if (TheMovieDb.isNotConnected()) {
             btnDownload.isDisable = true
             btnSearch.isDisable = true
         }
-        lblSearch.text = when(mediaInfo.mediaType){
+        lblSearch.text = when (mediaInfo.mediaType) {
             MediaType.MOVIE -> "Not the desired movie? Search."
             MediaType.TV -> "Not the desired show? Search."
+        }
+    }
+
+    private fun initToggleButton() {
+        tglBtnIconType.isSelected = when (iconTypeProperty.value!!) {
+            IconType.WITH_TEMPLATE -> true
+            IconType.SIMPLE -> false
+        }
+        iconTypeProperty.addListener { _, _, newValue ->
+            tglBtnIconType.isSelected =
+                when (newValue!!) {
+                    IconType.WITH_TEMPLATE -> true
+                    IconType.SIMPLE -> false
+                }
+        }
+        tglBtnIconType.setOnAction {
+            iconTypeProperty.value = when (iconTypeProperty.value!!) {
+                IconType.WITH_TEMPLATE -> IconType.SIMPLE
+                IconType.SIMPLE -> IconType.WITH_TEMPLATE
+            }
         }
     }
 
@@ -110,7 +137,7 @@ abstract class MediaController:Initializable, OpenSettingsControl() {
         btnDownload.setOnAction {
             downloadPoster()
         }
-        btnCreate.setOnAction{
+        btnCreate.setOnAction {
             createIcon()
         }
         btnApply.setOnAction {
@@ -321,7 +348,7 @@ abstract class MediaController:Initializable, OpenSettingsControl() {
             )
             return
         }
-        when(Preferences.iconType){
+        when (iconTypeProperty.value!!) {
             IconType.SIMPLE -> {
                 val progressDialog = progressDialog(root, "created")
                 progressDialog.show(root)
@@ -350,7 +377,7 @@ abstract class MediaController:Initializable, OpenSettingsControl() {
             )
             return
         }
-        when(Preferences.iconType){
+        when (iconTypeProperty.value!!) {
             IconType.SIMPLE -> {
                 val progressDialog = progressDialog(root)
                 progressDialog.show(root)

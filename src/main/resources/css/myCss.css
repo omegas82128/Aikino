@@ -65,3 +65,11 @@
     -fx-pref-width: 350px;
     -fx-pref-height: 50px;
 }
+
+.toggle-button {
+  -fx-graphic: url('../images/off.png');
+}
+
+.toggle-button:selected {
+  -fx-graphic: url('../images/on.png');
+}

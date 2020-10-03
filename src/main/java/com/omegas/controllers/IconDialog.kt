@@ -52,7 +52,7 @@ class IconDialog(
         val textColor = "white"
         val prefWidth = 300.0
 
-        val fxmlLoader = FXMLLoader(javaClass.getResource("/fxml/IconDialog.fxml"))
+        val fxmlLoader = FXMLLoader(javaClass.getResource("/fxml/partials/IconDialog.fxml"))
         fxmlLoader.setController(this)
 
         btnSelect = Button("Select")

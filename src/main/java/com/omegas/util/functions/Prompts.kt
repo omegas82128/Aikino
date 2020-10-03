@@ -241,23 +241,23 @@ fun posterConditionsDialog(templateAuthService: TemplateAuthService, root: Stack
                     val imageLocation = when (index) {
                         0 -> {
                             if (templateAuthService.isRatioValid) {
-                                "/ok.png"
+                                "/images/ok.png"
                             } else {
-                                "/cancel.png"
+                                "/images/cancel.png"
                             }
                         }
                         1 -> {
                             if (templateAuthService.isHeightValid) {
-                                "/ok.png"
+                                "/images/ok.png"
                             } else {
-                                "/cancel.png"
+                                "/images/cancel.png"
                             }
                         }
                         2 -> {
                             if (templateAuthService.isWidthValid) {
-                                "/ok.png"
+                                "/images/ok.png"
                             } else {
-                                "/cancel.png"
+                                "/images/cancel.png"
                             }
                         }
                         else -> ""
