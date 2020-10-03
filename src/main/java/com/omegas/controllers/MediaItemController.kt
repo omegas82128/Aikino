@@ -81,8 +81,9 @@ class MediaItemController:Initializable {
                     it.year = media.yearOfRelease
                     setScene(it.title, WindowType.MOVIE)
                 }
-                MediaType.TV ->{
+                MediaType.TV -> {
                     it.seasonNumber = media.currentSeason
+                    it.totalSeasons = media.totalSeasons
                     setScene(it.title, WindowType.TV)
                 }
             }
