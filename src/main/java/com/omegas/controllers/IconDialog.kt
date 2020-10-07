@@ -36,7 +36,8 @@ class IconDialog(
     private val templateService: TemplateService,
     private val createType: CreateType,
     private val file: File,
-    private val root:StackPane
+    private val root: StackPane,
+    private val btnSource: Button
 ) : Initializable{
 
     private val btnSelect:Button
@@ -74,6 +75,10 @@ class IconDialog(
 
         iconDialog.content = layout
         iconDialog.dialogContainer = root
+        iconDialog.setOnDialogClosed {
+            btnSource.isDisable = false
+        }
+
     }
     fun show(){
         iconDialog.show()
