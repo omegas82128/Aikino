@@ -14,6 +14,7 @@ import javafx.geometry.Pos
 import javafx.scene.control.Label
 import javafx.scene.layout.BorderPane
 import javafx.scene.layout.VBox
+import javafx.scene.paint.Paint
 
 class SearchTask(private val vBox: VBox, private val mediaType: MediaType, private val name:String,
                  private val number:Int) : Task<List<Media>>() {
@@ -47,21 +48,26 @@ class SearchTask(private val vBox: VBox, private val mediaType: MediaType, priva
                 fxmlLoader.getController<MediaItemController>().media = media
                 vBox.children.add(mediaItem)
             }
-        }else{
-            val mediaType:String = when(mediaType){
+        }else {
+            val mediaType: String = when (mediaType) {
                 MediaType.MOVIE -> "MOVIE"
                 MediaType.TV -> "TV SERIES"
             }
             val label = Label("NO RESULTS FOUND FOR $mediaType '${name.toUpperCase()}'")
             label.style = "-fx-font-weight: bold;"
+            label.textFill = Paint.valueOf("white")
+
             label.alignment = Pos.CENTER
+            label.isWrapText = true
             val fontSize = SimpleDoubleProperty(10.0)
             val blues = SimpleIntegerProperty(50)
             fontSize.bind(vBox.widthProperty().add(vBox.heightProperty()).divide(50))
             label.styleProperty().bind(
-                Bindings.concat("-fx-font-size: ", fontSize.asString(), ";"
-                ,"-fx-base: rgb(100,100,",blues.asString(),");"))
-            addComponent(vBox,label)
+                Bindings.concat(
+                    "-fx-font-size: ", fontSize.asString(), ";", "-fx-base: rgb(100,100,", blues.asString(), ");"
+                )
+            )
+            addComponent(vBox, label)
         }
     }
 }
