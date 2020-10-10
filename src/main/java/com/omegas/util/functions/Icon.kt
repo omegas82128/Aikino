@@ -96,16 +96,21 @@ fun createIcon(pngFile:File?, delete:Boolean):Icon?{
     }
 }
 
-fun applyIcon(icon: Icon?, file: File){
+fun applyIcon(icon: Icon?, mediaFolder: File) {
     val fileToDelete = icon?.file
-    icon?.file = file
-    if(icon!=null){
+    icon?.file = mediaFolder
+    if (icon != null) {
         applyIcon(icon)
-    }else{
-        showMessage("Icon could not be created.", AlertType.ERROR,"Icon Creation Failed")
+    } else {
+        showMessage("Icon could not be created.", AlertType.ERROR, "Icon Creation Failed")
     }
-    thread(isDaemon = false){
+    Runtime.getRuntime().addShutdownHook(thread(false) {
+        mediaFolder.refresh() // extension function
+    })
+    thread(isDaemon = false) {
         Thread.sleep(900) // waits till File Explorer has time to process desktop.ini file
         fileToDelete?.delete() // deletes png folder file in folder which causes File Explorer to apply changes to folder icon
+        mediaFolder.refresh() // extension function
     }
 }
+

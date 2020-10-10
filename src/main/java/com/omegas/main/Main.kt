@@ -26,12 +26,13 @@ class Main : Application() {
         primaryStage.icons?.add(Constants.ICON)
         stage.isResizable = false
         stage.setOnCloseRequest {
+            stage.hide()
             exitProcess(0)
         }
         if (args.isNotEmpty()){
             startAikino()
         }else{
-            setScene("Start Menu",WindowType.START)
+            setScene("Start Menu", WindowType.START)
         }
         stage.show()
     }
@@ -50,9 +51,9 @@ class Main : Application() {
                 Thread.sleep(10000)
                 exitProcess(1)
             }else{
-                val windowType:WindowType = when(mediaInfo!!.mediaType) {
-                    MediaType.TV-> WindowType.TV
-                    MediaType.MOVIE-> WindowType.MOVIE
+                val windowType:WindowType = when (mediaInfo!!.mediaType) {
+                    MediaType.TV -> WindowType.TV
+                    MediaType.MOVIE -> WindowType.MOVIE
                 }
                 setScene(mediaInfo!!.title, windowType)
                 stage.sizeToScene()
@@ -60,9 +61,9 @@ class Main : Application() {
         }
         fun setScene(title: String, windowType: WindowType){
             try {
-                val fxmlPath:String = when(windowType){
-                    WindowType.MOVIE,WindowType.TV -> "Media"
-                    WindowType.SEARCH ->"Search"
+                val fxmlPath:String = when (windowType) {
+                    WindowType.MOVIE, WindowType.TV -> "Media"
+                    WindowType.SEARCH -> "Search"
                     WindowType.START -> "Start"
                 }
                 val fxmlLoader =FXMLLoader(Main::class.java.getResource("/fxml/${fxmlPath}Window.fxml"))
@@ -76,23 +77,24 @@ class Main : Application() {
                 val root = fxmlLoader.load<Parent>()
                 stage.title = "$APP_NAME - $title"
                 stage.scene = Scene(root)
-                if (windowType == WindowType.SEARCH){
+                if (windowType == WindowType.SEARCH) {
                     fxmlLoader.getController<SearchController>().search()
                 }
             } catch (e: java.lang.Exception) {
                 e.printStackTrace()
             }
         }
+
         @JvmStatic
-        fun main(args:Array<String>){
+        fun main(args: Array<String>) {
             Companion.args = args
             //Companion.args = arrayOf("E:\\Hajime no Ippo Rising (Sub)")
-            try{
+            try {
                 UpdateService.automaticStart()
                 launch(Main::class.java)
-            }catch (exception:Exception){
+            } catch (exception: Exception) {
                 exception.printStackTrace()
-                showMessage("TheMovieDB.org cannot be reached.", AlertType.ERROR,"Connection Error:")
+                showMessage("TheMovieDB.org cannot be reached.", AlertType.ERROR, "Connection Error:")
                 exitProcess(1)
             }
         }
