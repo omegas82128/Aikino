@@ -88,7 +88,6 @@ class Main : Application() {
         @JvmStatic
         fun main(args: Array<String>) {
             Companion.args = args
-            //Companion.args = arrayOf("E:\\Hajime no Ippo Rising (Sub)")
             try {
                 UpdateService.automaticStart()
                 launch(Main::class.java)
