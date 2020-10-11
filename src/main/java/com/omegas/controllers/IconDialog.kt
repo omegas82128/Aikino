@@ -3,6 +3,7 @@ package com.omegas.controllers
 import com.jfoenix.controls.JFXDialog
 import com.jfoenix.controls.JFXDialogLayout
 import com.jfoenix.controls.JFXSlider
+import com.omegas.main.Main.Companion.stage
 import com.omegas.model.Icon
 import com.omegas.services.ImageSaveService.saveTemplatePng
 import com.omegas.services.TemplateService
@@ -11,7 +12,6 @@ import com.omegas.util.CreateType
 import com.omegas.util.functions.applyIcon
 import com.omegas.util.functions.progressDialog
 import com.omegas.util.functions.showMessage
-import javafx.application.Platform
 import javafx.embed.swing.SwingFXUtils
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
@@ -118,35 +118,35 @@ class IconDialog(
         imageView.image = SwingFXUtils.toFXImage(image, null)
     }
 
-    fun select(){
-        when(createType){
-            CreateType.CREATE -> {
-                val progressDialog = progressDialog(root, "created")
-                progressDialog.show(root)
-                thread(true) {
+    fun select() {
+        val onCloseRequest = stage.onCloseRequest
+        stage.setOnCloseRequest {
+            it.consume()
+        }
+        val progressDialog = when (createType) {
+            CreateType.CREATE -> progressDialog(root, "created")
+            CreateType.CREATE_AND_APPLY -> progressDialog(root)
+        }
+        progressDialog.show(root)
+        thread {
+            when (createType) {
+                CreateType.CREATE -> {
                     createIcon(image, true)
                     showMessage("Icon created successfully", AlertType.INFO, "Icon saved to folder ${file.name}")
-                    progressDialog.close()
+                }
+                CreateType.CREATE_AND_APPLY -> {
+                    val icon = createIcon(image, false)
+                    applyIcon(icon, this.file)
                 }
             }
-            CreateType.CREATE_AND_APPLY -> createAndApply(image)
+            progressDialog.close()
+            stage.onCloseRequest = onCloseRequest
         }
         iconDialog.close()
     }
     private fun createIcon(bufferedImage: BufferedImage, delete: Boolean):Icon?{
         val pngFile = saveTemplatePng(bufferedImage, file)
         return com.omegas.util.functions.createIcon(pngFile, delete)
-    }
-    private fun createAndApply(bufferedImage: BufferedImage){
-        val progressDialog = progressDialog(root)
-        progressDialog.show(root)
-        thread(true) {
-            val icon = createIcon(bufferedImage, false)
-            applyIcon(icon, this.file)
-            Platform.runLater {
-                progressDialog.close()
-            }
-        }
     }
 
     private fun onKeyPressed(event: KeyEvent) {
