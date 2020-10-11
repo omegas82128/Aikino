@@ -3,7 +3,6 @@ package com.omegas.util.functions
 import java.io.File
 import java.math.BigDecimal
 import java.math.RoundingMode
-import java.nio.file.Files
 
 fun Int.toHoursAndMinutes():String{
     var hoursAndMinutes:String = if(this>60){
@@ -25,10 +24,9 @@ fun File.refresh() { // creates and deletes files in folder so Windows Explorer 
         val times = listOf(1000L, 2000L)
         val range = (0..Int.MAX_VALUE)
         for (time in times) {
+            Thread.sleep(time)
             val temp = File("${this.absolutePath}\\${range.random()}.temp")
             temp.createNewFile()
-            Files.setAttribute(temp.toPath(), "dos:hidden", true)
-            Thread.sleep(time)
             temp.delete()
         }
     }
