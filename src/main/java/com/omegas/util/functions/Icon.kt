@@ -105,7 +105,7 @@ fun applyIcon(icon: Icon?, mediaFolder: File) {
         showMessage("Icon could not be created.", AlertType.ERROR, "Icon Creation Failed")
     }
     Runtime.getRuntime().addShutdownHook(thread(false) {
-        mediaFolder.refresh() // extension function
+        mediaFolder.refresh(10) // extension function
     })
     thread(isDaemon = false) {
         Thread.sleep(900) // waits till File Explorer has time to process desktop.ini file
