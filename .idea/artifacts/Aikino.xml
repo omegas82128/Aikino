@@ -15,7 +15,7 @@
         <option name="nativeBundle" value="all" />
         <option name="title" value="Aikino" />
         <option name="vendor" value="" />
-        <option name="version" value="2.1.3" />
+        <option name="version" value="2.2.3" />
         <option name="width" value="488" />
       </options>
     </properties>
@@ -91,6 +91,8 @@
       <element id="library" level="project" name="Maven: com.apollographql.apollo:apollo-normalized-cache-api-jvm:2.4.0" />
       <element id="library" level="project" name="Maven: com.apollographql.apollo:apollo-normalized-cache-jvm:2.4.0" />
       <element id="library" level="project" name="Maven: com.apollographql.apollo:apollo-runtime:2.4.0" />
+      <element id="library" level="project" name="Maven: junit:junit:4.13.1" />
+      <element id="library" level="project" name="Maven: org.hamcrest:hamcrest-core:1.3" />
     </root>
   </artifact>
 </component>

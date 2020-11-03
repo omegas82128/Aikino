@@ -47,7 +47,6 @@ private fun setIcon(folderPath: String, iconName:String, hideFile: Boolean) {
             if (hideFile) {
                 Files.setAttribute(File("$folderPath\\$iconName").toPath(), "dos:hidden", true)
             }
-            showMessage("Icon applied to folder $folderPath", AlertType.INFO, "Icon applied successfully")
         } else if (diPath.exists()) {
             Platform.runLater{// displays alert on FX thread
                 val alert = displayAlert("Folder already has an icon. Do you want to overwrite icon?",
@@ -104,13 +103,14 @@ fun applyIcon(icon: Icon?, mediaFolder: File) {
     } else {
         showMessage("Icon could not be created.", AlertType.ERROR, "Icon Creation Failed")
     }
+
     Runtime.getRuntime().addShutdownHook(thread(false) {
-        mediaFolder.refresh(10) // extension function
+        mediaFolder.refresh(8) // extension function
     })
-    thread(isDaemon = false) {
-        Thread.sleep(900) // waits till File Explorer has time to process desktop.ini file
-        fileToDelete?.delete() // deletes png folder file in folder which causes File Explorer to apply changes to folder icon
-        mediaFolder.refresh() // extension function
-    }
+    Thread.sleep(900) // waits till File Explorer has time to process desktop.ini file
+    fileToDelete?.delete() // deletes png folder file in folder which causes File Explorer to apply changes to folder icon
+    mediaFolder.refresh() // extension function
+
+    showMessage("Icon applied to folder ${mediaFolder.name}", AlertType.INFO, "Icon applied successfully")
 }
 
