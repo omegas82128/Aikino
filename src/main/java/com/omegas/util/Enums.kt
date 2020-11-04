@@ -20,10 +20,14 @@ enum class NotFoundType{
     MEDIA_NOT_FOUND, POSTER_NOT_FOUND
 }
 
-enum class PosterType{
+enum class PosterType {
     LOCAL, TMDB
 }
 
-enum class WindowType{
+enum class WindowType {
     MOVIE, TV, SEARCH, START
+}
+
+enum class IconDialogType {
+    HORIZONTAL, VERTICAL
 }

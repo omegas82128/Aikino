@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXSlider?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity"
+            minHeight="-Infinity" minWidth="-Infinity" prefWidth="300.0" styleClass="my-border-pane"
+            stylesheets="@../../css/myCss.css" xmlns="http://javafx.com/javafx/11.0.1">
+    <center>
+        <HBox alignment="CENTER" maxHeight="128.0" spacing="15.0" BorderPane.alignment="CENTER_LEFT">
+            <BorderPane.margin>
+                <Insets left="39.0"/>
+            </BorderPane.margin>
+            <ImageView fx:id="imageView" fitHeight="230.0" fitWidth="230.0" pickOnBounds="true" preserveRatio="true"/>
+            <JFXSlider fx:id="slider" blockIncrement="1.0" indicatorPosition="RIGHT" max="50.0" minorTickCount="5"
+                       nodeOrientation="RIGHT_TO_LEFT" orientation="VERTICAL" rotate="180.0" showTickMarks="true"
+                       stylesheets="@../../css/slider.css" value="25.0"/>
+        </HBox>
+    </center>
+</BorderPane>

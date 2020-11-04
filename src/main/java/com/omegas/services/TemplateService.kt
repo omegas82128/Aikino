@@ -3,6 +3,7 @@ package com.omegas.services
 import com.omegas.main.Main
 import com.omegas.util.Constants.PNG_POSTER_DIMENSION
 import com.omegas.util.Constants.TEMPLATE_POSTER_DIMENSION
+import com.omegas.util.IconDialogType
 import com.omegas.util.functions.getOutputFile
 import javafx.embed.swing.SwingFXUtils
 import javafx.scene.image.Image
@@ -11,17 +12,39 @@ import java.awt.image.BufferedImage
 import java.io.File
 import javax.imageio.ImageIO
 
-class TemplateService(image: Image, val file: File) {
-    val shortenedImage:BufferedImage
+class TemplateService(image: Image, val file: File, val iconDialogType: IconDialogType = IconDialogType.VERTICAL) {
+    private val shortenedImage: BufferedImage
+
     init {
         val outputFile = getOutputFile(file)
         ImageSaveService.saveImage(image, outputFile)
-        val imageNew =Image(outputFile.toURI().toString(), TEMPLATE_POSTER_DIMENSION.width, 0.0, true, true)
+        val imageNew = when (iconDialogType) {
+            IconDialogType.HORIZONTAL -> Image(
+                outputFile.toURI().toString(),
+                0.0,
+                TEMPLATE_POSTER_DIMENSION.height,
+                true,
+                true
+            )
+            IconDialogType.VERTICAL -> Image(
+                outputFile.toURI().toString(),
+                TEMPLATE_POSTER_DIMENSION.width,
+                0.0,
+                true,
+                true
+            )
+        }
         outputFile.delete()
-        shortenedImage = SwingFXUtils.fromFXImage(imageNew,null)
+        shortenedImage = SwingFXUtils.fromFXImage(imageNew, null)
     }
-    fun getImageInTemplate( y:Int): BufferedImage {
-        val input = shortenedImage.getSubimage(0,y, TEMPLATE_POSTER_DIMENSION.width.toInt(), TEMPLATE_POSTER_DIMENSION.height.toInt())
+
+    fun getImageInTemplate(x: Int = 0, y: Int = 0): BufferedImage {
+        val input = shortenedImage.getSubimage(
+            x,
+            y,
+            TEMPLATE_POSTER_DIMENSION.width.toInt(),
+            TEMPLATE_POSTER_DIMENSION.height.toInt()
+        )
 
         val dimension = PNG_POSTER_DIMENSION
         val output = BufferedImage(dimension.width, dimension.height, BufferedImage.TYPE_4BYTE_ABGR)
@@ -47,7 +70,11 @@ class TemplateService(image: Image, val file: File) {
         return output
     }
 
-    fun getHeightDifference(): Double{
-        return (shortenedImage.height- TEMPLATE_POSTER_DIMENSION.height)
+    fun getHeightDifference(): Double {
+        return (shortenedImage.height - TEMPLATE_POSTER_DIMENSION.height)
+    }
+
+    fun getWidthDifference(): Double {
+        return (shortenedImage.width - TEMPLATE_POSTER_DIMENSION.width)
     }
 }

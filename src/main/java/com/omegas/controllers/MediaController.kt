@@ -395,15 +395,18 @@ abstract class MediaController:Initializable, OpenSettingsControl() {
     private fun showIconDialog(createType: CreateType){
         val authService = TemplateAuthService(imageView.image)
         if(authService.isPosterValid){
-            val templateService = TemplateService(imageView.image, folder)
-
             // disable the button that shows dialog, to combat mis-clicks that result in multiple dialogs
             val btnSource = when (createType) {
                 CreateType.CREATE -> btnCreate
                 CreateType.CREATE_AND_APPLY -> btnApply
             }
             btnSource.isDisable = true
+            val templateService: TemplateService = if (authService.isRatioValid) {
+                TemplateService(imageView.image, folder)
+            } else {
+                TemplateService(imageView.image, folder, IconDialogType.HORIZONTAL)
 
+            }
             val iconChooserDialog = IconDialog(templateService, createType, folder, root, btnSource)
             iconChooserDialog.show()
         }else{

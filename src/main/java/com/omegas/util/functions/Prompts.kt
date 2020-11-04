@@ -9,7 +9,6 @@ import com.omegas.util.Constants
 import com.omegas.util.Constants.ICON
 import com.omegas.util.Constants.INVALID_COLOR
 import com.omegas.util.Constants.TEMPLATE_POSTER_DIMENSION
-import com.omegas.util.Constants.TEMPLATE_POSTER_RATIO
 import com.omegas.util.Constants.VALID_COLOR
 import com.omegas.util.Preferences.removeNotification
 import com.omegas.util.Preferences.removeSeconds
@@ -189,7 +188,7 @@ fun posterConditionsDialog(templateAuthService: TemplateAuthService, root: Stack
     val vBox = VBox(spacing)
     vBox.prefHeight = layout.prefWidth
 
-    for(i in 1..3){
+    for (i in 1..2) {
         val hBox = HBox(20.0)
         val imageView = ImageView()
         imageView.fitHeight = 50.0
@@ -197,12 +196,13 @@ fun posterConditionsDialog(templateAuthService: TemplateAuthService, root: Stack
         val label = Label("TEST LABEL")
         label.prefHeight = 50.0
         label.font = Font.font("System Bold")
-        hBox.children.addAll(imageView,label)
+        hBox.children.addAll(imageView, label)
         vBox.children.addAll(hBox)
     }
-    val arrayLabel = arrayOf("Image dimension ratio should be ${TEMPLATE_POSTER_RATIO.round(2)} or higher (ratio = ${templateAuthService.ratio})",
+    val arrayLabel = arrayOf(
         "Image height should be ${TEMPLATE_POSTER_DIMENSION.height} or higher (height = ${templateAuthService.height})",
-        "Image width should be ${TEMPLATE_POSTER_DIMENSION.width} or higher (width = ${templateAuthService.width})")
+        "Image width should be ${TEMPLATE_POSTER_DIMENSION.width} or higher (width = ${templateAuthService.width})"
+    )
 
     for ((index, node) in vBox.children.withIndex()){
         val hBox = node as HBox
@@ -213,20 +213,13 @@ fun posterConditionsDialog(templateAuthService: TemplateAuthService, root: Stack
                     child.style = "-fx-text-fill: ${
                         when (index) {
                             0 -> {
-                                if (templateAuthService.isRatioValid) {
-                                    VALID_COLOR
-                                } else {
-                                    INVALID_COLOR
-                                }
-                            }
-                            1 -> {
                                 if (templateAuthService.isHeightValid) {
                                     VALID_COLOR
                                 } else {
                                     INVALID_COLOR
                                 }
                             }
-                            2 -> {
+                            1 -> {
                                 if (templateAuthService.isWidthValid) {
                                     VALID_COLOR
                                 } else {
@@ -240,20 +233,13 @@ fun posterConditionsDialog(templateAuthService: TemplateAuthService, root: Stack
                 is ImageView -> {
                     val imageLocation = when (index) {
                         0 -> {
-                            if (templateAuthService.isRatioValid) {
-                                "/images/ok.png"
-                            } else {
-                                "/images/cancel.png"
-                            }
-                        }
-                        1 -> {
                             if (templateAuthService.isHeightValid) {
                                 "/images/ok.png"
                             } else {
                                 "/images/cancel.png"
                             }
                         }
-                        2 -> {
+                        1 -> {
                             if (templateAuthService.isWidthValid) {
                                 "/images/ok.png"
                             } else {

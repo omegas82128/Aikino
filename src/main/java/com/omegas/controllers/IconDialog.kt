@@ -9,6 +9,7 @@ import com.omegas.services.ImageSaveService.saveTemplatePng
 import com.omegas.services.TemplateService
 import com.omegas.util.AlertType
 import com.omegas.util.CreateType
+import com.omegas.util.IconDialogType
 import com.omegas.util.functions.applyIcon
 import com.omegas.util.functions.progressDialog
 import com.omegas.util.functions.showMessage
@@ -38,37 +39,56 @@ class IconDialog(
     private val file: File,
     private val root: StackPane,
     private val btnSource: Button
-) : Initializable{
+) : Initializable {
 
-    private val btnSelect:Button
+    private val btnSelect: Button
+
     @FXML
     lateinit var imageView: ImageView
-    @FXML
-    lateinit var slider:JFXSlider
 
-    private lateinit var image:BufferedImage
+    @FXML
+    lateinit var slider: JFXSlider
+
+    private lateinit var image: BufferedImage
     private val iconDialog = JFXDialog()
+
+    private val iconDialogType = templateService.iconDialogType
+
     init {
         val backgroundColor = "#2C3440"
         val textColor = "white"
         val prefWidth = 300.0
 
-        val fxmlLoader = FXMLLoader(javaClass.getResource("/fxml/partials/IconDialog.fxml"))
+        val fxmlLoader = when (iconDialogType) {
+            IconDialogType.HORIZONTAL -> FXMLLoader(javaClass.getResource("/fxml/partials/IconDialogHorizontal.fxml"))
+            IconDialogType.VERTICAL -> FXMLLoader(javaClass.getResource("/fxml/partials/IconDialogVertical.fxml"))
+        }
         fxmlLoader.setController(this)
 
         btnSelect = Button("Select")
         btnSelect.style = "-fx-text-fill: $textColor"
         btnSelect.prefWidth = 214.0
         val btnBorderPane = BorderPane(btnSelect)
-        btnBorderPane.padding = Insets(0.0,30.0,10.0,0.0)
+        btnBorderPane.padding = Insets(0.0, 30.0, 10.0, 0.0)
         btnBorderPane.prefWidth = prefWidth
 
-        val content : Parent = fxmlLoader.load()
+        val content: Parent = fxmlLoader.load()
         val layout = JFXDialogLayout()
         layout.prefWidth = prefWidth
         layout.prefHeight = 300.0
         layout.style = "-fx-background-color: $backgroundColor;"
 
+        // on hold
+        /*
+        val lblClose = Label("X")
+        lblClose.style = "-fx-text-fill: $textColor"
+        lblClose.font = Font("Arial", lblClose.font.size)
+        lblClose.setOnMouseClicked {
+            iconDialog.close()
+        }
+        val headingPane = BorderPane()
+        headingPane.right = lblClose
+        layout.setHeading(headingPane)*/
 
         layout.setBody(content)
         layout.setActions(btnBorderPane)
@@ -88,23 +108,26 @@ class IconDialog(
             event.consume()
             onKeyPressed(event)
         }
-        iconDialog.addEventFilter(ScrollEvent.SCROLL){event ->
+        iconDialog.addEventFilter(ScrollEvent.SCROLL) { event ->
             event.consume()
             val incrementOrDecrement = (event.deltaY / 26.666666666666664).absoluteValue.toInt()
-            when{ // values are inverted because slider is inverted
+            when { // values are inverted because slider is inverted
                 event.deltaY > 0 -> slider.value = slider.value - incrementOrDecrement
-                event.deltaY < 0 ->  slider.value = slider.value + incrementOrDecrement
+                event.deltaY < 0 -> slider.value = slider.value + incrementOrDecrement
             }
         }
         btnSelect.setOnAction {
             select()
         }
-        when(createType){
+        when (createType) {
             CreateType.CREATE -> btnSelect.text = "Create"
             CreateType.CREATE_AND_APPLY -> btnSelect.text = "Apply"
         }
-        slider.max = templateService.getHeightDifference()
-        slider.value = slider.max/2
+        slider.max = when (iconDialogType) {
+            IconDialogType.HORIZONTAL -> templateService.getWidthDifference()
+            IconDialogType.VERTICAL -> templateService.getHeightDifference()
+        }
+        slider.value = slider.max / 2
         slider.majorTickUnit = slider.value
         slider.valueProperty().addListener { _, _, newValue ->
             slider.value = newValue.toDouble()
@@ -113,8 +136,11 @@ class IconDialog(
         displayImage(slider.value.toInt())
     }
 
-    private fun displayImage(y: Int){
-        image = templateService.getImageInTemplate(y)
+    private fun displayImage(displacement: Int) {
+        image = when (iconDialogType) {
+            IconDialogType.HORIZONTAL -> templateService.getImageInTemplate(displacement)
+            IconDialogType.VERTICAL -> templateService.getImageInTemplate(y = displacement)
+        }
         imageView.image = SwingFXUtils.toFXImage(image, null)
     }
 
@@ -150,10 +176,23 @@ class IconDialog(
     }
 
     private fun onKeyPressed(event: KeyEvent) {
-        when(event.code) { // values are inverted because slider is inverted
-            KeyCode.UP -> slider.value = slider.value-1
-            KeyCode.DOWN -> slider.value = slider.value+1
-            else -> {}
+        when (iconDialogType) {
+            IconDialogType.HORIZONTAL -> {
+                when (event.code) { // values are inverted because slider is inverted
+                    KeyCode.LEFT -> slider.value = slider.value - 1
+                    KeyCode.RIGHT -> slider.value = slider.value + 1
+                    else -> {
+                    }
+                }
+            }
+            IconDialogType.VERTICAL -> {
+                when (event.code) { // values are inverted because slider is inverted
+                    KeyCode.UP -> slider.value = slider.value - 1
+                    KeyCode.DOWN -> slider.value = slider.value + 1
+                    else -> {
+                    }
+                }
+            }
         }
     }
 }
