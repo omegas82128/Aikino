@@ -1,4 +1,4 @@
-#UPDATE AVAILABLE
+# UPDATE AVAILABLE
 | Download | Vulnerabilities | Hits |
 |-------| --------------- | ---------|
 | [![latest release](https://img.shields.io/badge/download-v2.3.1-blue.svg)](https://github.com/omegas82128/Aikino/releases/download/v2.3.1/Aikino.Setup.v2.3.1.exe) | [![Known Vulnerabilities](https://snyk.io/test/github/omegas82128/Aikino/badge.svg?targetFile=pom.xml)](https://snyk.io/test/github/omegas82128/Aikino?targetFile=pom.xml) | ![Hits](https://hitcounter.pythonanywhere.com/count/tag.svg?url=https%3A%2F%2Fgithub.com%2Fomegas82128%2FAikino) |
