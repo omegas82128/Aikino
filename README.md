@@ -44,7 +44,10 @@ Death Note (Dual-Audio)
 ```
 
 #### I got the notification that icon was applied. Why isn't the icon displayed on the folder yet?
-Windows File Explorer updates on its own pace. It can apply the icon in a few seconds to about a minute. If it does not update till then close application. Icon should be applied in 30 seconds. 
+Windows File Explorer updates on its own pace. It can apply the icon in a few seconds to about a minute. 
+
+If it does not update till then close the application. Icon should be applied in 30 seconds. 
+
 If the icon is still not applied, use 'Refresh Folder Icon' in the windows right-click menu on the folder in question.
 
 #### I changed poster size from settings. Why is the downloaded poster of previous size?
