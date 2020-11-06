@@ -1,3 +1,4 @@
+#UPDATE AVAILABLE
 | Download | Vulnerabilities | Hits |
 |-------| --------------- | ---------|
 | [![latest release](https://img.shields.io/badge/download-v2.3.1-blue.svg)](https://github.com/omegas82128/Aikino/releases/download/v2.3.1/Aikino.Setup.v2.3.1.exe) | [![Known Vulnerabilities](https://snyk.io/test/github/omegas82128/Aikino/badge.svg?targetFile=pom.xml)](https://snyk.io/test/github/omegas82128/Aikino?targetFile=pom.xml) | ![Hits](https://hitcounter.pythonanywhere.com/count/tag.svg?url=https%3A%2F%2Fgithub.com%2Fomegas82128%2FAikino) |
@@ -12,8 +13,8 @@ Features include:
 * Downloading those posters.
 * Creating icons from posters and applying created icons.
 * Icons can be of different types ([With Template](https://www.deviantart.com/musacakir/art/Movie-And-TV-Show-DVD-Folder-Icon-Template-469935243) or Simple)
-* 'Open with Aikino' is added to windows *right-click menu* for folders on install
- * Clicking ''Open with Aikino'' will open Aikino for the selected folder.
+* 'Open with Aikino' and 'Refresh Folder Icon' are added to windows *right-click menu* for folders on install.
+ * Clicking 'Open with Aikino' will open Aikino for the selected folder.
  * Create icons from posters you have downloaded. (Posters need to be in the folder)
 
 ## FAQ
@@ -43,7 +44,8 @@ Death Note (Dual-Audio)
 ```
 
 #### I got the notification that icon was applied. Why isn't the icon displayed on the folder yet?
-Windows File Explorer updates on its own pace. It can apply the icon in a few seconds to about 2 minutes. It will update on refreshing or when you restart the File Explorer.
+Windows File Explorer updates on its own pace. It can apply the icon in a few seconds to about a minute. If it does not update till then close application. Icon should be applied in 30 seconds. 
+If the icon is still not applied, use 'Refresh Folder Icon' in the windows right-click menu on the folder in question.
 
 #### I changed poster size from settings. Why is the downloaded poster of previous size?
 The change takes effect on application restart. So when you restart the application, Aikino will download the poster in the new size. 
