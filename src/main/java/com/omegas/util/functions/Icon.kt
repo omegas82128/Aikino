@@ -43,7 +43,7 @@ private fun setIcon(folderPath: String, iconName:String, hideFile: Boolean) {
             desktopIni.store()
             val runtime = Runtime.getRuntime()
             runtime.exec("attrib +a +h +s \"$diPath\"")
-            runtime.exec("attrib +s \"$folderPath\"")
+            runtime.exec("attrib +s +a \"$folderPath\"")
             if (hideFile) {
                 Files.setAttribute(File("$folderPath\\$iconName").toPath(), "dos:hidden", true)
             }

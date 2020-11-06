@@ -90,7 +90,7 @@ class Main : Application() {
         fun main(args: Array<String>) {
             Companion.args = args
             if (args.size == 2 && args[0].equals("-r", true)) {
-                File(args[1]).refresh()
+                File(args[1]).refresh(2)
                 exitProcess(1)
             }
             try {

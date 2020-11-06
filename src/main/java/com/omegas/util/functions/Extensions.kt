@@ -20,7 +20,7 @@ fun Double.round(decimals: Int): Double {
     return BigDecimal(this).setScale(decimals, RoundingMode.HALF_EVEN).toDouble()
 }
 
-fun File.refresh(iterations: Int = 2) { // creates and deletes files in folder so Windows Explorer updates Icon
+fun File.refresh(iterations: Int = 4) { // creates and deletes files in folder so Windows Explorer updates Icon
     if (this.isDirectory) {
         val range = (0..Int.MAX_VALUE)
         for (iteration in 1..iterations) {
