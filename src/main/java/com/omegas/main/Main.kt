@@ -11,6 +11,7 @@ import com.omegas.util.Constants
 import com.omegas.util.Constants.APP_NAME
 import com.omegas.util.MediaType
 import com.omegas.util.WindowType
+import com.omegas.util.functions.refresh
 import com.omegas.util.functions.showMessage
 import javafx.application.Application
 import javafx.fxml.FXMLLoader
@@ -88,6 +89,10 @@ class Main : Application() {
         @JvmStatic
         fun main(args: Array<String>) {
             Companion.args = args
+            if (args.size == 2 && args[0].equals("-r", true)) {
+                File(args[1]).refresh()
+                exitProcess(1)
+            }
             try {
                 UpdateService.automaticStart()
                 launch(Main::class.java)
