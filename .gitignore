@@ -1,3 +1,5 @@
 /out
 /target
 dev registry settings.reg
+/src/main/java/com/omegas/util/RegistryEditor.kt
+/AikinoRefresh dev registry settings.reg

@@ -109,7 +109,8 @@
             <top>
                <ToggleButton fx:id="tglBtnIconType" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity"
                              maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
-                             prefHeight="28.0" prefWidth="36.0" styleClass="button" BorderPane.alignment="CENTER">
+                             prefHeight="28.0" prefWidth="36.0" styleClass="button"
+                             stylesheets="@../css/iconTypeToggle.css" BorderPane.alignment="CENTER">
                   <BorderPane.margin>
                      <Insets top="10.0"/>
                   </BorderPane.margin>

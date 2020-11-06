@@ -1,0 +1,8 @@
+
+.toggle-button {
+  -fx-graphic: url('../images/off.png');
+}
+
+.toggle-button:selected {
+  -fx-graphic: url('../images/on.png');
+}
