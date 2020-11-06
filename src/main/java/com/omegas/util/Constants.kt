@@ -11,11 +11,10 @@ import java.util.regex.Pattern
 object Constants{
 
     const val APP_NAME = "Aikino"
-    const val APP_VERSION = "2.2.5"
+    const val APP_VERSION = "2.2.6"
 
-    //resources
-    val PLACEHOLDER_IMAGE_PATH = javaClass.getResource("/images/placeholder.jpg").toString()
     val ICON = Image(javaClass.getResource("/icon.png").toString())
+    val NOT_FOUND_IMAGE = Image(javaClass.getResource("/images/image-not-found.png").toString())
 
     //tmdb api key
     val API_KEY :String = System.getenv("TMDB_API_KEY")

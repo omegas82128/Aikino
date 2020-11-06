@@ -12,7 +12,6 @@ import com.omegas.services.*
 import com.omegas.tasks.DisplayImageTask
 import com.omegas.util.*
 import com.omegas.util.Constants.LOCAL_POSTER_TOOL_TIP
-import com.omegas.util.Constants.PLACEHOLDER_IMAGE_PATH
 import com.omegas.util.Preferences.iconTypeProperty
 import com.omegas.util.functions.applyIcon
 import com.omegas.util.functions.posterConditionsDialog
@@ -46,12 +45,15 @@ abstract class MediaController:Initializable, OpenSettingsControl() {
     protected lateinit var imageView:ImageView
     @FXML
     protected lateinit var btnSearch: Button
+
     @FXML
-    protected lateinit var btnDownload: Button
+    lateinit var btnDownload: Button
+
     @FXML
-    protected lateinit var btnCreate: Button
+    lateinit var btnCreate: Button
+
     @FXML
-    protected lateinit var btnApply: Button
+    lateinit var btnApply: Button
 
     @FXML
     protected lateinit var btnSettings: Button
@@ -99,7 +101,6 @@ abstract class MediaController:Initializable, OpenSettingsControl() {
         }
         initButtonListeners()
         initToggleButton()
-        imageView.image = Image(PLACEHOLDER_IMAGE_PATH)
         if (TheMovieDb.isNotConnected()) {
             btnDownload.isDisable = true
             btnSearch.isDisable = true
@@ -170,10 +171,14 @@ abstract class MediaController:Initializable, OpenSettingsControl() {
             showPoster()
         }
     }
-    private fun showPoster(){
+    private fun showPoster() {
+
+        btnCreate.isDisable = false
+        btnApply.isDisable = false
+        btnDownload.isDisable = false
         imageThread?.interrupt()
 
-        when (posters[currentPosition].posterType){
+        when (posters[currentPosition].posterType) {
             PosterType.LOCAL -> {
                 Tooltip.install(imageView, LOCAL_POSTER_TOOL_TIP)
                 btnDownload.isDisable = true
@@ -189,7 +194,8 @@ abstract class MediaController:Initializable, OpenSettingsControl() {
             imageThread = Thread(
                 DisplayImageTask(
                     imageView,
-                    posters[currentPosition].poster
+                    posters[currentPosition].poster,
+                    this
                 )
             )
             imageThread!!.start()

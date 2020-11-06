@@ -8,7 +8,7 @@ import javafx.scene.image.Image
 class TemplateAuthService(image: Image){
     val width = image.width
     val height = image.height
-    val ratio = (image.height / image.width).round(2)
+    private val ratio = (image.height / image.width).round(2)
     val isHeightValid: Boolean = height >= TEMPLATE_POSTER_DIMENSION.height
     val isWidthValid: Boolean = width >= TEMPLATE_POSTER_DIMENSION.width
     val isRatioValid: Boolean = ratio >= TEMPLATE_POSTER_RATIO

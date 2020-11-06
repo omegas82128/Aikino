@@ -43,7 +43,7 @@ class MediaItemController:Initializable {
 
                 imageView.image = Image(url.openStream(),126.6667,190.0,true,true)
             }else{
-                imageView.image = Image(Constants.PLACEHOLDER_IMAGE_PATH)
+                imageView.image = Constants.NOT_FOUND_IMAGE
             }
 
             lblTitle.text = it.title
