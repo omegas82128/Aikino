@@ -33,9 +33,9 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="KotlinJavaRuntime" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.12.1" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.12.1" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.12.1" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.12.3" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.12.3" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.12.3" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.slf4j:slf4j-nop:2.0.0-alpha1" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:2.0.0-alpha1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.12.0" level="project" />
@@ -66,13 +66,13 @@
     <orderEntry type="library" name="Maven: info.movito:themoviedbapi:1.10" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:jcl-over-slf4j:1.7.7" level="project" />
     <orderEntry type="library" name="Maven: com.jfoenix:jfoenix:9.0.10" level="project" />
-    <orderEntry type="library" name="Maven: com.apollographql.apollo:apollo-runtime:2.5.3" level="project" />
-    <orderEntry type="library" name="Maven: com.apollographql.apollo:apollo-api-jvm:2.5.3" level="project" />
-    <orderEntry type="library" name="Maven: com.apollographql.apollo:apollo-normalized-cache-jvm:2.5.3" level="project" />
-    <orderEntry type="library" name="Maven: com.apollographql.apollo:apollo-normalized-cache-api-jvm:2.5.3" level="project" />
+    <orderEntry type="library" name="Maven: com.apollographql.apollo:apollo-runtime:2.5.4" level="project" />
+    <orderEntry type="library" name="Maven: com.apollographql.apollo:apollo-api-jvm:2.5.4" level="project" />
+    <orderEntry type="library" name="Maven: com.apollographql.apollo:apollo-normalized-cache-jvm:2.5.4" level="project" />
+    <orderEntry type="library" name="Maven: com.apollographql.apollo:apollo-normalized-cache-api-jvm:2.5.4" level="project" />
     <orderEntry type="library" name="Maven: com.benasher44:uuid-jvm:0.2.0" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: com.nytimes.android:cache:2.0.2" level="project" />
-    <orderEntry type="library" name="Maven: com.apollographql.apollo:apollo-http-cache-api:2.5.3" level="project" />
+    <orderEntry type="library" name="Maven: com.apollographql.apollo:apollo-http-cache-api:2.5.4" level="project" />
     <orderEntry type="library" name="Maven: com.squareup.okhttp3:okhttp:3.12.11" level="project" />
     <orderEntry type="library" name="Maven: com.github.sparow199:apollo-client-maven-plugin:3.3.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.maven:maven-plugin-api:3.6.0" level="project" />

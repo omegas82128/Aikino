@@ -96,9 +96,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <distribution.format>zip</distribution.format>
 
-        <version.jackson>2.12.2</version.jackson>
+        <version.jackson>2.12.3</version.jackson>
         <version.slf4j>1.7.30</version.slf4j>
-        <kotlin.version>1.4.31</kotlin.version>
+        <kotlin.version>1.4.30</kotlin.version>
     </properties>
 
     <dependencies>

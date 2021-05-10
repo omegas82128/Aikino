@@ -15,7 +15,7 @@
         <option name="nativeBundle" value="all" />
         <option name="title" value="Aikino" />
         <option name="vendor" value="" />
-        <option name="version" value="2.4.2" />
+        <option name="version" value="2.5.0" />
         <option name="width" value="488" />
       </options>
     </properties>
@@ -23,34 +23,50 @@
       <element id="archive" name="Aikino.jar">
         <element id="module-output" name="Aikino" />
       </element>
-      <element id="library" level="project" name="KotlinJavaRuntime" />
       <element id="library" level="project" name="Maven: org.jetbrains:annotations:13.0" />
-      <element id="library" level="project" name="Maven: com.google.code.findbugs:jsr305:3.0.2" />
-      <element id="library" level="project" name="Maven: com.google.guava:failureaccess:1.0.1" />
-      <element id="library" level="project" name="Maven: com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava" />
-      <element id="library" level="project" name="Maven: com.google.j2objc:j2objc-annotations:1.3" />
       <element id="library" level="project" name="Maven: org.python:jython-standalone:2.7.2" />
-      <element id="library" level="project" name="Maven: info.movito:themoviedbapi:1.10" />
-      <element id="library" level="project" name="Maven: org.ini4j:ini4j:0.5.4" />
-      <element id="library" level="project" name="Maven: org.jclarion:image4j:0.7" />
       <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:2.0.0-alpha1" />
-      <element id="library" level="project" name="Maven: com.jfoenix:jfoenix:9.0.10" />
+      <element id="library" level="project" name="Maven: org.slf4j:jcl-over-slf4j:1.7.7" />
+      <element id="library" level="project" name="KotlinJavaRuntime" />
       <element id="library" level="project" name="Maven: backport-util-concurrent:backport-util-concurrent:3.1" />
       <element id="library" level="project" name="Maven: classworlds:classworlds:1.1-alpha-2" />
+      <element id="library" level="project" name="Maven: com.apollographql.apollo:apollo-api-jvm:2.5.4" />
       <element id="library" level="project" name="Maven: com.apollographql.apollo:apollo-compiler:2.3.1" />
+      <element id="library" level="project" name="Maven: com.apollographql.apollo:apollo-http-cache-api:2.5.4" />
+      <element id="library" level="project" name="Maven: com.apollographql.apollo:apollo-normalized-cache-api-jvm:2.5.4" />
+      <element id="library" level="project" name="Maven: com.apollographql.apollo:apollo-normalized-cache-jvm:2.5.4" />
+      <element id="library" level="project" name="Maven: com.apollographql.apollo:apollo-runtime:2.5.4" />
       <element id="library" level="project" name="Maven: com.benasher44:uuid-jvm:0.2.0" />
+      <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.12.2" />
+      <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.12.2" />
+      <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.12.2" />
       <element id="library" level="project" name="Maven: com.g00fy2:versioncompare:1.3.4" />
       <element id="library" level="project" name="Maven: com.github.sparow199:apollo-client-maven-plugin:3.3.1" />
+      <element id="library" level="project" name="Maven: com.google.code.findbugs:jsr305:3.0.2" />
+      <element id="library" level="project" name="Maven: com.google.errorprone:error_prone_annotations:2.5.1" />
+      <element id="library" level="project" name="Maven: com.google.guava:failureaccess:1.0.1" />
+      <element id="library" level="project" name="Maven: com.google.guava:guava:30.1.1-jre" />
+      <element id="library" level="project" name="Maven: com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava" />
+      <element id="library" level="project" name="Maven: com.google.j2objc:j2objc-annotations:1.3" />
+      <element id="library" level="project" name="Maven: com.jfoenix:jfoenix:9.0.10" />
       <element id="library" level="project" name="Maven: com.nytimes.android:cache:2.0.2" />
       <element id="library" level="project" name="Maven: com.squareup.moshi:moshi-adapters:1.9.2" />
       <element id="library" level="project" name="Maven: com.squareup.moshi:moshi:1.9.2" />
       <element id="library" level="project" name="Maven: com.squareup.okhttp3:okhttp:3.12.11" />
+      <element id="library" level="project" name="Maven: com.squareup.okio:okio:2.10.0" />
       <element id="library" level="project" name="Maven: com.squareup:javapoet:1.9.0" />
       <element id="library" level="project" name="Maven: com.squareup:kotlinpoet:1.5.0" />
+      <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.15" />
+      <element id="library" level="project" name="Maven: commons-logging:commons-logging:1.2" />
+      <element id="library" level="project" name="Maven: info.movito:themoviedbapi:1.10" />
       <element id="library" level="project" name="Maven: javax.annotation:jsr250-api:1.0" />
       <element id="library" level="project" name="Maven: javax.enterprise:cdi-api:1.0" />
       <element id="library" level="project" name="Maven: javax.inject:javax.inject:1" />
+      <element id="library" level="project" name="Maven: junit:junit:4.13.2" />
       <element id="library" level="project" name="Maven: org.antlr:antlr4:4.5.3" />
+      <element id="library" level="project" name="Maven: org.apache.commons:commons-lang3:3.12.0" />
+      <element id="library" level="project" name="Maven: org.apache.httpcomponents:httpclient:4.5.13" />
+      <element id="library" level="project" name="Maven: org.apache.httpcomponents:httpcore:4.4.13" />
       <element id="library" level="project" name="Maven: org.apache.maven.wagon:wagon-provider-api:1.0-beta-6" />
       <element id="library" level="project" name="Maven: org.apache.maven:maven-artifact-manager:2.2.1" />
       <element id="library" level="project" name="Maven: org.apache.maven:maven-artifact:3.6.0" />
@@ -61,6 +77,7 @@
       <element id="library" level="project" name="Maven: org.apache.maven:maven-project:2.2.1" />
       <element id="library" level="project" name="Maven: org.apache.maven:maven-repository-metadata:2.2.1" />
       <element id="library" level="project" name="Maven: org.apache.maven:maven-settings:2.2.1" />
+      <element id="library" level="project" name="Maven: org.checkerframework:checker-qual:3.8.0" />
       <element id="library" level="project" name="Maven: org.codehaus.plexus:plexus-classworlds:2.5.2" />
       <element id="library" level="project" name="Maven: org.codehaus.plexus:plexus-component-annotations:1.5.5" />
       <element id="library" level="project" name="Maven: org.codehaus.plexus:plexus-container-default:1.0-alpha-9-stable-1" />
@@ -68,31 +85,14 @@
       <element id="library" level="project" name="Maven: org.codehaus.plexus:plexus-utils:3.1.0" />
       <element id="library" level="project" name="Maven: org.eclipse.sisu:org.eclipse.sisu.inject:0.3.3" />
       <element id="library" level="project" name="Maven: org.eclipse.sisu:org.eclipse.sisu.plexus:0.3.3" />
-      <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-reflect:1.4.0" />
-      <element id="library" level="project" name="Maven: org.slf4j:jcl-over-slf4j:1.7.7" />
-      <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.15" />
-      <element id="library" level="project" name="Maven: commons-logging:commons-logging:1.2" />
-      <element id="library" level="project" name="Maven: org.apache.httpcomponents:httpclient:4.5.13" />
-      <element id="library" level="project" name="Maven: org.apache.httpcomponents:httpcore:4.4.13" />
       <element id="library" level="project" name="Maven: org.hamcrest:hamcrest-core:1.3" />
-      <element id="library" level="project" name="Maven: com.apollographql.apollo:apollo-api-jvm:2.5.3" />
-      <element id="library" level="project" name="Maven: com.apollographql.apollo:apollo-http-cache-api:2.5.3" />
-      <element id="library" level="project" name="Maven: com.apollographql.apollo:apollo-normalized-cache-api-jvm:2.5.3" />
-      <element id="library" level="project" name="Maven: com.apollographql.apollo:apollo-normalized-cache-jvm:2.5.3" />
-      <element id="library" level="project" name="Maven: com.apollographql.apollo:apollo-runtime:2.5.3" />
-      <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.12.1" />
-      <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.12.1" />
-      <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.12.1" />
-      <element id="library" level="project" name="Maven: com.google.errorprone:error_prone_annotations:2.5.1" />
-      <element id="library" level="project" name="Maven: com.google.guava:guava:30.1.1-jre" />
-      <element id="library" level="project" name="Maven: com.squareup.okio:okio:2.10.0" />
-      <element id="library" level="project" name="Maven: junit:junit:4.13.2" />
-      <element id="library" level="project" name="Maven: org.apache.commons:commons-lang3:3.12.0" />
-      <element id="library" level="project" name="Maven: org.checkerframework:checker-qual:3.8.0" />
+      <element id="library" level="project" name="Maven: org.ini4j:ini4j:0.5.4" />
+      <element id="library" level="project" name="Maven: org.jclarion:image4j:0.7" />
+      <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-reflect:1.4.0" />
       <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-stdlib-common:1.4.20" />
-      <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.5.0" />
-      <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.0" />
-      <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-stdlib:1.5.0" />
+      <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.31" />
+      <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.31" />
+      <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-stdlib:1.4.31" />
     </root>
   </artifact>
 </component>
