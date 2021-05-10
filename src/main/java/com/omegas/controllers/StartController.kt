@@ -1,7 +1,6 @@
 package com.omegas.controllers
 
 import com.omegas.controllers.controls.OpenSettingsControl
-import com.omegas.main.Main
 import com.omegas.main.Main.Companion.stage
 import com.omegas.main.Main.Companion.startAikino
 import javafx.fxml.Initializable
@@ -25,8 +24,9 @@ class StartController : Initializable, OpenSettingsControl() {
         directoryChooser.title = "Choose a Movie or TV series folder"
         val file = directoryChooser.showDialog(stage)
         if (file != null) {
-            Main.args = arrayOf(file.absolutePath)
-            startAikino()
+            startAikino(
+                mutableListOf(file.absolutePath)
+            )
         }
     }
 

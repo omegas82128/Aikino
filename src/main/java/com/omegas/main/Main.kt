@@ -33,29 +33,28 @@ class Main : Application() {
             stage.hide()
             exitProcess(0)
         }
-        if (args.isNotEmpty()){
-            startAikino()
-        }else{
+        if (this.parameters.raw.isNotEmpty()) {
+            startAikino(this.parameters.raw)
+        } else {
             setScene("Start Menu", WindowType.START)
         }
         stage.show()
     }
 
-    companion object{
-        lateinit var args:Array<String>
+    companion object {
         lateinit var stage: Stage
-        var mediaInfo:MediaInfo? = null
-        fun startAikino(){
-            mediaInfo = NameParser.getMediaInfo(File(args[0]))
-            if(mediaInfo==null){
+        var mediaInfo: MediaInfo? = null
+        fun startAikino(parameters: MutableList<String>) {
+            mediaInfo = NameParser.getMediaInfo(File(parameters.first()))
+            if (mediaInfo == null) {
                 showMessage(
                     "Incomplete information in folder name.",
                     title = "Invalid Folder Name"
                 )
                 Thread.sleep(10000)
                 exitProcess(1)
-            }else{
-                val windowType:WindowType = when (mediaInfo!!.mediaType) {
+            } else {
+                val windowType: WindowType = when (mediaInfo!!.mediaType) {
                     MediaType.TV -> WindowType.TV
                     MediaType.MOVIE -> WindowType.MOVIE
                 }
@@ -92,14 +91,13 @@ class Main : Application() {
 
         @JvmStatic
         fun main(args: Array<String>) {
-            Companion.args = args
             if (args.size == 2 && args[0].equals("-r", true)) {
                 File(args[1]).refresh(2)
                 exitProcess(1)
             }
             try {
                 UpdateService.automaticStart()
-                launch(Main::class.java)
+                launch(Main::class.java, *args)
             } catch (exception: Exception) {
                 exception.printStackTrace()
                 showMessage("TheMovieDB.org cannot be reached.", AlertType.ERROR, "Connection Error:")
