@@ -8,6 +8,9 @@ import info.movito.themoviedbapi.model.ArtworkType
 import info.movito.themoviedbapi.model.MovieDb
 import info.movito.themoviedbapi.model.core.MovieResultsPage
 
+/**
+ * @author Muhammad Haris
+ * */
 object MovieDAL {
     val movies: TmdbMovies? = TheMovieDb.tmdbApi?.movies
 
@@ -15,6 +18,7 @@ object MovieDAL {
         val page: MovieResultsPage = TheMovieDb.tmdbSearch.searchMovie(movieName, year, null, false, 0)
         return page.results
     }
+
     fun getDirector(movieDb: MovieDb):String? {
         for (crew in movieDb.crew) {
             if (crew.job.equals("Director", ignoreCase = true)) {
@@ -23,6 +27,7 @@ object MovieDAL {
         }
         return null
     }
+
     private fun getMovie(movieName: String, year: Int): MovieDb?{
         var movieDbList: List<MovieDb> = search(movieName, year)
         if (movieDbList.isEmpty()){
@@ -55,6 +60,7 @@ object MovieDAL {
         }
         return null
     }
+
     private fun isMovie(movieDb: MovieDb, movieName: String, year: Int): Boolean {
         return (movieDb.title.replace(":", "").replace("?", "").trim { it <= ' ' }.equals(
             movieName,
@@ -62,6 +68,7 @@ object MovieDAL {
         )
                 && movieDb.releaseDate.startsWith(year.toString()))
     }
+
     private fun isPossiblyMovie(movieDb: MovieDb, movieName: String, year: Int): Boolean {
         return (movieDb.title.replace(":", "").replace("?", "").trim { it <= ' ' }.equals(
             movieName,
@@ -71,6 +78,7 @@ object MovieDAL {
                 || movieDb.releaseDate.startsWith((year - 1).toString())
                 || movieDb.releaseDate.startsWith((year + 1).toString())))
     }
+
     private fun canBeMovie(movieDb: MovieDb, movieName: String, year: Int): Boolean {
         return (movieDb.title.replace(":", "").replace("?", "").trim { it <= ' ' }.equals(
             movieName,

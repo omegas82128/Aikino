@@ -12,6 +12,10 @@ import java.awt.image.BufferedImage
 import java.io.File
 import javax.imageio.ImageIO
 
+
+/**
+ * @author Muhammad Haris
+ * */
 class TemplateService(image: Image, val file: File, val iconDialogType: IconDialogType = IconDialogType.VERTICAL) {
     private val shortenedImage: BufferedImage
 

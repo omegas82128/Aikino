@@ -18,66 +18,76 @@ import java.net.URL
 import java.util.*
 
 
+/**
+ * @author Muhammad Haris
+ * */
 class MediaItemController:Initializable {
     @FXML
     lateinit var lblTitle: Label
+
     @FXML
     lateinit var lblYear: Label
+
     @FXML
     lateinit var lblDirectorOrSeasons: Label
+
     @FXML
     lateinit var lblRuntimeOrEpisodes:Label
+
     @FXML
     lateinit var imageView:ImageView
+
     @FXML
-    lateinit var txtOverview:TextArea
+    lateinit var txtOverview: TextArea
     var media: Media? = null
-    set(media){
-        field = media
-        field?.let{
-            if(it.posterPath!=null){
-                val url = URL(it.posterPath)
-                val con = url.openConnection()
-                con.connectTimeout = TIMEOUT
-                con.readTimeout = TIMEOUT
+        set(media) {
+            field = media
+            field?.let {
+                if (it.posterPath != null) {
+                    val url = URL(it.posterPath)
+                    val con = url.openConnection()
+                    con.connectTimeout = TIMEOUT
+                    con.readTimeout = TIMEOUT
 
-                imageView.image = Image(url.openStream(),126.6667,190.0,true,true)
-            }else{
-                imageView.image = Constants.NOT_FOUND_IMAGE
-            }
-
-            lblTitle.text = it.title
-
-            txtOverview.text = if(it.overView.isNotEmpty()){
-                it.overView
-            }else{
-                "Synopsis not available".toUpperCase()
-            }
-
-            when(it.mediaType){
-                MediaType.MOVIE -> {
-                    lblYear.text= "(${it.yearOfRelease})"
-                    lblDirectorOrSeasons.text = it.director
-                    lblRuntimeOrEpisodes.text = it.runtime.toHoursAndMinutes()
+                    imageView.image = Image(url.openStream(), 126.6667, 190.0, true, true)
+                } else {
+                    imageView.image = Constants.NOT_FOUND_IMAGE
                 }
-                MediaType.TV -> {
-                    lblTitle.prefWidth = 260.0
-                    lblYear.text=""
-                    lblDirectorOrSeasons.text = "${it.totalSeasons} seasons"
-                    lblRuntimeOrEpisodes.text = "${it.episodes} total episodes"
+
+                lblTitle.text = it.title
+
+                txtOverview.text = if (it.overView.isNotEmpty()) {
+                    it.overView
+                } else {
+                    "Synopsis not available".toUpperCase()
+                }
+
+                when (it.mediaType) {
+                    MediaType.MOVIE -> {
+                        lblYear.text = "(${it.yearOfRelease})"
+                        lblDirectorOrSeasons.text = it.director
+                        lblRuntimeOrEpisodes.text = it.runtime.toHoursAndMinutes()
+                    }
+                    MediaType.TV -> {
+                        lblTitle.prefWidth = 260.0
+                        lblYear.text = ""
+                        lblDirectorOrSeasons.text = "${it.totalSeasons} seasons"
+                        lblRuntimeOrEpisodes.text = "${it.episodes} total episodes"
+                    }
                 }
             }
         }
-    }
+
     override fun initialize(location: URL?, resources: ResourceBundle?) {
     }
-    fun select(){
+
+    fun select() {
         Main.mediaInfo?.let {
             val media = this.media!!
             it.id = media.id
             it.title = media.title
-            when(media.mediaType){
-                MediaType.MOVIE ->{
+            when (media.mediaType) {
+                MediaType.MOVIE -> {
                     it.year = media.yearOfRelease
                     setScene(it.title, WindowType.MOVIE)
                 }

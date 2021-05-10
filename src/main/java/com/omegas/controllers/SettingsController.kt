@@ -19,15 +19,22 @@ import javafx.scene.control.ComboBox
 import java.net.URL
 import java.util.*
 
-class SettingsController:Initializable {
+
+/**
+ * @author Muhammad Haris
+ * */
+class SettingsController : Initializable {
     @FXML
-    lateinit var tglBtnHidden : JFXToggleButton
+    lateinit var tglBtnHidden: JFXToggleButton
+
     @FXML
-    lateinit var tglBtnPosters : JFXToggleButton
+    lateinit var tglBtnPosters: JFXToggleButton
+
     @FXML
-    lateinit var dpdPosterQuality:ComboBox<String>
+    lateinit var dpdPosterQuality: ComboBox<String>
+
     @FXML
-    lateinit var dpdIconType:ComboBox<IconType>
+    lateinit var dpdIconType: ComboBox<IconType>
     override fun initialize(location: URL?, resources: ResourceBundle?) {
         dpdIconType.items.addAll(IconType.values())
         dpdIconType.value = iconTypeProperty.value!!
@@ -44,11 +51,13 @@ class SettingsController:Initializable {
         // updated in preferences through changeListener
         // notification/message is generated in changeListener as well
     }
+
     fun posterQualityChanged(){
         posterSize = dpdPosterQuality.value
         preferences.put(POSTER_SIZE_KEY, posterSize)
         showMessage("New Poster size will take effect after app restart",AlertType.INFO,"Poster Size Changed")
     }
+
     fun iconHiddenPropertyChanged(){
         hideIcon = tglBtnHidden.isSelected
         preferences.putBoolean(HIDE_ICONS_KEY, hideIcon)
@@ -65,6 +74,7 @@ class SettingsController:Initializable {
             title = "Icons $hideOrShown"
         )
     }
+
     fun localPostersAllowedPropertyChanged(){
         localPostersAllowed = tglBtnPosters.isSelected
         preferences.putBoolean(LOCAL_POSTERS_ALLOWED_KEY, localPostersAllowed)

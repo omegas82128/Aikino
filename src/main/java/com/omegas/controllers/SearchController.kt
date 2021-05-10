@@ -18,24 +18,30 @@ import java.util.*
 import java.util.function.UnaryOperator
 
 
+/**
+ * @author Muhammad Haris
+ * */
 class SearchController:Initializable {
     private lateinit var mediaInfo: MediaInfo
     private lateinit var mediaType: MediaType
+
     @FXML
     lateinit var txtName:TextField
+
     @FXML
     lateinit var txtYearOrSeason:TextField
+
     @FXML
     lateinit var vbox:VBox
     override fun initialize(location: URL?, resources: ResourceBundle?) {
         mediaInfo = Main.mediaInfo!!
         mediaType = mediaInfo.mediaType
         vbox.isFocusTraversable = false
-        val integerFilter: UnaryOperator<TextFormatter.Change?>? = UnaryOperator { change ->
+        val integerFilter: UnaryOperator<TextFormatter.Change?> = UnaryOperator { change ->
             val newText: String = change!!.controlNewText
             if (newText.matches(Regex("([1-9][0-9]*)?"))) {
                 change
-            }else{
+            } else {
                 null
             }
         }
@@ -48,6 +54,7 @@ class SearchController:Initializable {
         }
         txtYearOrSeason.textFormatter = TextFormatter<Int>(IntegerStringConverter(), defaultValue,integerFilter)
     }
+
     fun search(){
         if(txtName.text.isNotEmpty()){
             val name = txtName.text
@@ -61,6 +68,7 @@ class SearchController:Initializable {
             simulateLoad()
         }
     }
+
     private fun simulateLoad(){
         val progressIndicator = ProgressIndicator(-1.0)
         progressIndicator.style = "-fx-accent: white"

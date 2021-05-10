@@ -33,6 +33,9 @@ import java.util.*
 import kotlin.concurrent.thread
 import kotlin.math.absoluteValue
 
+/**
+ * @author Muhammad Haris
+ * */
 class IconDialog(
     private val templateService: TemplateService,
     private val createType: CreateType,
@@ -100,9 +103,11 @@ class IconDialog(
         }
 
     }
+
     fun show(){
         iconDialog.show()
     }
+
     override fun initialize(location: URL?, resources: ResourceBundle?) {
         slider.addEventFilter(KeyEvent.KEY_PRESSED) { event ->
             event.consume()
@@ -170,6 +175,7 @@ class IconDialog(
         }
         iconDialog.close()
     }
+
     private fun createIcon(bufferedImage: BufferedImage, delete: Boolean):Icon?{
         val pngFile = saveTemplatePng(bufferedImage, file)
         return com.omegas.util.functions.createIcon(pngFile, delete)

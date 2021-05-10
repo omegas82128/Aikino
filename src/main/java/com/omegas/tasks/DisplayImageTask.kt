@@ -7,6 +7,9 @@ import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import java.util.concurrent.Future
 
+/**
+ * @author Muhammad Haris
+ * */
 class DisplayImageTask(
     private val imageView: ImageView,
     private val futureImage: Future<Image>,

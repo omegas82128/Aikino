@@ -36,13 +36,19 @@ import kotlin.concurrent.thread
 import kotlin.system.exitProcess
 
 
+/**
+ * @author Muhammad Haris
+ * */
 abstract class MediaController:Initializable, OpenSettingsControl() {
     @FXML
     protected lateinit var btnNext: Button
+
     @FXML
     protected lateinit var btnPrevious: Button
+
     @FXML
     protected lateinit var imageView:ImageView
+
     @FXML
     protected lateinit var btnSearch: Button
 
@@ -159,18 +165,21 @@ abstract class MediaController:Initializable, OpenSettingsControl() {
         Main.mediaInfo = mediaInfo
         Main.setScene("Search Window", WindowType.SEARCH)
     }
+
     private fun nextPoster() {
         if(!btnNext.isDisabled){
             currentPosition++
             showPoster()
         }
     }
+
     private fun  previousPoster() {
         if(!btnPrevious.isDisabled){
             currentPosition--
             showPoster()
         }
     }
+
     private fun showPoster() {
 
         btnCreate.isDisable = false
@@ -207,6 +216,7 @@ abstract class MediaController:Initializable, OpenSettingsControl() {
             btnPrevious.isDisable = false
         }
     }
+
     abstract fun downloadPoster()
     fun downloadPoster(name: String){
         if(imageView.image == null){
@@ -247,6 +257,7 @@ abstract class MediaController:Initializable, OpenSettingsControl() {
             )
         }
     }
+
     abstract fun showSeasonInfo()
     protected fun getPosters(mediaInfo: MediaInfo, function: (mediaInfo: MediaInfo) -> MutableList<String>){
         btnNext.isDisable = true
@@ -264,6 +275,7 @@ abstract class MediaController:Initializable, OpenSettingsControl() {
                     emptyList<String>().toMutableList()
                 }
             }
+
             override fun succeeded() {
                 stage.title = mediaInfo.title
                 if(mediaInfo.mediaType == MediaType.TV){
@@ -370,10 +382,12 @@ abstract class MediaController:Initializable, OpenSettingsControl() {
         }
 
     }
+
     private fun createIcon(delete: Boolean): Icon?{
         val pngFile = ImageSaveService.saveTransparentPng(imageView.image, folder)
         return com.omegas.util.functions.createIcon(pngFile, delete)
     }
+
     private fun createAndApply(){
         if(imageView.image == null){
             showMessage(
@@ -398,6 +412,7 @@ abstract class MediaController:Initializable, OpenSettingsControl() {
             }
         }
     }
+
     private fun showIconDialog(createType: CreateType){
         val authService = TemplateAuthService(imageView.image)
         if(authService.isPosterValid){

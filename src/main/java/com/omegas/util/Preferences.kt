@@ -4,6 +4,9 @@ import com.omegas.util.functions.showMessage
 import javafx.beans.property.SimpleObjectProperty
 import java.util.prefs.Preferences
 
+/**
+ * @author Muhammad Haris
+ * */
 object Preferences {
     // TODO turn all preferences to properties and change value through changeListeners
     val preferences: Preferences = Preferences.userRoot().node(javaClass.name)

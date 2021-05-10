@@ -5,6 +5,9 @@ import info.movito.themoviedbapi.TmdbApi
 import info.movito.themoviedbapi.TmdbSearch
 
 
+/**
+ * @author Muhammad Haris
+ * */
 object TheMovieDb {
     val tmdbApi: TmdbApi? = try {
         TmdbApi(API_KEY)
@@ -17,6 +20,7 @@ object TheMovieDb {
     fun isConnected():Boolean{
         return tmdbApi!=null
     }
+
     fun isNotConnected():Boolean{
         return !isConnected()
     }

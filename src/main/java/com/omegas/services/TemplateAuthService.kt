@@ -5,6 +5,9 @@ import com.omegas.util.Constants.TEMPLATE_POSTER_RATIO
 import com.omegas.util.functions.round
 import javafx.scene.image.Image
 
+/**
+ * @author Muhammad Haris
+ * */
 class TemplateAuthService(image: Image){
     val width = image.width
     val height = image.height

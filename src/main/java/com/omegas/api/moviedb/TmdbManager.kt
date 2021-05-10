@@ -6,6 +6,9 @@ import com.omegas.util.NotFoundType
 import info.movito.themoviedbapi.TmdbMovies
 import info.movito.themoviedbapi.TmdbTV
 
+/**
+ * @author Muhammad Haris
+ * */
 object TmdbManager {
     var notFoundType:NotFoundType? = null
     fun searchSeries(showName: String, seasonNumber:Int):List<Media>{

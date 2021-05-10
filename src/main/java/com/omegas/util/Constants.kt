@@ -8,16 +8,19 @@ import java.awt.Dimension
 import java.util.regex.Pattern
 
 
-object Constants{
+/**
+ * @author Muhammad Haris
+ * */
+object Constants {
 
     const val APP_NAME = "Aikino"
-    const val APP_VERSION = "2.3.1"
+    const val APP_VERSION = "2.4.1"
 
-    val ICON = Image(javaClass.getResource("/icon.png").toString())
-    val NOT_FOUND_IMAGE = Image(javaClass.getResource("/images/image-not-found.png").toString())
+    val ICON = Image(javaClass.getResource("/icon.png")!!.toString())
+    val NOT_FOUND_IMAGE = Image(javaClass.getResource("/images/image-not-found.png")!!.toString())
 
     //tmdb api key
-    val API_KEY :String = System.getenv("TMDB_API_KEY")
+    val API_KEY: String = System.getenv("TMDB_API_KEY")
 
     //regular expressions
     val ANIME_RE = Regex("(.+) \\((([DdSs]ub)|([Dd]ual-[Aa]udio)|([aA][nN][iI][mM][eE]))\\)")
@@ -53,6 +56,7 @@ object Constants{
 
     // UI
     val LOCAL_POSTER_TOOL_TIP = Tooltip("Local Poster")
+
     init {
         LOCAL_POSTER_TOOL_TIP.showDelay = Duration(10.0)
     }

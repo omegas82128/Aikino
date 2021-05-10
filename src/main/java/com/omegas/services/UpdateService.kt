@@ -16,11 +16,15 @@ import java.util.*
 import kotlin.concurrent.thread
 
 
+/**
+ * @author Muhammad Haris
+ * */
 class UpdateService {
     companion object{
         fun automaticStart(){
             start(wasRequested = false)
         }
+
         fun start(wasRequested:Boolean = true){
             thread(isDaemon = true){
                 val client = ApolloClient.builder()
@@ -28,27 +32,36 @@ class UpdateService {
                     .okHttpClient(OkHttpClient.Builder().build()).build()
 
                 client.query(GetVersionInfoQuery(APP_NAME))
-                .enqueue(object : ApolloCall.Callback<Optional<GetVersionInfoQuery.Data>>() {
-                    override fun onResponse(response: Response<Optional<GetVersionInfoQuery.Data>>) {
-                        val versionInDB = response.data!!.get().applications_by_pk.get().app_version
-                        println(versionInDB)
-                        if(Version(versionInDB).isHigherThan(APP_VERSION)){
-                            showMessage(title = "Aikino v$versionInDB Available",text = "Click to Download",type = AlertType.INFO){
-                                if (Desktop.isDesktopSupported() ) {
-                                    Desktop.getDesktop().browse(URI(response.data!!.get().applications_by_pk.get().download_link.get()))
+                    .enqueue(object : ApolloCall.Callback<Optional<GetVersionInfoQuery.Data>>() {
+                        override fun onResponse(response: Response<Optional<GetVersionInfoQuery.Data>>) {
+                            val versionInDB = response.data!!.get().applications_by_pk.get().app_version
+                            println(versionInDB)
+                            if (Version(versionInDB).isHigherThan(APP_VERSION)) {
+                                showMessage(
+                                    title = "Aikino v$versionInDB Available",
+                                    text = "Click to Download",
+                                    type = AlertType.INFO
+                                ) {
+                                    if (Desktop.isDesktopSupported()) {
+                                        Desktop.getDesktop()
+                                            .browse(URI(response.data!!.get().applications_by_pk.get().download_link.get()))
+                                    }
+                                }
+                            } else {
+                                if (wasRequested) {
+                                    showMessage(
+                                        "You already have the latest Version",
+                                        AlertType.INFO,
+                                        "No New Updates Available"
+                                    )
                                 }
                             }
-                        }else{
-                            if(wasRequested){
-                                showMessage("You already have the latest Version",AlertType.INFO, "No New Updates Available")
-                            }
                         }
-                    }
 
-                    override fun onFailure(e: ApolloException) {
-                        println(e)
-                    }
-                })
+                        override fun onFailure(e: ApolloException) {
+                            println(e)
+                        }
+                    })
             }
         }
     }

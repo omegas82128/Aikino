@@ -9,9 +9,13 @@ import java.net.URL
 import java.util.*
 
 
+/**
+ * @author Muhammad Haris
+ * */
 class MovieController:MediaController() {
     @FXML
     private lateinit var seasonBorderPane: BorderPane
+
     @FXML
     private lateinit var actionsVBox: VBox
     override fun initialize(location: URL?, resources: ResourceBundle?) {
@@ -25,6 +29,7 @@ class MovieController:MediaController() {
             }
         }
     }
+
     override fun downloadPoster(){
         super.downloadPoster(folder.name)
     }

@@ -1,5 +1,8 @@
 package com.omegas.util
 
+/**
+ * @author Muhammad Haris
+ * */
 enum class AlertType {
     ERROR, INFO
 }

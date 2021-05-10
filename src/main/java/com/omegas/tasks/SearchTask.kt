@@ -16,15 +16,21 @@ import javafx.scene.layout.BorderPane
 import javafx.scene.layout.VBox
 import javafx.scene.paint.Paint
 
-class SearchTask(private val vBox: VBox, private val mediaType: MediaType, private val name:String,
-                 private val number:Int) : Task<List<Media>>() {
+
+/**
+ * @author Muhammad Haris
+ * */
+class SearchTask(
+    private val vBox: VBox, private val mediaType: MediaType, private val name: String,
+    private val number: Int
+) : Task<List<Media>>() {
 
     override fun call(): List<Media> {
         try {
-            val mediaList:MutableList<Media> = mutableListOf()
-            when(mediaType){
+            val mediaList: MutableList<Media> = mutableListOf()
+            when (mediaType) {
                 MediaType.MOVIE -> {
-                    mediaList.addAll(TmdbManager.searchMovie(name,number))
+                    mediaList.addAll(TmdbManager.searchMovie(name, number))
                 }
                 MediaType.TV -> {
                     mediaList.addAll(TmdbManager.searchSeries(name, number))
@@ -44,7 +50,7 @@ class SearchTask(private val vBox: VBox, private val mediaType: MediaType, priva
             for(media in value){
                 val fxmlLoader = FXMLLoader()
                 val mediaItem =
-                    fxmlLoader.load<BorderPane>(javaClass.getResource("/fxml/partials/MediaItem.fxml").openStream())
+                    fxmlLoader.load<BorderPane>(javaClass.getResource("/fxml/partials/MediaItem.fxml")!!.openStream())
                 fxmlLoader.getController<MediaItemController>().media = media
                 vBox.children.add(mediaItem)
             }

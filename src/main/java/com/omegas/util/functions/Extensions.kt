@@ -4,7 +4,9 @@ import java.io.File
 import java.math.BigDecimal
 import java.math.RoundingMode
 import java.nio.file.Files
-
+/**
+ * @author Muhammad Haris
+ * */
 fun Int.toHoursAndMinutes():String{
     var hoursAndMinutes:String = if(this>60){
         "${this/60} hours and "

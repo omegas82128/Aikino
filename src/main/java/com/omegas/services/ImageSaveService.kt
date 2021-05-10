@@ -11,6 +11,9 @@ import java.io.File
 import javax.imageio.ImageIO
 
 
+/**
+ * @author Muhammad Haris
+ * */
 object ImageSaveService {
     fun saveTransparentPng(image:Image, file: File):File?{
         return try {
@@ -39,9 +42,11 @@ object ImageSaveService {
     fun saveImage(image:Image, outputFile: File){
         saveImage(SwingFXUtils.fromFXImage(image, null), outputFile)
     }
+
     private fun saveImage(bufferedImage:BufferedImage, outputFile: File, format:String = "png"){
         ImageIO.write(bufferedImage,format, outputFile)
     }
+
     fun saveTemplatePng(bufferedImage: BufferedImage, file:File):File?{
         return try {
             val outputFile = getOutputFile(file)

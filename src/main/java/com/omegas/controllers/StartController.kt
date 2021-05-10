@@ -12,24 +12,31 @@ import java.net.URL
 import java.util.*
 import kotlin.system.exitProcess
 
-class StartController : Initializable, OpenSettingsControl(){
+
+/**
+ * @author Muhammad Haris
+ * */
+class StartController : Initializable, OpenSettingsControl() {
     override fun initialize(location: URL?, resources: ResourceBundle?) {
     }
-    fun start(){
+
+    fun start() {
         val directoryChooser = DirectoryChooser()
         directoryChooser.title = "Choose a Movie or TV series folder"
         val file = directoryChooser.showDialog(stage)
-        if(file!=null){
+        if (file != null) {
             Main.args = arrayOf(file.absolutePath)
             startAikino()
         }
     }
-    fun help(){
-        if (Desktop.isDesktopSupported() ) {
+
+    fun help() {
+        if (Desktop.isDesktopSupported()) {
             Desktop.getDesktop().browse(URI("https://github.com/omegas82128/aikino#faq"))
         }
     }
-    fun exit(){
+
+    fun exit() {
         exitProcess(0)
     }
 }

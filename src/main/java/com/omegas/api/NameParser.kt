@@ -14,6 +14,9 @@ import org.python.util.PythonInterpreter
 import java.io.File
 
 
+/**
+ * @author Muhammad Haris
+ * */
 object NameParser {
     fun getMediaInfo(folder:File):MediaInfo?{
         return when {
@@ -31,6 +34,7 @@ object NameParser {
             }
         }
     }
+
     private fun parse(folder: File):MediaInfo?{
         val pi = PythonInterpreter()
         pi.exec("from python import parse")
@@ -41,6 +45,7 @@ object NameParser {
             pi.exec("year = result['year']")
             MediaInfo(pi["title"].asString(), MediaType.MOVIE,folder,pi["year"].asInt())
         } catch (e: Exception) {
+            e.printStackTrace()
             try{
                 pi.exec("season = result['season']")
                 MediaInfo(pi["title"].asString(),
@@ -51,6 +56,7 @@ object NameParser {
 
         }
     }
+
     private fun parseAnimeFormat(file: File):MediaInfo{
         val matcher = PREFERRED_ANIME_PATTERN.matcher(file.name)
         matcher.find()

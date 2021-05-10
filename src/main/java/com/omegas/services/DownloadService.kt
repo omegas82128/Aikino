@@ -8,11 +8,15 @@ import java.awt.image.BufferedImage
 import java.io.File
 import javax.imageio.ImageIO
 
+/**
+ * @author Muhammad Haris
+ * */
 object DownloadService {
     @Throws(java.lang.Exception::class)
     fun getFileName(url: String?): String? {
         return url?.let{url.substring(url.lastIndexOf("/"))}
     }
+
     fun getImage(imageURL: String): Image {
         return Image(getFullURL(imageURL, posterSize))
     }
@@ -20,6 +24,7 @@ object DownloadService {
     fun getFullURL(imageURL: String, size:String):String{
         return "https://image.tmdb.org/t/p/$size$imageURL"
     }
+
     fun download(imageURL: String?, folder: String, image:Image): String? {
         return try {
             val folderFile = File(folder)

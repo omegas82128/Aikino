@@ -7,6 +7,9 @@ import info.movito.themoviedbapi.TmdbTV
 import info.movito.themoviedbapi.TmdbTvSeasons
 import info.movito.themoviedbapi.model.tv.TvSeries
 
+/**
+ * @author Muhammad Haris
+ * */
 object TvDAL {
     private val tvSeasons: TmdbTvSeasons? = TheMovieDb.tmdbApi?.tvSeasons
     val tmdbTV: TmdbTV? = TheMovieDb.tmdbApi?.tvSeries
@@ -33,19 +36,21 @@ object TvDAL {
         }
         return posterList
     }
-    fun getShowPosters(showId:Int,seasonNumber: Int):MutableList<String>{
+
+    fun getShowPosters(showId:Int,seasonNumber: Int):MutableList<String> {
         val posterList = mutableListOf<String>()
-        val series: TvSeries? = tmdbTV?.getSeries(showId,null) ?: return posterList
-        val season = tvSeasons!!.getSeason(series!!.id,seasonNumber,null, TmdbTvSeasons.SeasonMethod.images)
+        val series: TvSeries = tmdbTV?.getSeries(showId, null) ?: return posterList
+        val season = tvSeasons!!.getSeason(series.id, seasonNumber, null, TmdbTvSeasons.SeasonMethod.images)
         val posters = season.images
-        for(poster in posters.posters){
+        for (poster in posters.posters) {
             posterList.add(poster.filePath)
         }
-        series.posterPath?.let{
+        series.posterPath?.let {
             posterList.add(it)
         }
         return posterList
     }
+
     fun searchSeries(showName: String):List<TvSeries>{
         val page = TheMovieDb.tmdbSearch.searchTv(showName,null,0)
         return page.results

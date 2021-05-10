@@ -21,6 +21,9 @@ import javafx.stage.Stage
 import java.io.File
 import kotlin.system.exitProcess
 
+/**
+ * @author Muhammad Haris
+ * */
 class Main : Application() {
     override fun start(primaryStage: Stage?) {
         stage = primaryStage!!
@@ -60,6 +63,7 @@ class Main : Application() {
                 stage.sizeToScene()
             }
         }
+
         fun setScene(title: String, windowType: WindowType){
             try {
                 val fxmlPath:String = when (windowType) {

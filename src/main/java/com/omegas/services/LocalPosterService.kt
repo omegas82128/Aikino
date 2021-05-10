@@ -7,6 +7,9 @@ import java.io.File
 import java.util.concurrent.ExecutorService
 import kotlin.properties.Delegates
 
+/**
+ * @author Muhammad Haris
+ * */
 class LocalPosterService(val folder: File, private val executorService: ExecutorService) {
     private var isNotDirectory by Delegates.notNull<Boolean>()
     private val localPosters = mutableListOf<Image>()
@@ -33,6 +36,7 @@ class LocalPosterService(val folder: File, private val executorService: Executor
             isNotDirectory = true
         }
     }
+
     fun getPosters(): List<Poster>{
         return if(localPosters.isNullOrEmpty() || isNotDirectory){
             emptyList()

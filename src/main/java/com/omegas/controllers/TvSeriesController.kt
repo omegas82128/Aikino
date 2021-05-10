@@ -10,11 +10,16 @@ import java.net.URL
 import java.util.*
 
 
+/**
+ * @author Muhammad Haris
+ * */
 class TvSeriesController:MediaController() {
     @FXML
     private lateinit var btnNextSeason:Button
+
     @FXML
     private lateinit var btnPreviousSeason:Button
+
     @FXML
     private lateinit var lblSeasonInfo:Label
     override fun initialize(location: URL?, resources: ResourceBundle?) {
@@ -33,6 +38,7 @@ class TvSeriesController:MediaController() {
             loadPostersById()
         }
     }
+
     override fun downloadPoster(){
         super.downloadPoster(folder.name)
     }
@@ -40,11 +46,13 @@ class TvSeriesController:MediaController() {
     override fun showSeasonInfo() {
         btnNextSeason.isDisable = Main.mediaInfo!!.totalSeasons == Main.mediaInfo!!.seasonNumber
         btnPreviousSeason.isDisable = Main.mediaInfo!!.seasonNumber <= 1
-        lblSeasonInfo.text = "${Main.mediaInfo!!.seasonNumber}/${if(Main.mediaInfo!!.totalSeasons<0){ 
-            "?"   
-        }else{
-            Main.mediaInfo!!.totalSeasons
-        }}"
+        lblSeasonInfo.text = "${Main.mediaInfo!!.seasonNumber}/${
+            if (Main.mediaInfo!!.totalSeasons < 0) {
+                "?"
+            } else {
+                Main.mediaInfo!!.totalSeasons
+            }
+        }"
     }
 
     private fun loadPostersById(){
@@ -52,18 +60,21 @@ class TvSeriesController:MediaController() {
             getShowPosters(Main.mediaInfo!!.id,Main.mediaInfo!!.seasonNumber)
         }
     }
+
     private fun showNextSeasonPosters(){
         if (Main.mediaInfo!!.totalSeasons != Main.mediaInfo!!.seasonNumber){
             Main.mediaInfo!!.seasonNumber++
             reload()
         }
     }
+
     private fun showPreviousSeasonPosters(){
         if (Main.mediaInfo!!.seasonNumber != 1){
             Main.mediaInfo!!.seasonNumber--
             reload()
         }
     }
+
     private fun reload(){
         Main.setScene(Main.mediaInfo!!.title, WindowType.TV)
     }
