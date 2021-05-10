@@ -5,14 +5,17 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<BorderPane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="406.0" styleClass="my-border-pane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.omegas.controllers.MediaItemController">
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity"
+            minHeight="-Infinity" minWidth="-Infinity" prefWidth="406.0" styleClass="my-border-pane"
+            xmlns="http://javafx.com/javafx/10.0.1" fx:controller="com.omegas.controllers.MediaItemController">
    <left>
       <BorderPane BorderPane.alignment="CENTER">
          <BorderPane.margin>
-            <Insets />
+            <Insets/>
          </BorderPane.margin>
          <right>
-            <ImageView fx:id="imageView" fitHeight="200.0" fitWidth="133.33" focusTraversable="true" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+            <ImageView fx:id="imageView" fitHeight="200.0" fitWidth="133.33" focusTraversable="true" pickOnBounds="true"
+                       preserveRatio="true" BorderPane.alignment="CENTER"/>
          </right>
       </BorderPane>
    </left>

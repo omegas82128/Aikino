@@ -8,17 +8,20 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<StackPane fx:id="root" styleClass="my-border-pane" stylesheets="@../css/myCss.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="400.0" styleClass="my-border-pane">
+<StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="root" styleClass="my-border-pane" stylesheets="@../css/myCss.css"
+           xmlns="http://javafx.com/javafx/10.0.1">
+   <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="400.0"
+               styleClass="my-border-pane">
       <center>
          <BorderPane maxWidth="214.0" styleClass="image-view-wrapper" BorderPane.alignment="CENTER">
             <BorderPane.margin>
-               <Insets top="13.0" />
+               <Insets top="13.0"/>
             </BorderPane.margin>
             <center>
                <StackPane fx:id="stackPane">
-                  <ImageView fx:id="imageView" fitHeight="313.5" fitWidth="209.0" pickOnBounds="true" preserveRatio="true" styleClass="image-view-wrapper" />
-                  <ProgressIndicator fx:id="progressIndicator" style="-fx-accent: white;" />
+                  <ImageView fx:id="imageView" fitHeight="313.5" fitWidth="209.0" pickOnBounds="true"
+                             preserveRatio="true" styleClass="image-view-wrapper"/>
+                  <ProgressIndicator fx:id="progressIndicator" style="-fx-accent: white;"/>
                </StackPane>
             </center>
          </BorderPane>

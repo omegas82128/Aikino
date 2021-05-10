@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
-<?import javafx.geometry.Insets?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="420.0" prefHeight="473.4" prefWidth="430.0" styleClass="my-border-pane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.omegas.controllers.SearchController">
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+            minWidth="420.0" prefHeight="473.4" prefWidth="430.0" styleClass="my-border-pane"
+            xmlns="http://javafx.com/javafx/10.0.1" fx:controller="com.omegas.controllers.SearchController">
    <top>
       <BorderPane BorderPane.alignment="CENTER">
          <BorderPane.margin>
-            <Insets top="10.0" />
+            <Insets top="10.0"/>
          </BorderPane.margin>
          <center>
             <AnchorPane BorderPane.alignment="CENTER">
                <BorderPane.margin>
-                  <Insets />
+                  <Insets/>
                </BorderPane.margin>
                <TextField fx:id="txtName" alignment="CENTER" layoutX="6.0" onAction="#search" prefHeight="25.0" prefWidth="245.0" promptText="Enter movie name" AnchorPane.leftAnchor="10.0" />
                <TextField fx:id="txtYearOrSeason" alignment="CENTER" layoutX="261.0" minWidth="147.0" onAction="#search" prefHeight="25.0" prefWidth="150.0" promptText="Enter year of release" AnchorPane.rightAnchor="19.0" />

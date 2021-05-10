@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity"
             minHeight="-Infinity" minWidth="-Infinity" prefWidth="300.0" styleClass="my-border-pane"
-            stylesheets="@../../css/myCss.css" xmlns="http://javafx.com/javafx/11.0.1">
+            stylesheets="@../../css/myCss.css" xmlns="http://javafx.com/javafx/10.0.1">
    <center>
       <VBox BorderPane.alignment="CENTER_LEFT">
          <BorderPane.margin>

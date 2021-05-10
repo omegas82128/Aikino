@@ -8,7 +8,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <?import java.net.URL?>
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="569.0" prefWidth="400.0" styleClass="my-border-pane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.omegas.controllers.SettingsController">
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+            minWidth="-Infinity" prefHeight="569.0" prefWidth="400.0" styleClass="my-border-pane"
+            xmlns="http://javafx.com/javafx/10.0.1" fx:controller="com.omegas.controllers.SettingsController">
    <center>
       <ScrollPane BorderPane.alignment="CENTER">
          <BorderPane.margin>
