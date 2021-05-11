@@ -1,8 +1,8 @@
 package com.omegas.tasks
 
-import com.omegas.api.moviedb.TmdbManager
 import com.omegas.controllers.MediaItemController
 import com.omegas.model.Media
+import com.omegas.moviedb.TmdbManager
 import com.omegas.util.MediaType
 import com.omegas.util.functions.addComponent
 import javafx.beans.binding.Bindings
@@ -35,6 +35,9 @@ class SearchTask(
                 MediaType.TV -> {
                     mediaList.addAll(TmdbManager.searchSeries(name, number))
                 }
+                else -> {
+                    throw IllegalStateException("MediaType is Unknown")
+                }
             }
 
             return mediaList
@@ -58,6 +61,7 @@ class SearchTask(
             val mediaType: String = when (mediaType) {
                 MediaType.MOVIE -> "MOVIE"
                 MediaType.TV -> "TV SERIES"
+                else -> ""
             }
             val label = Label("NO RESULTS FOUND FOR $mediaType '${name.toUpperCase()}'")
             label.style = "-fx-font-weight: bold;"

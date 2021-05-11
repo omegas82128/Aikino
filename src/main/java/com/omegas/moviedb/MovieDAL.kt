@@ -1,7 +1,7 @@
-package com.omegas.api.moviedb
+package com.omegas.moviedb
 
-import com.omegas.api.moviedb.TmdbManager.notFoundType
 import com.omegas.model.MediaInfo
+import com.omegas.moviedb.TmdbManager.notFoundType
 import com.omegas.util.NotFoundType
 import info.movito.themoviedbapi.TmdbMovies
 import info.movito.themoviedbapi.model.ArtworkType

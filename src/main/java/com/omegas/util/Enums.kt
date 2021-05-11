@@ -8,7 +8,7 @@ enum class AlertType {
 }
 
 enum class MediaType {
-    MOVIE,TV
+    MOVIE, TV, UNKOWN
 }
 
 enum class CreateType {

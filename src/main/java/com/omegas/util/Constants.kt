@@ -5,7 +5,6 @@ import javafx.scene.control.Tooltip
 import javafx.scene.image.Image
 import javafx.util.Duration
 import java.awt.Dimension
-import java.util.regex.Pattern
 
 
 /**
@@ -14,23 +13,13 @@ import java.util.regex.Pattern
 object Constants {
 
     const val APP_NAME = "Aikino"
-    const val APP_VERSION = "2.5.0"
+    const val APP_VERSION = "2.6.0"
 
     val ICON = Image(javaClass.getResource("/icon.png")!!.toString())
     val NOT_FOUND_IMAGE = Image(javaClass.getResource("/images/image-not-found.png")!!.toString())
 
     //tmdb api key
     val API_KEY: String = System.getenv("TMDB_API_KEY")
-
-    //regular expressions
-    val ANIME_RE = Regex("(.+) \\((([DdSs]ub)|([Dd]ual-[Aa]udio)|([aA][nN][iI][mM][eE]))\\)")
-    val TV_SERIES_RE = Regex("(.+) ((\\([Mm]ini-[Ss]eries\\))|([Ss]eason \\d+)|([tT][vV]))")
-    val MOVIE_RE = Regex("(.+) \\((\\d{4})\\)$")
-
-    //patterns
-    val PREFERRED_MOVIE_PATTERN: Pattern = Pattern.compile(MOVIE_RE.pattern)
-    val PREFERRED_ANIME_PATTERN:Pattern = Pattern.compile(ANIME_RE.pattern)
-    val PREFERRED_TV_PATTERN:Pattern = Pattern.compile(TV_SERIES_RE.pattern)
 
     //dimensions
     val PNG_POSTER_DIMENSION = Dimension(512,512)

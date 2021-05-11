@@ -1,9 +1,9 @@
 package com.omegas.controllers
 
-import com.omegas.api.moviedb.TheMovieDb.TIMEOUT
 import com.omegas.main.Main
 import com.omegas.main.Main.Companion.setScene
 import com.omegas.model.Media
+import com.omegas.moviedb.TheMovieDb.TIMEOUT
 import com.omegas.util.Constants
 import com.omegas.util.MediaType
 import com.omegas.util.WindowType
@@ -74,6 +74,9 @@ class MediaItemController:Initializable {
                         lblDirectorOrSeasons.text = "${it.totalSeasons} seasons"
                         lblRuntimeOrEpisodes.text = "${it.episodes} total episodes"
                     }
+                    else -> {
+                        throw IllegalStateException("MediaType is Unknown")
+                    }
                 }
             }
         }
@@ -95,6 +98,9 @@ class MediaItemController:Initializable {
                     it.seasonNumber = media.currentSeason
                     it.totalSeasons = media.totalSeasons
                     setScene(it.title, WindowType.TV)
+                }
+                else -> {
+                    throw IllegalStateException("MediaType is Unknown")
                 }
             }
         }

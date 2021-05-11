@@ -1,16 +1,12 @@
 package com.omegas.main
 
-import com.omegas.api.NameParser
 import com.omegas.controllers.MovieController
 import com.omegas.controllers.SearchController
 import com.omegas.controllers.TvSeriesController
 import com.omegas.model.MediaInfo
 import com.omegas.services.UpdateService
-import com.omegas.util.AlertType
-import com.omegas.util.Constants
+import com.omegas.util.*
 import com.omegas.util.Constants.APP_NAME
-import com.omegas.util.MediaType
-import com.omegas.util.WindowType
 import com.omegas.util.functions.refresh
 import com.omegas.util.functions.showMessage
 import javafx.application.Application
@@ -45,7 +41,7 @@ class Main : Application() {
         lateinit var stage: Stage
         var mediaInfo: MediaInfo? = null
         fun startAikino(parameters: MutableList<String>) {
-            mediaInfo = NameParser.getMediaInfo(File(parameters.first()))
+            mediaInfo = FolderNameParser(File(parameters.first())).mediaInfo
             if (mediaInfo == null) {
                 showMessage(
                     "Incomplete information in folder name.",
@@ -57,6 +53,9 @@ class Main : Application() {
                 val windowType: WindowType = when (mediaInfo!!.mediaType) {
                     MediaType.TV -> WindowType.TV
                     MediaType.MOVIE -> WindowType.MOVIE
+                    else -> {
+                        throw IllegalStateException("MediaType is Unknown")
+                    }
                 }
                 setScene(mediaInfo!!.title, windowType)
                 stage.sizeToScene()

@@ -1,7 +1,7 @@
 package com.omegas.controllers
 
-import com.omegas.api.moviedb.TvDAL.getShowPosters
 import com.omegas.main.Main
+import com.omegas.moviedb.TvDAL.getShowPosters
 import com.omegas.util.WindowType
 import javafx.fxml.FXML
 import javafx.scene.control.Button

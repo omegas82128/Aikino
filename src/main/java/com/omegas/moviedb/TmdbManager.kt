@@ -1,4 +1,4 @@
-package com.omegas.api.moviedb
+package com.omegas.moviedb
 
 import com.omegas.model.Media
 import com.omegas.util.MediaType

@@ -1,13 +1,13 @@
 package com.omegas.controllers
 
-import com.omegas.api.moviedb.TheMovieDb
-import com.omegas.api.moviedb.TmdbManager
 import com.omegas.controllers.controls.OpenSettingsControl
 import com.omegas.main.Main
 import com.omegas.main.Main.Companion.stage
 import com.omegas.model.Icon
 import com.omegas.model.MediaInfo
 import com.omegas.model.Poster
+import com.omegas.moviedb.TheMovieDb
+import com.omegas.moviedb.TmdbManager
 import com.omegas.services.*
 import com.omegas.tasks.DisplayImageTask
 import com.omegas.util.*
@@ -114,6 +114,7 @@ abstract class MediaController:Initializable, OpenSettingsControl() {
         lblSearch.text = when (mediaInfo.mediaType) {
             MediaType.MOVIE -> "Not the desired movie? Search."
             MediaType.TV -> "Not the desired show? Search."
+            else -> ""
         }
     }
 
@@ -330,6 +331,7 @@ abstract class MediaController:Initializable, OpenSettingsControl() {
                 val name = when(mediaInfo.mediaType){
                     MediaType.MOVIE -> mediaInfo.toMovieName()
                     MediaType.TV -> mediaInfo.toTVSeriesName()
+                    else -> ""
                 }
                 when(TmdbManager.notFoundType){
                     NotFoundType.POSTER_NOT_FOUND -> {
@@ -342,6 +344,9 @@ abstract class MediaController:Initializable, OpenSettingsControl() {
                         val media = when (mediaInfo.mediaType) {
                             MediaType.MOVIE -> "Movie"
                             MediaType.TV -> "Tv Show"
+                            else -> {
+                                throw IllegalStateException("MediaType is Unknown")
+                            }
                         }
                         showMessage(
                             title = "$media not Found",

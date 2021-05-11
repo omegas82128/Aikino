@@ -1,18 +1,22 @@
 package com.omegas.model
 
+import java.util.regex.Pattern
+
 /**
  * @author Muhammad Haris
  * */
-class SeasonNameParser(seasonName:String) {
+class SeasonNameParser(seasonName: String) {
 
     companion object {
-        val regex = Regex("[Ss]eason [0-9]+")
+        val SEASON_NUM_REGEX = Regex("(([Ss]eason)|[Ss])\\s*([0-9]+).*")
     }
 
     val name =
-        seasonName.replace(Regex("\\((([DdSs]ub)|([Dd]ual-[Aa]udio))\\)"), "").replace(Regex("( [Ss]eason [0-9]+)"), "")
-    var number: Int = if (seasonName.contains(regex)) {
-        regex.find(seasonName)!!.value.replace("season", "", ignoreCase = true).trim().toInt()
+        seasonName.replace(SEASON_NUM_REGEX, "")
+    var number: Int = if (seasonName.contains(SEASON_NUM_REGEX)) {
+        val matcher = Pattern.compile(SEASON_NUM_REGEX.pattern).matcher(seasonName)
+        matcher.find()
+        matcher.group(3).toInt()
     } else {
         1
     }

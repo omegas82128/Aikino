@@ -1,7 +1,7 @@
 package com.omegas.controllers
 
-import com.omegas.api.moviedb.MovieDAL
 import com.omegas.model.MediaInfo
+import com.omegas.moviedb.MovieDAL
 import javafx.fxml.FXML
 import javafx.scene.layout.BorderPane
 import javafx.scene.layout.VBox
