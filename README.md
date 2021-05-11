@@ -63,7 +63,6 @@ Yes you can. Just turn on Local Posters feature from settings. After that poster
 Aikino uses the following APIs:
 * **imcdonagh** - [image4j](https://github.com/imcdonagh/image4j)
 * **Ivan Szkiba**- [ini4j](http://ini4j.sourceforge.net/)
-* **divijbindlish** - [parse-torrent-name](https://github.com/divijbindlish/parse-torrent-name)
 * **G00fY2** - [version-compare](https://github.com/G00fY2/version-compare)
 * **aoudiamoncef** [apollo-client-maven-plugin](https://github.com/aoudiamoncef/apollo-client-maven-plugin)
 * **jfoenixadmin** [JFoenix](https://github.com/jfoenixadmin/JFoenix)
