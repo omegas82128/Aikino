@@ -1,7 +1,7 @@
 # UPDATE AVAILABLE
-| Download | Vulnerabilities | Hits |
+| Download | Vulnerabilities |  Support Server |
 |-------| --------------- | ---------|
-| [![latest release](https://img.shields.io/badge/download-v2.3.1-blue.svg)](https://github.com/omegas82128/Aikino/releases/download/v2.3.1/Aikino.Setup.v2.3.1.exe) | [![Known Vulnerabilities](https://snyk.io/test/github/omegas82128/Aikino/badge.svg?targetFile=pom.xml)](https://snyk.io/test/github/omegas82128/Aikino?targetFile=pom.xml) | ![Hits](https://hitcounter.pythonanywhere.com/count/tag.svg?url=https%3A%2F%2Fgithub.com%2Fomegas82128%2FAikino) |
+| [![latest release](https://img.shields.io/badge/download-v2.3.1-blue.svg)](https://github.com/omegas82128/Aikino/releases/download/v2.3.1/Aikino.Setup.v2.3.1.exe) | [![Known Vulnerabilities](https://snyk.io/test/github/omegas82128/Aikino/badge.svg?targetFile=pom.xml)](https://snyk.io/test/github/omegas82128/Aikino?targetFile=pom.xml) |[![Discord](https://img.shields.io/discord/777367280656711712?color=7289da&label=discord&logo=discord)](https://discord.gg/rKAWJhGjxm) |
 # ![app icon](./.github/readme-images/app-icon.png) Aikino
 Aikino is an open source windows application that downloads movie, anime and tv show posters, converts them to icons and applies them.
 
