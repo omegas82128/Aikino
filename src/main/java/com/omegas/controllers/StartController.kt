@@ -23,16 +23,22 @@ class StartController : Initializable, OpenSettingsControl() {
         val directoryChooser = DirectoryChooser()
         directoryChooser.title = "Choose a Movie or TV series folder"
         val file = directoryChooser.showDialog(stage)
-        if (file != null) {
+        file?.let {
             startAikino(
-                mutableListOf(file.absolutePath)
+                mutableListOf(it.absolutePath)
             )
         }
     }
 
-    fun help() {
+    fun faq() {
         if (Desktop.isDesktopSupported()) {
             Desktop.getDesktop().browse(URI("https://github.com/omegas82128/aikino#faq"))
+        }
+    }
+
+    fun support() {
+        if (Desktop.isDesktopSupported()) {
+            Desktop.getDesktop().browse(URI("https://discord.gg/rKAWJhGjxm"))
         }
     }
 

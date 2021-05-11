@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="425.0" prefWidth="400.0" styleClass="my-border-pane"
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" prefWidth="400.0" styleClass="my-border-pane"
             stylesheets="@../css/myCss.css" xmlns="http://javafx.com/javafx/10.0.1"
             fx:controller="com.omegas.controllers.StartController">
     <top>
@@ -24,32 +23,42 @@
         </BorderPane>
     </top>
    <center>
-       <VBox prefHeight="200.0" prefWidth="100.0" spacing="25.0" BorderPane.alignment="CENTER">
+       <VBox prefWidth="100.0" spacing="25.0" BorderPane.alignment="CENTER">
            <BorderPane.margin>
-               <Insets bottom="50.0" left="25.0" right="25.0" top="50.0" />
+               <Insets bottom="50.0" left="25.0" right="25.0" top="50.0"/>
            </BorderPane.margin>
-           <Button alignment="CENTER" contentDisplay="CENTER" graphicTextGap="10.0" mnemonicParsing="false" onAction="#start" styleClass="start-button" text="START">
-              <VBox.margin>
-                  <Insets />
-              </VBox.margin>
-              <font>
-                  <Font name="System Bold" size="16.0" />
-              </font>
+           <Button alignment="CENTER" contentDisplay="CENTER" graphicTextGap="10.0" mnemonicParsing="false"
+                   onAction="#start" styleClass="start-button" text="START">
+               <VBox.margin>
+                   <Insets/>
+               </VBox.margin>
+               <font>
+                   <Font name="System Bold" size="16.0"/>
+               </font>
            </Button>
-           <Button alignment="CENTER" graphicTextGap="10.0" mnemonicParsing="false" onAction="#openSettings" styleClass="start-button" text="SETTINGS">
-              <font>
-                  <Font name="System Bold" size="16.0" />
-              </font>
+           <Button alignment="CENTER" graphicTextGap="10.0" mnemonicParsing="false" onAction="#openSettings"
+                   styleClass="start-button" text="SETTINGS">
+               <font>
+                   <Font name="System Bold" size="16.0"/>
+               </font>
            </Button>
-           <Button alignment="CENTER" graphicTextGap="10.0" mnemonicParsing="false" onAction="#help" styleClass="start-button" text="HELP">
-              <font>
-                  <Font name="System Bold" size="16.0" />
-              </font>
+           <Button alignment="CENTER" graphicTextGap="10.0" mnemonicParsing="false" onAction="#faq"
+                   styleClass="start-button" text="HELP">
+               <font>
+                   <Font name="System Bold" size="16.0"/>
+               </font>
            </Button>
-           <Button alignment="CENTER" graphicTextGap="10.0" mnemonicParsing="false" onAction="#exit" styleClass="start-button" text="EXIT">
-              <font>
-                  <Font name="System Bold" size="16.0" />
-              </font>
+           <Button alignment="CENTER" graphicTextGap="10.0" mnemonicParsing="false" onAction="#support"
+                   styleClass="start-button" text="CONTACT SUPPORT">
+               <font>
+                   <Font name="System Bold" size="16.0"/>
+               </font>
+           </Button>
+           <Button alignment="CENTER" graphicTextGap="10.0" mnemonicParsing="false" onAction="#exit"
+                   styleClass="start-button" text="EXIT">
+               <font>
+                   <Font name="System Bold" size="16.0"/>
+               </font>
            </Button>
        </VBox>
    </center>
