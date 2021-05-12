@@ -248,7 +248,7 @@ fun posterConditionsDialog(templateAuthService: TemplateAuthService, root: Stack
                         }
                         else -> ""
                     }
-                    val image = Image(Constants.javaClass.getResource(imageLocation).toString())
+                    val image = Image(Constants.javaClass.getResource(imageLocation)!!.toString())
                     child.image = image
                 }
                 else -> {}
