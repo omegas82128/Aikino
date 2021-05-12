@@ -5,20 +5,17 @@ import com.omegas.model.Media
 import com.omegas.moviedb.TmdbManager
 import com.omegas.util.MediaType
 import com.omegas.util.functions.addComponent
-import javafx.application.Platform
 import javafx.beans.binding.Bindings
 import javafx.beans.property.SimpleDoubleProperty
 import javafx.beans.property.SimpleIntegerProperty
 import javafx.concurrent.Task
 import javafx.fxml.FXMLLoader
 import javafx.geometry.Pos
+import javafx.scene.Node
 import javafx.scene.control.Label
 import javafx.scene.layout.BorderPane
 import javafx.scene.layout.VBox
 import javafx.scene.paint.Paint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 
 /**
@@ -27,9 +24,9 @@ import kotlinx.coroutines.runBlocking
 class SearchTask(
     private val vBox: VBox, private val mediaType: MediaType, private val name: String,
     private val number: Int
-) : Task<List<Media>>() {
+) : Task<List<Node>>() {
 
-    override fun call(): List<Media> {
+    override fun call(): List<Node> {
         try {
             val mediaList: MutableList<Media> = mutableListOf()
             when (mediaType) {
@@ -43,30 +40,28 @@ class SearchTask(
                     throw IllegalStateException("MediaType is Unknown")
                 }
             }
-
-            return mediaList
+            val nodeList = mutableListOf<Node>()
+            for (media in mediaList) {
+                val fxmlLoader = FXMLLoader()
+                val mediaNode =
+                    fxmlLoader.load<BorderPane>(
+                        javaClass.getResource("/fxml/partials/MediaItem.fxml")!!.openStream()
+                    )
+                fxmlLoader.getController<MediaItemController>().media = media
+                nodeList.add(mediaNode)
+            }
+            return nodeList
         } catch (ex: Exception) {
             ex.printStackTrace()
             return emptyList()
         }
     }
 
-    override fun succeeded() = runBlocking {
-        // using coroutine to stop UI from freezing when all of the mediaItems are added to vBox
+    override fun succeeded() {
         vBox.children.clear()
         if (value.isNotEmpty()) {
-            for (media in value) {
-                launch(Dispatchers.IO) {
-                    val fxmlLoader = FXMLLoader()
-                    val mediaItem =
-                        fxmlLoader.load<BorderPane>(
-                            javaClass.getResource("/fxml/partials/MediaItem.fxml")!!.openStream()
-                        )
-                    fxmlLoader.getController<MediaItemController>().media = media
-                    Platform.runLater {
-                        vBox.children.add(mediaItem)
-                    }
-                }
+            for (node in value) {
+                vBox.children.add(node)
             }
         } else {
             val mediaType: String = when (mediaType) {
