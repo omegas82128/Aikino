@@ -36,10 +36,13 @@ class SearchController:Initializable {
 
     @FXML
     lateinit var vbox: VBox
+
+    private var searchThread: Thread? = null
     override fun initialize(location: URL?, resources: ResourceBundle?) {
         mediaInfo = Main.mediaInfo!!
         dpdMediaType.items.addAll(MediaType.MOVIE, MediaType.TV)
         dpdMediaType.value = mediaInfo.mediaType
+        mediaTypeChanged()
         vbox.isFocusTraversable = false
         val integerFilter: UnaryOperator<TextFormatter.Change?> = UnaryOperator { change ->
             val newText: String = change!!.controlNewText
@@ -61,7 +64,7 @@ class SearchController:Initializable {
     }
 
     fun search(){
-        if(txtName.text.isNotEmpty()){
+        if (txtName.text.isNotEmpty() && (this.searchThread == null || !this.searchThread!!.isAlive)) {
             val name = txtName.text
             val number = if (txtYearOrSeason.text.isEmpty()) {
                 1
@@ -69,7 +72,8 @@ class SearchController:Initializable {
                 txtYearOrSeason.text.toInt()
             }
             val task: Task<*> = SearchTask(vbox, dpdMediaType.value, name, number)
-            Thread(task).start()
+            this.searchThread = Thread(task)
+            this.searchThread!!.start()
             simulateLoad()
         }
     }

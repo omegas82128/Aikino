@@ -5,6 +5,7 @@ import com.omegas.model.Media
 import com.omegas.moviedb.TmdbManager
 import com.omegas.util.MediaType
 import com.omegas.util.functions.addComponent
+import javafx.application.Platform
 import javafx.beans.binding.Bindings
 import javafx.beans.property.SimpleDoubleProperty
 import javafx.beans.property.SimpleIntegerProperty
@@ -15,6 +16,9 @@ import javafx.scene.control.Label
 import javafx.scene.layout.BorderPane
 import javafx.scene.layout.VBox
 import javafx.scene.paint.Paint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 
 /**
@@ -41,23 +45,30 @@ class SearchTask(
             }
 
             return mediaList
-        }catch (ex:Exception){
+        } catch (ex: Exception) {
             ex.printStackTrace()
             return emptyList()
         }
     }
 
-    override fun succeeded() {
+    override fun succeeded() = runBlocking {
+        // using coroutine to stop UI from freezing when all of the mediaItems are added to vBox
         vBox.children.clear()
-        if(value.isNotEmpty()){
-            for(media in value){
-                val fxmlLoader = FXMLLoader()
-                val mediaItem =
-                    fxmlLoader.load<BorderPane>(javaClass.getResource("/fxml/partials/MediaItem.fxml")!!.openStream())
-                fxmlLoader.getController<MediaItemController>().media = media
-                vBox.children.add(mediaItem)
+        if (value.isNotEmpty()) {
+            for (media in value) {
+                launch(Dispatchers.IO) {
+                    val fxmlLoader = FXMLLoader()
+                    val mediaItem =
+                        fxmlLoader.load<BorderPane>(
+                            javaClass.getResource("/fxml/partials/MediaItem.fxml")!!.openStream()
+                        )
+                    fxmlLoader.getController<MediaItemController>().media = media
+                    Platform.runLater {
+                        vBox.children.add(mediaItem)
+                    }
+                }
             }
-        }else {
+        } else {
             val mediaType: String = when (mediaType) {
                 MediaType.MOVIE -> "MOVIE"
                 MediaType.TV -> "TV SERIES"
