@@ -13,7 +13,7 @@ import java.awt.Dimension
 object Constants {
 
     const val APP_NAME = "Aikino"
-    const val APP_VERSION = "2.6.5"
+    const val APP_VERSION = "2.6.6"
 
     val ICON = Image(javaClass.getResource("/icon.png")!!.toString())
     val NOT_FOUND_IMAGE = Image(javaClass.getResource("/images/image-not-found.png")!!.toString())
