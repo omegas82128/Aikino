@@ -1,7 +1,7 @@
 # UPDATE AVAILABLE
 | Download | Vulnerabilities |  Support Server |
 |-------| --------------- | ---------|
-| [![latest release](https://img.shields.io/badge/download-v2.3.1-blue.svg)](https://github.com/omegas82128/Aikino/releases/download/v2.3.1/Aikino.Setup.v2.3.1.exe) | [![Known Vulnerabilities](https://snyk.io/test/github/omegas82128/Aikino/badge.svg?targetFile=pom.xml)](https://snyk.io/test/github/omegas82128/Aikino?targetFile=pom.xml) |[![Discord](https://img.shields.io/discord/777367280656711712?color=7289da&label=discord&logo=discord)](https://discord.gg/rKAWJhGjxm) |
+| [![latest release](https://img.shields.io/badge/download-v2.6.6-blue.svg)](https://github.com/omegas82128/Aikino/releases/tag/v2.6.6) | [![Known Vulnerabilities](https://snyk.io/test/github/omegas82128/Aikino/badge.svg?targetFile=pom.xml)](https://snyk.io/test/github/omegas82128/Aikino?targetFile=pom.xml) |[![Discord](https://img.shields.io/discord/777367280656711712?color=7289da&label=discord&logo=discord)](https://discord.gg/rKAWJhGjxm) |
 # ![app icon](./.github/readme-images/app-icon.png) Aikino
 Aikino is an open source windows application that downloads movie, anime and tv show posters, converts them to icons and applies them.
 
@@ -25,11 +25,15 @@ Features include:
 ```
 Doctor.Sleep.2019.DC.1080p.BluRay.x265-RARBG
 Magnolia (1999)
+Joker 2019
 ```
-* For **Tv Series folders** that either mention season number or have name followed by a Mini-Series tag.
+
+* For **Tv Series folders** that either mention season number or have name followed by a Mini-Series tag. All folders
+  will be considered as TV Series Folders by default.
 
 *For example:*
 ```
+Dark
 Twin Peaks Season 2
 Devs (Mini-Series)
 ```
@@ -43,24 +47,39 @@ Tatami Galaxy Season 1
 Death Note (Dual-Audio)
 ```
 
+##### **NOTE:** All folders will be considered TV Show Folders by default.
+
 #### I got the notification that icon was applied. Why isn't the icon displayed on the folder yet?
 Windows File Explorer updates on its own pace. It can apply the icon in a few seconds to about a minute. 
 
-If it does not update till then close the application. Icon should be applied in 30 seconds. 
+If it does not update till then close the application. Icon should be applied in 30 seconds.
 
 If the icon is still not applied, use 'Refresh Folder Icon' in the windows right-click menu on the folder in question.
 
 #### I changed poster size from settings. Why is the downloaded poster of previous size?
-The change takes effect on application restart. So when you restart the application, Aikino will download the poster in the new size. 
+
+The change takes effect on application restart. So when you restart the application, Aikino will download the poster in
+the new size.
 
 #### Why doesn't my movie/tv show/anime have more/any posters?
-All posters are provided by [TMDb](https://www.themoviedb.org/). If you have a poster that you want to add, and it follows TMDb guidelines, you can upload on TMDb and access it through Aikino.
+
+All posters are provided by [TMDb](https://www.themoviedb.org/). If you have a poster that you want to add, and it
+follows TMDb guidelines, you can upload on TMDb and access it through Aikino.
 
 #### Can I use Aikino to create and apply an icon from a poster that I have?
-Yes you can. Just turn on Local Posters feature from settings. After that posters in the folder you opened will display, along with posters provided by the app, for icon creation. (It is turned on by default)
+
+Yes you can. Just turn on Local Posters feature from settings. After that posters in the folder you opened will display,
+along with posters provided by the app, for icon creation. (It is turned on by default)
+
+#### Aikino thought that xyz tv show was a movie, or xyz movie was a tv show. What should I do?
+
+Click on search. Then change the type from tv show to movie or whichever the correct one is and then search and select
+from the search results.
 
 ## Credits
+
 Aikino uses the following APIs:
+
 * **imcdonagh** - [image4j](https://github.com/imcdonagh/image4j)
 * **Ivan Szkiba**- [ini4j](http://ini4j.sourceforge.net/)
 * **G00fY2** - [version-compare](https://github.com/G00fY2/version-compare)
