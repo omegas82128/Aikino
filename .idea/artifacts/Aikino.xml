@@ -4,6 +4,7 @@
     <properties id="javafx-properties">
       <options>
         <option name="appClass" value="com.omegas.main.Main" />
+        <option name="convertCss2Bin" value="true" />
         <option name="description" value="" />
         <option name="height" value="388" />
         <option name="htmlPlaceholderId" value="" />
@@ -12,10 +13,10 @@
             <option name="windowsIcon" value="$PROJECT_DIR$/src/main/resources/icon.ico" />
           </JavaFxApplicationIcons>
         </option>
-        <option name="nativeBundle" value="all" />
+        <option name="nativeBundle" value="dmg" />
         <option name="title" value="Aikino" />
         <option name="vendor" value="" />
-        <option name="version" value="2.6.6" />
+        <option name="version" value="2.7.0" />
         <option name="width" value="488" />
       </options>
     </properties>
@@ -79,19 +80,19 @@
       <element id="library" level="project" name="Maven: org.jclarion:image4j:0.7" />
       <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-reflect:1.4.0" />
       <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-stdlib-common:1.4.20" />
-      <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.12.3" />
-      <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.12.3" />
       <element id="library" level="project" name="Maven: org.jetbrains:annotations:13.0" />
-      <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.12.3" />
-      <element id="library" level="project" name="Maven: com.apollographql.apollo:apollo-runtime:2.5.6" />
-      <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-stdlib:1.4.32" />
-      <element id="library" level="project" name="Maven: com.apollographql.apollo:apollo-api-jvm:2.5.6" />
       <element id="library" level="project" name="Maven: com.apollographql.apollo:apollo-compiler:2.3.1" />
-      <element id="library" level="project" name="Maven: com.apollographql.apollo:apollo-http-cache-api:2.5.6" />
-      <element id="library" level="project" name="Maven: com.apollographql.apollo:apollo-normalized-cache-api-jvm:2.5.6" />
-      <element id="library" level="project" name="Maven: com.apollographql.apollo:apollo-normalized-cache-jvm:2.5.6" />
-      <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.32" />
-      <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.32" />
+      <element id="library" level="project" name="Maven: com.apollographql.apollo:apollo-api-jvm:2.5.7" />
+      <element id="library" level="project" name="Maven: com.apollographql.apollo:apollo-http-cache-api:2.5.7" />
+      <element id="library" level="project" name="Maven: com.apollographql.apollo:apollo-normalized-cache-api-jvm:2.5.7" />
+      <element id="library" level="project" name="Maven: com.apollographql.apollo:apollo-normalized-cache-jvm:2.5.7" />
+      <element id="library" level="project" name="Maven: com.apollographql.apollo:apollo-runtime:2.5.7" />
+      <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.12.4" />
+      <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.12.4" />
+      <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.12.4" />
+      <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.5.10" />
+      <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.10" />
+      <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-stdlib:1.5.10" />
     </root>
   </artifact>
 </component>

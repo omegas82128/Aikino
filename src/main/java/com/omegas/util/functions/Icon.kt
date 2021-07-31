@@ -10,6 +10,7 @@ import org.ini4j.Wini
 import java.io.File
 import java.io.FileWriter
 import java.nio.file.Files
+import java.util.*
 import javax.imageio.ImageIO
 import kotlin.concurrent.thread
 
@@ -104,13 +105,17 @@ fun applyIcon(icon: Icon?, mediaFolder: File) {
         showMessage("Icon could not be created.", AlertType.ERROR, "Icon Creation Failed")
     }
 
-    Runtime.getRuntime().addShutdownHook(thread(false) {
-        mediaFolder.refresh(8) // extension function
-    })
-    Thread.sleep(900) // waits till File Explorer has time to process desktop.ini file
-    fileToDelete?.delete() // deletes png folder file in folder which causes File Explorer to apply changes to folder icon
-    mediaFolder.refresh() // extension function
-
+//    Runtime.getRuntime().addShutdownHook(thread(false) {
+//        mediaFolder.refresh(8) // extension function
+//    })
+    Thread.sleep(100) // waits till File Explorer has time to process desktop.ini file
+    fileToDelete?.delete()
+    val sysProps: Properties = System.getProperties()
+    if ((sysProps["os.name"] as String).contains("10")) {//File Explorer to clear icon cache
+        Runtime.getRuntime().exec("ie4uinit.exe -show")
+    } else {
+        Runtime.getRuntime().exec("ie4uinit.exe -ClearIconCache")
+    }
     showMessage("Icon applied to folder ${mediaFolder.name}", AlertType.INFO, "Icon applied successfully")
 }
 
