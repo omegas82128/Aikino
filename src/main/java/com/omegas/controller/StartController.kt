@@ -1,6 +1,6 @@
-package com.omegas.controllers
+package com.omegas.controller
 
-import com.omegas.controllers.controls.OpenSettingsControl
+import com.omegas.controller.control.OpenSettingsControl
 import com.omegas.main.Main.Companion.stage
 import com.omegas.main.Main.Companion.startAikino
 import javafx.fxml.Initializable

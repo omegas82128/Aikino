@@ -1,4 +1,4 @@
-package com.omegas.services
+package com.omegas.service
 
 import com.omegas.model.Poster
 import com.omegas.util.Constants.POSTER_EXTENSIONS_LIST
@@ -38,12 +38,12 @@ class LocalPosterService(val folder: File, private val executorService: Executor
     }
 
     fun getPosters(): List<Poster>{
-        return if(localPosters.isNullOrEmpty() || isNotDirectory){
+        return if (localPosters.isEmpty() || isNotDirectory) {
             emptyList()
-        }else{
+        } else {
             val futurePosters = mutableListOf<Poster>()
 
-            for(localPoster in localPosters){
+            for (localPoster in localPosters) {
                 futurePosters.add(
                     Poster(
                         executorService.submit<Image> { // Executor Service only provides a wrapper

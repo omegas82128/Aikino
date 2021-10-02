@@ -1,10 +1,10 @@
 package com.omegas.main
 
-import com.omegas.controllers.MovieController
-import com.omegas.controllers.SearchController
-import com.omegas.controllers.TvSeriesController
+import com.omegas.controller.MovieController
+import com.omegas.controller.SearchController
+import com.omegas.controller.TvSeriesController
 import com.omegas.model.MediaInfo
-import com.omegas.services.UpdateService
+import com.omegas.service.UpdateService
 import com.omegas.util.*
 import com.omegas.util.Constants.APP_NAME
 import com.omegas.util.functions.refresh

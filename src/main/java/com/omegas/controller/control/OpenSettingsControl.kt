@@ -1,4 +1,4 @@
-package com.omegas.controllers.controls
+package com.omegas.controller.control
 
 import com.omegas.util.Constants
 import javafx.fxml.FXMLLoader

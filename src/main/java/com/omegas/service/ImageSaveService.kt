@@ -1,6 +1,6 @@
-package com.omegas.services
+package com.omegas.service
 
-import com.omegas.util.Constants.PNG_POSTER_DIMENSION
+import com.omegas.util.Constants.ICON_IMAGE_DIMENSION
 import com.omegas.util.functions.exceptionDialog
 import com.omegas.util.functions.getOutputFile
 import com.omegas.util.functions.increaseSize
@@ -27,7 +27,7 @@ object ImageSaveService {
 
             bufferedImage = increaseSize(
                 bufferedImage,
-                PNG_POSTER_DIMENSION
+                ICON_IMAGE_DIMENSION
             )
 
             saveImage(bufferedImage, outputFile)

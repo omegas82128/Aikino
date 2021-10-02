@@ -1,6 +1,6 @@
-package com.omegas.controllers
+package com.omegas.controller
 
-import com.omegas.controllers.controls.OpenSettingsControl
+import com.omegas.controller.control.OpenSettingsControl
 import com.omegas.main.Main
 import com.omegas.main.Main.Companion.stage
 import com.omegas.model.Icon
@@ -8,8 +8,8 @@ import com.omegas.model.MediaInfo
 import com.omegas.model.Poster
 import com.omegas.moviedb.TheMovieDb
 import com.omegas.moviedb.TmdbManager
-import com.omegas.services.*
-import com.omegas.tasks.DisplayImageTask
+import com.omegas.service.*
+import com.omegas.task.DisplayImageTask
 import com.omegas.util.*
 import com.omegas.util.Constants.LOCAL_POSTER_TOOL_TIP
 import com.omegas.util.Preferences.iconTypeProperty
@@ -419,7 +419,7 @@ abstract class MediaController:Initializable, OpenSettingsControl() {
     }
 
     private fun showIconDialog(createType: CreateType){
-        val authService = TemplateAuthService(imageView.image)
+        val authService = TemplateAuthService(imageView.image, Preferences.template)
         if(authService.isPosterValid){
             // disable the button that shows dialog, to combat mis-clicks that result in multiple dialogs
             val btnSource = when (createType) {
@@ -427,10 +427,11 @@ abstract class MediaController:Initializable, OpenSettingsControl() {
                 CreateType.CREATE_AND_APPLY -> btnApply
             }
             btnSource.isDisable = true
+
             val templateService: TemplateService = if (authService.isRatioValid) {
-                TemplateService(imageView.image, folder)
+                TemplateService(imageView.image)
             } else {
-                TemplateService(imageView.image, folder, IconDialogType.HORIZONTAL)
+                TemplateService(imageView.image, IconDialogType.HORIZONTAL)
 
             }
             val iconChooserDialog = IconDialog(templateService, createType, folder, root, btnSource)

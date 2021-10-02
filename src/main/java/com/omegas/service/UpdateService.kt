@@ -1,4 +1,4 @@
-package com.omegas.services
+package com.omegas.service
 import com.apollographql.apollo.ApolloCall
 import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.api.Response

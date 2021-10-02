@@ -1,6 +1,5 @@
 package com.omegas.util
 
-import javafx.geometry.Dimension2D
 import javafx.scene.control.Tooltip
 import javafx.scene.image.Image
 import javafx.util.Duration
@@ -13,7 +12,7 @@ import java.awt.Dimension
 object Constants {
 
     const val APP_NAME = "Aikino"
-    const val APP_VERSION = "2.7.0"
+    const val APP_VERSION = "2.7.5"
 
     val ICON = Image(javaClass.getResource("/icon.png")!!.toString())
     val NOT_FOUND_IMAGE = Image(javaClass.getResource("/images/image-not-found.png")!!.toString())
@@ -22,9 +21,7 @@ object Constants {
     val API_KEY: String = System.getenv("TMDB_API_KEY")
 
     //dimensions
-    val PNG_POSTER_DIMENSION = Dimension(512,512)
-    val TEMPLATE_POSTER_DIMENSION = Dimension2D(338.0 ,460.0)
-    const val TEMPLATE_POSTER_RATIO = 1.36094675
+    val ICON_IMAGE_DIMENSION = Dimension(512, 512)
 
     //poster util
     val POSTER_SIZES = listOf("w500","w780","w1280","original")

@@ -1,4 +1,4 @@
-package com.omegas.services
+package com.omegas.service
 
 import com.omegas.util.Preferences.posterSize
 import com.omegas.util.functions.exceptionDialog

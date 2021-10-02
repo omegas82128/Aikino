@@ -3,13 +3,13 @@ package com.omegas.util.functions
 import com.jfoenix.controls.JFXDialog
 import com.jfoenix.controls.JFXDialogLayout
 import com.omegas.main.Main
-import com.omegas.services.TemplateAuthService
+import com.omegas.service.TemplateAuthService
 import com.omegas.util.AlertType
 import com.omegas.util.Constants
 import com.omegas.util.Constants.ICON
 import com.omegas.util.Constants.INVALID_COLOR
-import com.omegas.util.Constants.TEMPLATE_POSTER_DIMENSION
 import com.omegas.util.Constants.VALID_COLOR
+import com.omegas.util.Preferences
 import com.omegas.util.Preferences.removeNotification
 import com.omegas.util.Preferences.removeSeconds
 import javafx.geometry.Insets
@@ -200,8 +200,8 @@ fun posterConditionsDialog(templateAuthService: TemplateAuthService, root: Stack
         vBox.children.addAll(hBox)
     }
     val arrayLabel = arrayOf(
-        "Image height should be ${TEMPLATE_POSTER_DIMENSION.height} or higher (height = ${templateAuthService.height})",
-        "Image width should be ${TEMPLATE_POSTER_DIMENSION.width} or higher (width = ${templateAuthService.width})"
+        "Image height should be ${Preferences.template.posterDimension.height} or higher (height = ${templateAuthService.height})",
+        "Image width should be ${Preferences.template.posterDimension.width} or higher (width = ${templateAuthService.width})"
     )
 
     for ((index, node) in vBox.children.withIndex()){

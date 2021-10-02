@@ -1,6 +1,6 @@
 package com.omegas.model
 
-import com.omegas.services.DownloadService.getFullURL
+import com.omegas.service.DownloadService.getFullURL
 import com.omegas.util.MediaType
 import java.time.LocalDate
 

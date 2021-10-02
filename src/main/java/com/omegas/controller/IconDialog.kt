@@ -1,12 +1,12 @@
-package com.omegas.controllers
+package com.omegas.controller
 
 import com.jfoenix.controls.JFXDialog
 import com.jfoenix.controls.JFXDialogLayout
 import com.jfoenix.controls.JFXSlider
 import com.omegas.main.Main.Companion.stage
 import com.omegas.model.Icon
-import com.omegas.services.ImageSaveService.saveTemplatePng
-import com.omegas.services.TemplateService
+import com.omegas.service.ImageSaveService.saveTemplatePng
+import com.omegas.service.TemplateService
 import com.omegas.util.AlertType
 import com.omegas.util.CreateType
 import com.omegas.util.IconDialogType

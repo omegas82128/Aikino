@@ -1,4 +1,4 @@
-package com.omegas.controllers
+package com.omegas.controller
 
 import com.omegas.model.MediaInfo
 import com.omegas.moviedb.MovieDAL

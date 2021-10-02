@@ -1,4 +1,4 @@
-package com.omegas.controllers
+package com.omegas.controller
 
 import com.jfoenix.controls.JFXToggleButton
 import com.omegas.util.AlertType
@@ -75,14 +75,22 @@ class SettingsController : Initializable {
         )
     }
 
-    fun localPostersAllowedPropertyChanged(){
+    fun localPostersAllowedPropertyChanged() {
         localPostersAllowed = tglBtnPosters.isSelected
         preferences.putBoolean(LOCAL_POSTERS_ALLOWED_KEY, localPostersAllowed)
-        val showOrHidden = if (localPostersAllowed){
+        val showOrHidden = if (localPostersAllowed) {
             "shown"
-        }else{
+        } else {
             "hidden"
         }
-        showMessage("Local posters will be $showOrHidden after app restart",AlertType.INFO,"Local Posters ${showOrHidden.capitalize()}")
+        showMessage(
+            "Local posters will be $showOrHidden after app restart", AlertType.INFO, "Local Posters ${
+                showOrHidden.replaceFirstChar {
+                    if (it.isLowerCase()) it.titlecase(
+                        Locale.getDefault()
+                    ) else it.toString()
+                }
+            }"
+        )
     }
 }

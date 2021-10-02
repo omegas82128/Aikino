@@ -1,4 +1,4 @@
-package com.omegas.controllers
+package com.omegas.controller
 
 import com.omegas.main.Main
 import com.omegas.moviedb.TvDAL.getShowPosters

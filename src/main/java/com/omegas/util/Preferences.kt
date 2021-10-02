@@ -1,7 +1,10 @@
 package com.omegas.util
 
+import com.omegas.model.Template
+import com.omegas.model.Templates
 import com.omegas.util.functions.showMessage
 import javafx.beans.property.SimpleObjectProperty
+import java.util.*
 import java.util.prefs.Preferences
 
 /**
@@ -20,11 +23,16 @@ object Preferences {
     var removeNotification: Boolean = false
     var removeSeconds: Long = 3
 
+    var template: Template = Templates.DVD_FOLDER_TEMPLATE
+
     init {
         iconTypeProperty.addListener { _, _, newValue ->
             preferences.put(Constants.ICON_TYPE_KEY, newValue.name)
             showMessage(
-                text = "Icon type changed to ${newValue.name.replace('_', ' ').toLowerCase().capitalize()}",
+                text = "Icon type changed to ${
+                    newValue.name.replace('_', ' ').lowercase(Locale.getDefault())
+                        .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
+                }",
                 type = AlertType.INFO,
                 title = "Icon Type Changed"
             )

@@ -6,7 +6,7 @@
 <?import javafx.scene.text.*?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" prefWidth="400.0" styleClass="my-border-pane"
             stylesheets="@../css/myCss.css" xmlns="http://javafx.com/javafx/10.0.1"
-            fx:controller="com.omegas.controllers.StartController">
+            fx:controller="com.omegas.controller.StartController">
     <top>
         <BorderPane styleClass="my-border-pane" BorderPane.alignment="CENTER">
             <center>

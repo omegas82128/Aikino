@@ -1,6 +1,6 @@
-package com.omegas.tasks
+package com.omegas.task
 
-import com.omegas.controllers.MediaController
+import com.omegas.controller.MediaController
 import com.omegas.util.Constants.NOT_FOUND_IMAGE
 import javafx.concurrent.Task
 import javafx.scene.image.Image

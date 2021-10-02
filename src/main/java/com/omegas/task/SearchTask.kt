@@ -1,6 +1,6 @@
-package com.omegas.tasks
+package com.omegas.task
 
-import com.omegas.controllers.MediaItemController
+import com.omegas.controller.MediaItemController
 import com.omegas.model.Media
 import com.omegas.moviedb.TmdbManager
 import com.omegas.util.MediaType
@@ -15,6 +15,7 @@ import javafx.scene.control.Label
 import javafx.scene.layout.BorderPane
 import javafx.scene.layout.VBox
 import javafx.scene.paint.Paint
+import java.util.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import kotlin.concurrent.thread
@@ -81,7 +82,7 @@ class SearchTask(
                 MediaType.TV -> "TV SERIES"
                 else -> ""
             }
-            val label = Label("NO RESULTS FOUND FOR $mediaType '${name.toUpperCase()}'")
+            val label = Label("NO RESULTS FOUND FOR $mediaType '${name.uppercase(Locale.getDefault())}'")
             label.style = "-fx-font-weight: bold;"
             label.textFill = Paint.valueOf("white")
 

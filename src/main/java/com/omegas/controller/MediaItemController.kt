@@ -1,4 +1,4 @@
-package com.omegas.controllers
+package com.omegas.controller
 
 import com.omegas.main.Main
 import com.omegas.main.Main.Companion.setScene
@@ -59,7 +59,7 @@ class MediaItemController:Initializable {
                 txtOverview.text = if (it.overView.isNotEmpty()) {
                     it.overView
                 } else {
-                    "Synopsis not available".toUpperCase()
+                    "Synopsis not available".uppercase(Locale.getDefault())
                 }
 
                 when (it.mediaType) {
