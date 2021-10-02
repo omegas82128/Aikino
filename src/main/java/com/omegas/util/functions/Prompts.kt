@@ -200,8 +200,8 @@ fun posterConditionsDialog(templateAuthService: TemplateAuthService, root: Stack
         vBox.children.addAll(hBox)
     }
     val arrayLabel = arrayOf(
-        "Image height should be ${Preferences.template.posterDimension.height} or higher (height = ${templateAuthService.height})",
-        "Image width should be ${Preferences.template.posterDimension.width} or higher (width = ${templateAuthService.width})"
+        "Image height should be ${Preferences.templateProperty.get().posterDimension.height} or higher (height = ${templateAuthService.height})",
+        "Image width should be ${Preferences.templateProperty.get().posterDimension.width} or higher (width = ${templateAuthService.width})"
     )
 
     for ((index, node) in vBox.children.withIndex()){

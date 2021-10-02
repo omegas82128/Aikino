@@ -419,7 +419,7 @@ abstract class MediaController:Initializable, OpenSettingsControl() {
     }
 
     private fun showIconDialog(createType: CreateType){
-        val authService = TemplateAuthService(imageView.image, Preferences.template)
+        val authService = TemplateAuthService(imageView.image, Preferences.templateProperty.get())
         if(authService.isPosterValid){
             // disable the button that shows dialog, to combat mis-clicks that result in multiple dialogs
             val btnSource = when (createType) {

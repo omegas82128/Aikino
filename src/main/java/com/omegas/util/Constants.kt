@@ -31,6 +31,7 @@ object Constants {
     const val ICON_TYPE_KEY = "ICON_TYPE"
     const val HIDE_ICONS_KEY = "HIDE_ICONS"
     const val POSTER_SIZE_KEY = "POSTER_SIZE"
+    const val TEMPLATE_TYPE_KEY = "TEMPLATE_TYPE"
     const val LOCAL_POSTERS_ALLOWED_KEY = "LOCAL_POSTERS_ALLOWED"
 
     // supported local poster file types

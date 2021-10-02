@@ -20,7 +20,7 @@ import javax.imageio.ImageIO
 class TemplateService(
     poster: Image,
     val iconDialogType: IconDialogType = IconDialogType.VERTICAL,
-    private val template: Template = Preferences.template
+    private val template: Template = Preferences.templateProperty.get()
 ) {
     private val resizedPoster: BufferedImage
 

@@ -1,7 +1,6 @@
 package com.omegas.util
 
 import com.omegas.model.Template
-import com.omegas.model.Templates
 import com.omegas.util.functions.showMessage
 import javafx.beans.property.SimpleObjectProperty
 import java.util.*
@@ -23,7 +22,10 @@ object Preferences {
     var removeNotification: Boolean = false
     var removeSeconds: Long = 3
 
-    var template: Template = Templates.DVD_FOLDER_TEMPLATE
+
+    var templateProperty = SimpleObjectProperty(
+        Template.valueOf(preferences[Constants.TEMPLATE_TYPE_KEY, Template.DVD_FOLDER_TEMPLATE.name])
+    )
 
     init {
         iconTypeProperty.addListener { _, _, newValue ->
