@@ -3,6 +3,7 @@ package com.omegas.util.functions
 import com.omegas.model.Icon
 import com.omegas.util.AlertType
 import com.omegas.util.Preferences.hideIconProperty
+import com.omegas.util.Refresh
 import javafx.application.Platform
 import javafx.scene.control.ButtonType
 import net.sf.image4j.codec.ico.ICOEncoder
@@ -10,7 +11,6 @@ import org.ini4j.Wini
 import java.io.File
 import java.io.FileWriter
 import java.nio.file.Files
-import java.util.*
 import javax.imageio.ImageIO
 import kotlin.concurrent.thread
 
@@ -104,18 +104,18 @@ fun applyIcon(icon: Icon?, mediaFolder: File) {
     } else {
         showMessage("Icon could not be created.", AlertType.ERROR, "Icon Creation Failed")
     }
-
 //    Runtime.getRuntime().addShutdownHook(thread(false) {
 //        mediaFolder.refresh(8) // extension function
 //    })
     Thread.sleep(100) // waits till File Explorer has time to process desktop.ini file
     fileToDelete?.delete()
-    val sysProps: Properties = System.getProperties()
+    /*val sysProps: Properties = System.getProperties()
     if ((sysProps["os.name"] as String).contains("10")) {//File Explorer to clear icon cache
         Runtime.getRuntime().exec("ie4uinit.exe -show")
     } else {
         Runtime.getRuntime().exec("ie4uinit.exe -ClearIconCache")
-    }
+    }*/
+    Refresh().refreshIcon(mediaFolder.absolutePath)
     showMessage("Icon applied to folder ${mediaFolder.name}", AlertType.INFO, "Icon applied successfully")
 }
 

@@ -94,6 +94,15 @@ class Main : Application() {
                 File(args[1]).refresh(2)
                 exitProcess(1)
             }
+            //& 'C:\Program Files\Java\jdk-10.0.1\bin\java.exe' -jar .\Aikino.jar "E:\Pig (2021)"
+
+            var file = File("")
+            file = (File(file.absolutePath + "/refresh.dll"))
+            if (file.exists()) {
+                System.load(file.absolutePath)
+            } else {
+                System.load(Main::class.java.getResource("/native/refresh.dll")!!.path)
+            }
             try {
                 UpdateService.automaticStart()
                 launch(Main::class.java, *args)
