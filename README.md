@@ -12,7 +12,9 @@ Features include:
 * Browsing posters of Movies, Tv Shows and Anime.
 * Downloading those posters.
 * Creating icons from posters and applying created icons.
-* Icons can be of different types ([With Template](https://www.deviantart.com/musacakir/art/Movie-And-TV-Show-DVD-Folder-Icon-Template-469935243) or Simple)
+* Icons can be of different
+  types ([DVD Folder Icon](https://www.deviantart.com/musacakir/art/Movie-And-TV-Show-DVD-Folder-Icon-Template-469935243)
+  ,[DVD Plastic Case](https://www.deviantart.com/mauricioestrella/art/DVD-Plastic-Case-PSD-file-86546288) or Simple)
 * 'Open with Aikino' and 'Refresh Folder Icon' are added to windows *right-click menu* for folders on install.
  * Clicking 'Open with Aikino' will open Aikino for the selected folder.
  * Create icons from posters you have downloaded. (Posters need to be in the folder)
