@@ -15,7 +15,7 @@ object Preferences {
     private val preferences: Preferences = Preferences.userRoot().node(javaClass.name)
 
     var iconTypeProperty = SimpleObjectProperty(
-        IconType.valueOf(preferences[Constants.ICON_TYPE_KEY, IconType.WITH_TEMPLATE.name])
+        IconType.valueOf(preferences[Constants.ICON_TYPE_KEY, IconType.DVD_FOLDER.name])
     )
     var hideIconProperty = SimpleBooleanProperty(preferences.getBoolean(Constants.HIDE_ICONS_KEY, true))
     var posterSizeProperty = SimpleStringProperty(preferences[Constants.POSTER_SIZE_KEY, "w1280"])
@@ -28,20 +28,26 @@ object Preferences {
 
 
     var templateProperty = SimpleObjectProperty(
-        Template.valueOf(preferences[Constants.TEMPLATE_TYPE_KEY, Template.DVD_FOLDER_TEMPLATE.name])
+        when (iconTypeProperty.get()) {
+            IconType.DVD_FOLDER -> Template.DVD_FOLDER_TEMPLATE
+            IconType.DVD_BOX -> Template.DVD_BOX_TEMPLATE
+            else -> Template.DVD_FOLDER_TEMPLATE
+        }
     )
 
     init {
         iconTypeProperty.addListener { _, _, newValue ->
             preferences.put(Constants.ICON_TYPE_KEY, newValue.name)
-            showMessage(
-                text = "Icon type changed to ${
-                    newValue.name.replace('_', ' ').lowercase(Locale.getDefault())
-                        .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
-                }",
-                type = AlertType.INFO,
-                title = "Icon Type Changed"
-            )
+            templateProperty.value = when (newValue) {
+                IconType.DVD_FOLDER -> Template.DVD_FOLDER_TEMPLATE
+                IconType.DVD_BOX -> Template.DVD_BOX_TEMPLATE
+                else -> Template.DVD_FOLDER_TEMPLATE
+            }
+//            showMessage(
+//                text = "Icon type changed to $newValue",
+//                type = AlertType.INFO,
+//                title = "Icon Type Changed"
+//            )
         }
         posterSizeProperty.addListener { _, _, newValue ->
             preferences.put(Constants.POSTER_SIZE_KEY, newValue)

@@ -49,7 +49,7 @@ class FolderNameParser(val folder: File) {
                 MediaInfo(SeasonNameParser(matcher.group(1)), folder)
             }
             else -> {
-                MediaInfo(name, MediaType.UNKOWN, folder)
+                MediaInfo(name, MediaType.UNKNOWN, folder)
             }
         }
     }

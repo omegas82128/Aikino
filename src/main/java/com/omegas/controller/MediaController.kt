@@ -1,5 +1,6 @@
 package com.omegas.controller
 
+import com.jfoenix.controls.JFXNodesList
 import com.omegas.controller.control.OpenSettingsControl
 import com.omegas.main.Main
 import com.omegas.main.Main.Companion.stage
@@ -13,15 +14,15 @@ import com.omegas.task.DisplayImageTask
 import com.omegas.util.*
 import com.omegas.util.Constants.LOCAL_POSTER_TOOL_TIP
 import com.omegas.util.Preferences.iconTypeProperty
-import com.omegas.util.functions.applyIcon
-import com.omegas.util.functions.posterConditionsDialog
-import com.omegas.util.functions.progressDialog
-import com.omegas.util.functions.showMessage
+import com.omegas.util.functions.*
 import javafx.application.Platform
 import javafx.concurrent.Task
 import javafx.fxml.FXML
 import javafx.fxml.Initializable
-import javafx.scene.control.*
+import javafx.scene.control.Button
+import javafx.scene.control.Label
+import javafx.scene.control.ProgressIndicator
+import javafx.scene.control.Tooltip
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import javafx.scene.input.KeyCode
@@ -77,28 +78,57 @@ abstract class MediaController:Initializable, OpenSettingsControl() {
     private lateinit var stackPane: StackPane
 
     @FXML
-    private lateinit var tglBtnIconType: ToggleButton
+    private lateinit var iconTypeList: JFXNodesList
 
+    @FXML
+    private lateinit var mainIconType: ImageView
     protected lateinit var folder: File
     protected lateinit var mediaInfo: MediaInfo
     private var currentPosition = -1
     private var posters: MutableList<Poster> = mutableListOf()
     private var executorService: ExecutorService? = null
     private var imageThread: Thread? = null
+    private val iconTypeButtons: MutableList<IconTypeButton> = mutableListOf()
+
+
     override fun initialize(location: URL?, resources: ResourceBundle?) {
         mediaInfo = Main.mediaInfo!!
+
+        mainIconType.image = Image(getIconTypeImagePath(iconTypeProperty.value))
+        for (iconType in IconType.values().filter { icon -> icon != iconTypeProperty.value }) {
+            val button = IconTypeButton(iconType)
+            iconTypeButtons.add(button)
+            iconTypeList.addAnimatedNode(button)
+            button.setOnAction {
+                iconTypeList.animateList(false)
+                val ic = button.iconTypeProperty.value
+                button.iconTypeProperty.value = iconTypeProperty.value
+                iconTypeProperty.value = ic
+                mainIconType.image = Image(getIconTypeImagePath(iconTypeProperty.value))
+            }
+        }
+
+        iconTypeProperty.addListener { _, oldValue, newValue ->
+            if (iconTypeButtons.any { itb -> itb.iconTypeProperty.value == newValue }) {
+                val btn = iconTypeButtons.first { btn -> btn.iconTypeProperty.value == newValue }
+                btn.iconTypeProperty.value = oldValue
+                mainIconType.image = Image(getIconTypeImagePath(newValue))
+            }
+        }
+
         btnPrevious.isDisable = true
         folder = mediaInfo.file
-        root.addEventHandler(KeyEvent.KEY_RELEASED){
-            when(it.code){
+        root.addEventHandler(KeyEvent.KEY_RELEASED) {
+            when (it.code) {
                 KeyCode.RIGHT -> nextPoster()
                 KeyCode.LEFT -> previousPoster()
-                else -> {}
+                else -> {
+                }
             }
         }
         imageView.imageProperty().addListener { _, _, newValue ->
-            if (newValue == null){
-                if(!stackPane.children.contains(progressIndicator)){
+            if (newValue == null) {
+                if (!stackPane.children.contains(progressIndicator)) {
                     stackPane.children.add(progressIndicator)
                 }
             }else{
@@ -106,7 +136,6 @@ abstract class MediaController:Initializable, OpenSettingsControl() {
             }
         }
         initButtonListeners()
-        initToggleButton()
         if (TheMovieDb.isNotConnected()) {
             btnDownload.isDisable = true
             btnSearch.isDisable = true
@@ -115,26 +144,6 @@ abstract class MediaController:Initializable, OpenSettingsControl() {
             MediaType.MOVIE -> "Not the desired movie? Search."
             MediaType.TV -> "Not the desired show? Search."
             else -> ""
-        }
-    }
-
-    private fun initToggleButton() {
-        tglBtnIconType.isSelected = when (iconTypeProperty.value!!) {
-            IconType.WITH_TEMPLATE -> true
-            IconType.SIMPLE -> false
-        }
-        iconTypeProperty.addListener { _, _, newValue ->
-            tglBtnIconType.isSelected =
-                when (newValue!!) {
-                    IconType.WITH_TEMPLATE -> true
-                    IconType.SIMPLE -> false
-                }
-        }
-        tglBtnIconType.setOnAction {
-            iconTypeProperty.value = when (iconTypeProperty.value!!) {
-                IconType.WITH_TEMPLATE -> IconType.SIMPLE
-                IconType.SIMPLE -> IconType.WITH_TEMPLATE
-            }
         }
     }
 
@@ -381,7 +390,7 @@ abstract class MediaController:Initializable, OpenSettingsControl() {
                     progressDialog.close()
                 }
             }
-            IconType.WITH_TEMPLATE -> {
+            IconType.DVD_FOLDER, IconType.DVD_BOX -> {
                 showIconDialog(CreateType.CREATE)
             }
         }
@@ -390,7 +399,7 @@ abstract class MediaController:Initializable, OpenSettingsControl() {
 
     private fun createIcon(delete: Boolean): Icon?{
         val pngFile = ImageSaveService.saveTransparentPng(imageView.image, folder)
-        return com.omegas.util.functions.createIcon(pngFile, delete)
+        return createIcon(pngFile, delete)
     }
 
     private fun createAndApply(){
@@ -412,7 +421,7 @@ abstract class MediaController:Initializable, OpenSettingsControl() {
                     progressDialog.close()
                 }
             }
-            IconType.WITH_TEMPLATE -> {
+            IconType.DVD_FOLDER, IconType.DVD_BOX -> {
                 showIconDialog(CreateType.CREATE_AND_APPLY)
             }
         }

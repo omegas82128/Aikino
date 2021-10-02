@@ -1,5 +1,7 @@
 package com.omegas.util.functions
 
+import com.omegas.main.Main
+import com.omegas.util.IconType
 import javafx.embed.swing.SwingFXUtils
 import javafx.scene.image.Image
 import java.awt.Color
@@ -38,16 +40,20 @@ fun copyImage(img: BufferedImage): BufferedImage {
     return copy
 }
 
-fun getOutputFile(folder: File, extension: String = "png"):File{
+fun getOutputFile(folder: File, extension: String = "png"): File {
     var outputFile = File(folder.absolutePath + "/${folder.name}.$extension")
     var number = 2
-    while(outputFile.exists()){
-        outputFile = File(folder.absolutePath + "/" + folder.name+"v$number.$extension")
+    while (outputFile.exists()) {
+        outputFile = File(folder.absolutePath + "/" + folder.name + "v$number.$extension")
         number++
     }
     return outputFile
 }
 
-fun getImage(bufferedImage: BufferedImage):Image{
-    return SwingFXUtils.toFXImage(bufferedImage,null)
+fun getIconTypeImagePath(iconType: IconType): String {
+    return Main::class.java.getResource("/images/${iconType.iconName}.png")!!.toURI().toString()
+}
+
+fun getImage(bufferedImage: BufferedImage): Image {
+    return SwingFXUtils.toFXImage(bufferedImage, null)
 }

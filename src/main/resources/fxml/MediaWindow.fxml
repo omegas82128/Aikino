@@ -2,6 +2,7 @@
 
 <!--suppress JavaFxEventHandler -->
 
+<?import com.jfoenix.controls.JFXNodesList?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.Image?>
@@ -9,30 +10,31 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="root" styleClass="my-border-pane" stylesheets="@../css/myCss.css"
-           xmlns="http://javafx.com/javafx/10.0.1">
-   <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="400.0"
-               styleClass="my-border-pane">
-      <center>
-         <BorderPane maxWidth="214.0" styleClass="image-view-wrapper" BorderPane.alignment="CENTER">
-            <BorderPane.margin>
-               <Insets top="13.0"/>
-            </BorderPane.margin>
-            <center>
-               <StackPane fx:id="stackPane">
-                  <ImageView fx:id="imageView" fitHeight="313.5" fitWidth="209.0" pickOnBounds="true"
-                             preserveRatio="true" styleClass="image-view-wrapper"/>
-                  <ProgressIndicator fx:id="progressIndicator" style="-fx-accent: white;"/>
-               </StackPane>
-            </center>
-         </BorderPane>
-      </center>
-      <bottom>
-         <VBox fx:id="actionsVBox" alignment="BASELINE_CENTER" prefHeight="150.0" prefWidth="400.0" spacing="5.0" BorderPane.alignment="CENTER">
-            <Label fx:id="lblSearch" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Label>
+           xmlns="http://javafx.com/javafx/11.0.1">
+    <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="400.0"
+                styleClass="my-border-pane">
+        <center>
+            <BorderPane maxWidth="214.0" styleClass="image-view-wrapper" BorderPane.alignment="CENTER">
+                <BorderPane.margin>
+                    <Insets top="13.0"/>
+                </BorderPane.margin>
+                <center>
+                    <StackPane fx:id="stackPane">
+                        <ImageView fx:id="imageView" fitHeight="313.5" fitWidth="209.0" pickOnBounds="true"
+                                   preserveRatio="true" styleClass="image-view-wrapper"/>
+                        <ProgressIndicator fx:id="progressIndicator" style="-fx-accent: white;"/>
+                    </StackPane>
+                </center>
+            </BorderPane>
+        </center>
+        <bottom>
+            <VBox fx:id="actionsVBox" alignment="BASELINE_CENTER" prefHeight="150.0" prefWidth="400.0" spacing="5.0"
+                  BorderPane.alignment="CENTER">
+                <Label fx:id="lblSearch" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="14.0"/>
+                    </font>
+                </Label>
             <BorderPane fx:id="seasonBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="214.0">
                <left>
                   <Button fx:id="btnPreviousSeason" disable="true" mnemonicParsing="false" prefWidth="50.0" text="&lt;" BorderPane.alignment="CENTER">
@@ -48,13 +50,13 @@
                      </font>
                   </Button>
                </right>
-               <center>
-                  <HBox alignment="CENTER" prefHeight="113.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                     <Label alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="63.6" text="Season: "
-                            textFill="#f8f8f8"/>
-                     <Label fx:id="lblSeasonInfo" prefHeight="26.0" prefWidth="50.0" text="?/?" textFill="WHITE"/>
-                  </HBox>
-               </center>
+                <center>
+                    <HBox alignment="CENTER" prefHeight="113.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                        <Label alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="63.6" text="Season: "
+                               textFill="#f8f8f8"/>
+                        <Label fx:id="lblSeasonInfo" prefHeight="26.0" prefWidth="50.0" text="?/?" textFill="WHITE"/>
+                    </HBox>
+                </center>
             </BorderPane>
             <Button fx:id="btnSearch" mnemonicParsing="false" prefHeight="25.0" prefWidth="214.0" text="Search" />
             <Button fx:id="btnDownload" mnemonicParsing="false" prefHeight="25.0" prefWidth="214.0" text="Download Poster" />
@@ -84,41 +86,44 @@
                   </BorderPane.margin>
                   <graphic>
                      <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                        <Image url="@../images/settings.png"/>
+                         <Image url="@../images/settings.png"/>
                      </ImageView>
                   </graphic>
                </Button>
             </top>
             <BorderPane.margin>
-               <Insets left="10.0" right="10.0"/>
+                <Insets left="10.0" right="10.0"/>
             </BorderPane.margin>
          </BorderPane>
       </right>
       <left>
          <BorderPane BorderPane.alignment="CENTER">
             <BorderPane.margin>
-               <Insets left="10.0" right="10.0"/>
+                <Insets left="10.0" right="10.0"/>
             </BorderPane.margin>
-            <center>
-               <Button fx:id="btnPrevious" mnemonicParsing="false" text="&lt;" BorderPane.alignment="CENTER">
-                  <font>
-                     <Font name="System Bold" size="20.0"/>
-                  </font>
-                  <BorderPane.margin>
-                     <Insets bottom="38.0"/>
-                  </BorderPane.margin>
-               </Button>
-            </center>
-            <top>
-               <ToggleButton fx:id="tglBtnIconType" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity"
-                             maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
-                             prefHeight="28.0" prefWidth="36.0" styleClass="button"
-                             stylesheets="@../css/iconTypeToggle.css" BorderPane.alignment="CENTER">
-                  <BorderPane.margin>
-                     <Insets top="10.0"/>
-                  </BorderPane.margin>
-               </ToggleButton>
-            </top>
+             <center>
+                 <Button fx:id="btnPrevious" mnemonicParsing="false" text="&lt;" BorderPane.alignment="CENTER">
+                     <font>
+                         <Font name="System Bold" size="20.0"/>
+                     </font>
+                     <BorderPane.margin>
+                         <Insets bottom="38.0"/>
+                     </BorderPane.margin>
+                 </Button>
+             </center>
+             <top>
+                 <JFXNodesList fx:id="iconTypeList" spacing="2.0" BorderPane.alignment="CENTER">
+                     <BorderPane.margin>
+                         <Insets top="10.0"/>
+                     </BorderPane.margin>
+                     <Button fx:id="btnSettings13" alignment="CENTER" graphicTextGap="0.0" mnemonicParsing="false">
+                         <graphic>
+                             <ImageView fx:id="mainIconType" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true"
+                                        preserveRatio="true"/>
+                         </graphic>
+                     </Button>
+                 </JFXNodesList>
+             </top>
          </BorderPane>
       </left>
    </BorderPane>
