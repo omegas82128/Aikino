@@ -289,7 +289,7 @@ abstract class MediaController:Initializable, OpenSettingsControl() {
                 thread.join()
 
                 // check if local posters are allowed
-                if(Preferences.localPostersAllowed){
+                if (Preferences.localPostersAllowedProperty.value) {
                     // add local posters
                     val localPosterService = LocalPosterService(folder, executorService!!)
                     posters.addAll(localPosterService.getPosters())

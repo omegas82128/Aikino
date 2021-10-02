@@ -2,7 +2,7 @@ package com.omegas.util.functions
 
 import com.omegas.model.Icon
 import com.omegas.util.AlertType
-import com.omegas.util.Preferences.hideIcon
+import com.omegas.util.Preferences.hideIconProperty
 import javafx.application.Platform
 import javafx.scene.control.ButtonType
 import net.sf.image4j.codec.ico.ICOEncoder
@@ -77,7 +77,7 @@ private fun setIcon(folderPath: String, iconName:String, hideFile: Boolean) {
 
 
 private fun applyIcon(icon: Icon){
-    setIcon(icon.file.absolutePath, icon.iconName, hideIcon)
+    setIcon(icon.file.absolutePath, icon.iconName, hideIconProperty.value)
 }
 
 fun createIcon(pngFile:File?, delete:Boolean):Icon?{

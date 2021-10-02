@@ -1,6 +1,6 @@
 package com.omegas.service
 
-import com.omegas.util.Preferences.posterSize
+import com.omegas.util.Preferences.posterSizeProperty
 import com.omegas.util.functions.exceptionDialog
 import javafx.embed.swing.SwingFXUtils
 import javafx.scene.image.Image
@@ -18,7 +18,7 @@ object DownloadService {
     }
 
     fun getImage(imageURL: String): Image {
-        return Image(getFullURL(imageURL, posterSize))
+        return Image(getFullURL(imageURL, posterSizeProperty.value))
     }
 
     fun getFullURL(imageURL: String, size:String):String{
