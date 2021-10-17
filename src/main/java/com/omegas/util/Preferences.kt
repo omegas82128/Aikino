@@ -15,7 +15,7 @@ object Preferences {
     private val preferences: Preferences = Preferences.userRoot().node(javaClass.name)
 
     var iconTypeProperty = SimpleObjectProperty(
-        IconType.valueOf(preferences[Constants.ICON_TYPE_KEY, IconType.DVD_FOLDER.name])
+        IconType.getValue(preferences[Constants.ICON_TYPE_KEY, IconType.DVD_FOLDER.name])
     )
     var hideIconProperty = SimpleBooleanProperty(preferences.getBoolean(Constants.HIDE_ICONS_KEY, true))
     var posterSizeProperty = SimpleStringProperty(preferences[Constants.POSTER_SIZE_KEY, "w1280"])

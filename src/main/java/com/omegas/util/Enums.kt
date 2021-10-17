@@ -24,6 +24,16 @@ enum class IconType(val iconName: String) {
         return name.replace('_', ' ').lowercase(Locale.getDefault())
             .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
     }
+
+    companion object {
+        fun getValue(value: String): IconType {
+            return try {
+                valueOf(value)
+            } catch (e: IllegalArgumentException) {
+                DVD_FOLDER
+            }
+        }
+    }
 }
 
 enum class NotFoundType{
